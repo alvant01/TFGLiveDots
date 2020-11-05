@@ -1,0 +1,24 @@
+Bienvenido a la guía de uso  de LiveDots. En este documento encontrarás la indicaciones necesarias para usar LiveDots.
+
+La ventana principal tiene tres componentes: la barra superior, que tiene las herramientas necesarias para interactuar con la aplicación, un panel para visualizar la partitura en tinta (que no es accesible mediante teclado) y un panel donde leer la partitura en braille.
+
+La barra superior tiene dos menús desplegables: "Archivo" y "Visualización" y tres botones para controlar la reproducción. Veamos qué opciones tiene cada desplegable y qué atajos de teclado tienen asociados.
+
+El desplegable "Archivo" tiene las siguientes opciones:
+"Abrir" atajo Control o
+"Guardar braille" atajo Control b
+"Guardar musicxml" atajo Control s
+"Salir" atajo Control e
+
+El desplegable "Visualización" permite modificar el tamaño de la partitura el menú y el braille por separado. También podemos ampliar o reducir todos los componentes al mismo tiempo usando los atajos control + y control -.
+
+Los botones de reproducción en orden de navegación son:
+"Reproducir" atajo Control R
+"Pausar" atajo Control T
+"Parar" atajo Control Y
+
+El desplegable "Acerca de" contiene la "guía de uso" y información "acerca de LiveDots".
+
+Puedes desplazarte de un componente a otro usando el tabulador. El orden de los componentes es: desplegable "archivo", desplegable "visualización", botones de reproducción, desplegable "acerca de", panel braille.
+
+En el panel braille puedes recorrer los cajetines braille con las teclas derecha e izquierda obteniendo una lectura de los componentes musicales que representan.

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveDots", "LiveDots.csproj", "{26054EF8-7963-46DC-880A-DDE97E14CD61}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LiveDotsInstaller", "LiveDotsInstaller.vdproj", "{15865758-2CD8-49FC-B4ED-EF90C51C15B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26054EF8-7963-46DC-880A-DDE97E14CD61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26054EF8-7963-46DC-880A-DDE97E14CD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26054EF8-7963-46DC-880A-DDE97E14CD61}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{26054EF8-7963-46DC-880A-DDE97E14CD61}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{15865758-2CD8-49FC-B4ED-EF90C51C15B3}.Debug|Any CPU.ActiveCfg = Release
+		{15865758-2CD8-49FC-B4ED-EF90C51C15B3}.Debug|Any CPU.Build.0 = Release
+		{15865758-2CD8-49FC-B4ED-EF90C51C15B3}.Release|Any CPU.ActiveCfg = Release
+		{15865758-2CD8-49FC-B4ED-EF90C51C15B3}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1AB604A-E22E-402D-9161-1E8945C4646F}
+	EndGlobalSection
+EndGlobal

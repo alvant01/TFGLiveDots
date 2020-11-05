@@ -1,0 +1,8 @@
+﻿LiveDots es un proyecto desarrollado por Óscar Díaz Ribagorda, Claudia Guerrero García-Heras y Lucas de Torre Barrio bajo la dirección de María Guijarro Mata-García y Borja Manero Iglesias en colaboración con la Organización Nacional de Ciegos de España (ONCE).
+
+Licencias:
+Manufaktura, Manufaktura Programów por Jacek Salamon (Licencia MIT).
+
+MusicXML.NET, Vincent Daron y Steven Solomon (Licencia BSD).
+
+SpicyTaco.AutoGrid, Kris McGinnes (Licencia MIT).
