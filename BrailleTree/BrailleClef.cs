@@ -40,54 +40,85 @@ namespace LiveDots
         //Indica que la clave de sol tiene un ocho por encima o por debajo. Valores:"up","down",null
         public string Ocho { get; set; }
 
-        internal void ParseBrailleInverse(char sign, char line)
+        public int ParseBrailleInverse( BrailleText brailleText, char sign, char line, char hand, char ochoIni, char ocho)
         {
+            int res = 3;
+            List<string> L = new List<string>();
             switch (sign)
             {
                 case 'í':
-                    this.Sign = "34";
+                    this.Sign = "G";
+                    L.Add("34");
                     break;
 
                 case '#':
-                    this.Sign = "3456";
+                    this.Sign = "F";
+                    L.Add("3456");
                     break;
                 case 'ó':
-                    this.Sign = "346";
+                    this.Sign = "C";
+                    L.Add("346");
                     break;
             }
             switch (line)
             {
                 case '\'':
-                    this.Line = 4;
-                    break;
-                case 'l':
-                    this.Line = 123;
-                    break;
-                case 'k':
-                    this.Line = 13;
+                    this.Line = 1;
+                    L.Add("4");
                     break;
                 case '%':
-                    this.Line = 456;
+                    this.Line = 2;
+                    L.Add("456");
                     break;
                 case '`':
-                    this.Line = 5;
+                    this.Line = 2;
+                    L.Add("5");
                     break;
                 case '{':
-                    this.Line = 46;
+                    this.Line = 2;
+                    L.Add("46");
                     break;
-
-
+                default: // line = 2;
+                    res = 2;
+                    this.Line = 2;
+                    break;
             }
-        }
-
-        internal void ParseBrailleInverseOcho(char v)
-        {
-            if (v == 'h')
+            //Hand
+            if (hand == 'l')
             {
-                this.Ocho = "125";
+                this.Hand = "left";
+                L.Add("13");
             }
             else
-                this.Ocho = "236";
+            {
+                this.Hand = "right";
+                L.Add("123");
+            }
+
+            //ocho
+            if (ochoIni == '#')
+            {
+                if (ocho == 'h')
+                {
+                    L.Add("125");
+                    this.Ocho = "up";
+                }
+                else
+                {
+                    L.Add("236");
+                    this.Ocho = "down";
+                }
+                res = 5;
+            }
+            else
+            {
+                this.Ocho = null;
+            }
+
+
+
+            brailleText.AddText(L);
+            return res;
         }
 
         // public int clef_octave_change { get; set; }

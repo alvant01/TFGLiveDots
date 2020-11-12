@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\LiveDots.LiveDotsCOMObj\CLSID]
+@="{64550ee5-5255-4c18-98f0-71ec898fe97c}"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\LiveDots.LiveDotsCOMObj\CLSID]
+@="{64550ee5-5255-4c18-98f0-71ec898fe97c}"

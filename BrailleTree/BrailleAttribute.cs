@@ -34,7 +34,7 @@ namespace LiveDots
             brailleText.JumpLine();
         }
 
-        public Attribute ParseBraille(List<char> content)
+        public Attribute ParseBraille(List<char> content, BrailleText brailleText)
         {
             Attribute res = null;
             //Quito los 4 espacios
@@ -42,23 +42,19 @@ namespace LiveDots
             //Quito )
 
             //asigno clef
-            Clef.ParseBrailleInverse(content[0], content[1]);
-            content.RemoveRange(0,2);
-            if (content[0] == '#')
-            {
-                content.RemoveAt(0);
-                Clef.ParseBrailleInverseOcho(content[0]);
-                content.RemoveAt(0);
-            }
+            int num = Clef.ParseBrailleInverse(brailleText, content[0], content[1], content[2], content[3], content[4]);
+
+            content.RemoveRange(0, num);
+
             //asigno Key
             if (content[0] != ' ')
             {
-                Key.ParseBrailleInverse(content[0], content[1]);
+                int numDelete = Key.ParseBrailleInverse(brailleText, content[0], content[1], content[2]);
             }
             else
                 content.RemoveAt(0);
             //asigno Time
-            Time.ParseBrailleInverse(content[0], content[1], content[2]);
+            Time.ParseBrailleInverse(brailleText, content[0], content[1], content[2]);
 
             return res;
         }

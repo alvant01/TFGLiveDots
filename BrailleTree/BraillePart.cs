@@ -31,10 +31,10 @@ namespace LiveDots
 
         }
 
-        internal void ParseBraille(List<char> content)
+        internal void ParseBraille(List<char> content,BrailleText brailleText)
         {
             //Hacer bucle
-            Measures[0].ParseBraille(content);
+            Measures[0].ParseBraille(content, brailleText);
         }
     }
 }

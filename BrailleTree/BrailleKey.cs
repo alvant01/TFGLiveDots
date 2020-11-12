@@ -43,12 +43,102 @@ namespace LiveDots
         /// <param name="v2"></param>
         /// <param name="v3"></param>
         /// <returns>number of parameters needed for the Key</returns>
-        public int ParseBrailleInverse(char v1, char v2, char v3)
+        public int ParseBrailleInverse(BrailleText brailleText, char v1, char v2, char v3)
         {
+            List<string> L = new List<string>();
             int res = 0;
+            if (v1 == '3')
+            {
+                L.Add("146");
+                if (v2 == '3')
+                {
+                    L.Add("146");
+                    if (v3 == '3')
+                    {
+                        L.Add("146");
+                        this.Fifths = 3;
+                        res = 3;
+                    }
+                    else
+                    {
+                        this.Fifths = 2;
+                        res = 2;
+                    }
+                }
+                else
+                {
+                    this.Fifths = 1;
+                    res = 1;
+                }
+            }
+            else if (v1 == '#')
+            {
+                L.Add("3456");
+                if (v2 == 'd' && v3 == '3')
+                {
+                    L.Add("145");
+                    L.Add("146");
+                    this.Fifths = 4;
+                }
+                else if (v2 == 'e' && v3 == '3')
+                {
+                    L.Add("15");
+                    L.Add("146");
+                    this.Fifths = 5;
+                }
+                else if (v2 == 'f' && v3 == '3')
+                {
+                    L.Add("124");
+                    L.Add("146");
+                    this.Fifths = 6;
+                }
+                else if (v2 == 'd' && v3 == '(')
+                {
+                    L.Add("145");
+                    L.Add("126");
+                    this.Fifths = -4;
+                }
+                else if (v2 == 'e' && v3 == '(')
+                {
+                    L.Add("15");
+                    L.Add("126");
+                    this.Fifths = -5;
+                }
+                else if (v2 == 'f' && v3 == '(')
+                {
+                    L.Add("124");
+                    L.Add("126");
+                    this.Fifths = -6;
+                }
+                res = 3;
+            }
+            else if (v1 == '(')
+            {
+                L.Add("126");
+                if (v2 == '(')
+                {
+                    L.Add("126");
 
+                    if (v3 == '(')
+                    {
+                        L.Add("126");
 
-
+                        this.Fifths = -3;
+                        res = 3;
+                    }
+                    else
+                    {
+                        this.Fifths = -2;
+                        res = 2;
+                    }
+                }
+                else
+                {
+                    this.Fifths = -1;
+                    res = 1;
+                }
+            }
+            brailleText.AddText(L);
             return res;
         }
 

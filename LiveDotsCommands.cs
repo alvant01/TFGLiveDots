@@ -43,7 +43,7 @@ namespace LiveDots
                     BrailleText bt = new BrailleText();
                     BrailleScore bs = new BrailleScore();
 
-                    bs.ParseBraille(content); 
+                    bs.ParseBraille(content, bt); 
 
                     //PArsear Notas
 

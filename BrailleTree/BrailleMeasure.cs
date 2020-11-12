@@ -35,11 +35,11 @@ namespace LiveDots
         /// 
         /// </summary>
         /// <returns>Atribute of the Part</returns>
-        internal Attribute ParseBraille(List<char> content)
+        internal Attribute ParseBraille(List<char> content, BrailleText brailleText)
         {
             Attribute res = null;
 
-            res = Attribute.ParseBraille(content);
+            res = Attribute.ParseBraille(content, brailleText);
 
             return res;
         }

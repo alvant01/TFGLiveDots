@@ -63,8 +63,9 @@ namespace LiveDots
             }
         }
 
-        internal void ParseBrailleInverse(char sign, char beat, char beatType)
+        internal void ParseBrailleInverse(BrailleText brailleText, char sign, char beat, char beatType)
         {
+            List<string> L = new List<string>();
             switch (sign)
             {
                 case '#':
@@ -76,7 +77,6 @@ namespace LiveDots
                 case '%':
                     this.Symbol = Time_Symbol.Cut;
                     break;
-                case '':
             }
         }
 

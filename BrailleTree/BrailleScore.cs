@@ -37,11 +37,11 @@ namespace LiveDots
             brailleText.AddScoreEnd();
         }
 
-        internal void ParseBraille(List<char> content)
+        internal void ParseBraille(List<char> content, BrailleText brailleText)
         {
             BraillePart p = new BraillePart();
 
-            p.ParseBraille(content);
+            p.ParseBraille(content, brailleText);
         }
     }
 }
