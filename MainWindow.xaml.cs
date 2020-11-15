@@ -181,6 +181,11 @@ namespace LiveDots
             string nuevo = parser.ParseBack(noteViewer1.InnerScore).ToString();
             System.IO.File.WriteAllText("prueba.xml", nuevo);
 
+            //======================================================
+            //Alvar:temporal
+            SourceXml = File.ReadAllText("prueba.xml");
+            //======================================================
+
             BrailleScore bs = Converter.Xml2Braille("prueba.xml");
             BrailleText = new BrailleText(bs);
             Braille = BrailleText.GetBrailleString();
