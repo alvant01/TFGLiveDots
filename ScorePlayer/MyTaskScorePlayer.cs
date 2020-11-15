@@ -147,17 +147,24 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
             while (timelineIterator.MoveNext())
             {
                 var timelineElement = timelineIterator.Current;
-                if (State != PlaybackState.Playing) break;
-
-                if (previousElement != null && timelineElement.When > previousElement.When)
+                try
                 {
-                    await Task.Delay(lastAwaitedDuration == TimeSpan.Zero ? previousElement.When : previousElement.When - lastAwaitedDuration);
-                    PlayQueue(simultaneousElements);
-                    lastAwaitedDuration = previousElement.When;
-                }
+                    if (State != PlaybackState.Playing) break;
 
-                simultaneousElements.Enqueue(timelineElement);
-                previousElement = timelineElement;
+                    if (previousElement != null && timelineElement.When > previousElement.When)
+                    {
+                        await Task.Delay(lastAwaitedDuration == TimeSpan.Zero ? previousElement.When : previousElement.When - lastAwaitedDuration);
+                        PlayQueue(simultaneousElements);
+                        lastAwaitedDuration = previousElement.When;
+                    }
+
+                    simultaneousElements.Enqueue(timelineElement);
+                    previousElement = timelineElement;
+                }
+                catch (Exception e)
+                {
+                    
+                }
             }
 
             if (simultaneousElements.Any())

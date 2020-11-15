@@ -6,8 +6,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Threading;
-
-
+using Manufaktura.Music.Model; // temporal
 
 namespace LiveDots
 {
@@ -18,6 +17,7 @@ namespace LiveDots
             get { return (string)GetValue(SourceXmlProperty); }
             set
             {
+                cursorSound = new CursorPosSound();
                 SetValue(SourceXmlProperty, value);
                 var score = value.ToScore();
                 if (player != null) ((IDisposable)player).Dispose();
@@ -55,6 +55,7 @@ namespace LiveDots
         public BrailleText BrailleText;
         public BrailleMusicViewer Viewer;
         public bool Moved;
+        public CursorPosSound cursorSound;
 
 
         public new int FontSize
@@ -248,6 +249,10 @@ namespace LiveDots
                 {
                     text1.CaretIndex += Viewer.GetCurrentForward() - 1;
                     Viewer.UpdateIndex(text1.CaretIndex);
+                    if (!Viewer.IsInMiddle())
+                    {
+                       //cursorSound.play(Pitch.C5, RhythmicDuration.Quarter);
+                    }
                 }
 
                 //Si va pa tras

@@ -161,7 +161,7 @@ namespace LiveDots
             return txt;
         }
 
-        bool IsInMiddle()
+        public bool IsInMiddle()
         {
             return Current > 0 && Current < Viewer.Count && (Viewer[Current] == Viewer[Current - 1]);
         }
