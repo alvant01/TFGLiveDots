@@ -18,11 +18,11 @@ namespace LiveDots
             get { return (string)GetValue(SourceXmlProperty); }
             set
             {
-                cursorSound = new CursorPosSound();
                 SetValue(SourceXmlProperty, value);
                 var score = value.ToScore();
                 if (player != null) ((IDisposable)player).Dispose();
-                player = new MyMidiTaskScorePlayer(score);
+                //player = new MyMidiTaskScorePlayer(score);
+                cursorSound = new CursorPosSound(cursor);
                 PlayCommand?.FireCanExecuteChanged();
                 PauseCommand?.FireCanExecuteChanged();
                 StopCommand?.FireCanExecuteChanged();
@@ -53,6 +53,7 @@ namespace LiveDots
         public string FileNameXml;
         public string FileNameBraille;
         public ScorePlayer player;
+        public ScorePlayer cursor;
         public BrailleText BrailleText;
         public BrailleMusicViewer Viewer;
         public bool Moved;
@@ -256,9 +257,9 @@ namespace LiveDots
                     else nota = false;
                     if (!Viewer.IsInMiddle() && nota) // si la celda en la que esta situada es una nota distinta, haz que suene
                     {
-                        //cursorSound.play(Pitch.C5, RhythmicDuration.Quarter);
                         cursorSound.setPlay(false);
                     }
+                    cursorSound.play(Pitch.C5, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
                 }
 
                 //Si va pa tras

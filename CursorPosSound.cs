@@ -13,6 +13,7 @@ using Manufaktura.Music;
 using Manufaktura.Controls.Model;
 using Manufaktura.Music.Model.MajorAndMinor;
 using Manufaktura.Music.Model;
+using Manufaktura.Controls.Desktop.Audio.Midi;
 
 namespace LiveDots
 {
@@ -21,29 +22,37 @@ namespace LiveDots
         private bool played;
         ScorePlayer reproductor;
         Score nota;
-        public CursorPosSound()
+        public CursorPosSound(ScorePlayer r)
         {
-            played = false;
+            played = true;
             nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
-            //reproductor = new MyMidiTaskScorePlayer(nota);
+            if (reproductor != null) ((IDisposable)reproductor).Dispose();
+            reproductor = r;
+            reproductor = new MyMidiTaskScorePlayer(nota);
+            //    new MyMidiTaskScorePlayer(nota, new MidiDevice(2, "Cursor")); // cannot insert different devices, no idea why
         }
-        Score creaScore()
-        { //score.FirstStaff.Elements.Add(new Note(Pitch.C5, RhythmicDuration.Quarter));
-            return Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
-        }
+
+        //public void play(Pitch pitch, RhythmicDuration duration)
         public void play(Pitch pitch, RhythmicDuration duration)
         {
-            nota.FirstStaff.Elements.Add(new Note(pitch, duration));
-            //if (reproductor != null) ((IDisposable)reproductor).Dispose();
-          
-            reproductor.Play();
-            //nota.FirstStaff.Elements.Clear();
-            played = true;
+            if (!played)
+            {
+                // no consigo hacer que se reproduzca una nota, se van añadiendo
+                nota.FirstStaff.Elements.Add(new Note(pitch, duration));
+                reproductor.Play();
+                nota.FirstStaff.Elements.Clear();
+                //reproductor.PlayElement(new Note(pitch,duration)); ?
+                played = true;
+            }
 
         }
         public void setPlay(bool p)
         {
             played = p;
         }
+        /*Score creaScore()
+{ //score.FirstStaff.Elements.Add(new Note(Pitch.C5, RhythmicDuration.Quarter));
+    return Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
+}*/
     }
 }
