@@ -25,7 +25,7 @@ namespace LiveDots
         {
             played = false;
             nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
-            reproductor = new MyMidiTaskScorePlayer(nota);
+            //reproductor = new MyMidiTaskScorePlayer(nota);
         }
         Score creaScore()
         { //score.FirstStaff.Elements.Add(new Note(Pitch.C5, RhythmicDuration.Quarter));
@@ -41,9 +41,9 @@ namespace LiveDots
             played = true;
 
         }
-        void setPlaY()
+        public void setPlay(bool p)
         {
-            played = false;
+            played = p;
         }
     }
 }

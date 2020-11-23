@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Threading;
 using Manufaktura.Music.Model; // temporal
+using System.Text.RegularExpressions;
 
 namespace LiveDots
 {
@@ -249,9 +250,14 @@ namespace LiveDots
                 {
                     text1.CaretIndex += Viewer.GetCurrentForward() - 1;
                     Viewer.UpdateIndex(text1.CaretIndex);
-                    if (!Viewer.IsInMiddle())
+                    var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
+                    bool nota;
+                    if (s.Value != "Espacio" && s.Value != "Clave" && s.Value != "Armadura" && s.Value != "Compás" && s.Value != "Salto") nota = true;
+                    else nota = false;
+                    if (!Viewer.IsInMiddle() && nota) // si la celda en la que esta situada es una nota distinta, haz que suene
                     {
-                       //cursorSound.play(Pitch.C5, RhythmicDuration.Quarter);
+                        //cursorSound.play(Pitch.C5, RhythmicDuration.Quarter);
+                        cursorSound.setPlay(false);
                     }
                 }
 

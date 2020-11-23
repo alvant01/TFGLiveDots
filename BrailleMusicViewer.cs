@@ -40,6 +40,7 @@ namespace LiveDots
             MyMainWindow = window;
         }
 
+        //devuelve el texto entero
         public string GetText()
         {
             string txt = "";
