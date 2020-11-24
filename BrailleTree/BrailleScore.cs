@@ -42,6 +42,8 @@ namespace LiveDots
             BraillePart p = new BraillePart();
 
             p.ParseBraille(content, brailleText);
+            brailleText.AddScoreEnd();
+            this.Parts.Add(p);
         }
     }
 }

@@ -43,9 +43,14 @@ namespace LiveDots
                     BrailleText bt = new BrailleText();
                     BrailleScore bs = new BrailleScore();
 
-                    bs.ParseBraille(content, bt); 
+                    bs.ParseBraille(content, bt);
 
-                    //PArsear Notas
+                    window.BrailleText = bt;
+                    window.Viewer = window.BrailleText.GetViewer();
+                    window.Braille = window.BrailleText.GetBrailleString();
+
+                    window.Moved = true;
+                    LiveDotsCOMObj.SetCurrent(window.BrailleText.GetViewer());
 
                 }
                 else

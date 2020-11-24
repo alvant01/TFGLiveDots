@@ -44,6 +44,7 @@ namespace LiveDots
         {
             int res = 3;
             List<string> L = new List<string>();
+            L.Add("345");
             switch (sign)
             {
                 case 'í':
@@ -81,18 +82,20 @@ namespace LiveDots
                 default: // line = 2;
                     res = 2;
                     this.Line = 2;
+                    ochoIni = hand;
+                    hand = line;
                     break;
             }
             //Hand
             if (hand == 'l')
             {
-                this.Hand = "left";
-                L.Add("13");
+               this.Hand = "right";
+               L.Add("123");
             }
             else
             {
-                this.Hand = "right";
-                L.Add("123");
+                this.Hand = "left";
+                 L.Add("13");
             }
 
             //ocho
@@ -118,6 +121,7 @@ namespace LiveDots
 
 
             brailleText.AddText(L);
+            ParseText(brailleText);
             return res;
         }
 

@@ -34,6 +34,8 @@ namespace LiveDots
         internal void ParseBraille(List<char> content,BrailleText brailleText)
         {
             //Hacer bucle
+            BrailleMeasure m = new BrailleMeasure();
+            this.Measures.Add(m);
             Measures[0].ParseBraille(content, brailleText);
         }
     }

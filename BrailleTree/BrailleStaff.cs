@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LiveDots
@@ -37,5 +38,12 @@ namespace LiveDots
             }
         }
 
+        internal void ParseBraille(List<char> content, BrailleText brailleText)
+        {
+            //Hacer bucle
+            BrailleVoice voice = new BrailleVoice();
+
+            voice.ParseBraille(content, brailleText);
+        }
     }
 }

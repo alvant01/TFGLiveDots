@@ -38,8 +38,18 @@ namespace LiveDots
         internal Attribute ParseBraille(List<char> content, BrailleText brailleText)
         {
             Attribute res = null;
-
+            Attribute = new BrailleAttribute();
             res = Attribute.ParseBraille(content, brailleText);
+            content.RemoveAt(0); //\n
+            BrailleStaff staff = new BrailleStaff();
+
+            while (content.Count != 0)
+            {
+                staff.ParseBraille(content, brailleText);
+                brailleText.AddSpace();
+            }
+
+
 
             return res;
         }

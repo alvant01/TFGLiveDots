@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LiveDots
 {
@@ -43,5 +44,34 @@ namespace LiveDots
             }
         }
 
+        internal void ParseBraille(List<char> content, BrailleText brailleText)
+        {
+            //Hacer Bucle
+            /*while (content[0] != '\n')
+            {
+                BrailleNote n = new BrailleNote();
+
+                n.ParseBrailleInverse(brailleText, content);
+
+                if (content[0] == '(' && content[1] == 'k')
+                {
+                    content.RemoveRange(0, 2);
+                    return;
+                }
+            }
+            if(content[0] == '\n')
+            {
+                content.RemoveAt(0);
+                brailleText.JumpLine();
+            }*/
+
+            while (content.Count != 0)
+            {
+                BrailleNote n = new BrailleNote();
+
+                n.ParseBrailleInverse(brailleText, content);
+            }
+            int i = 0;
+        }
     }
 }

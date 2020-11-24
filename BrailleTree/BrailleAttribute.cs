@@ -37,24 +37,27 @@ namespace LiveDots
         public Attribute ParseBraille(List<char> content, BrailleText brailleText)
         {
             Attribute res = null;
-            //Quito los 4 espacios
 
-            //Quito )
+            content.RemoveRange(0, 5);
+            brailleText.AddSpace(4);
 
             //asigno clef
+            Clef = new BrailleClef();
             int num = Clef.ParseBrailleInverse(brailleText, content[0], content[1], content[2], content[3], content[4]);
-
             content.RemoveRange(0, num);
 
             //asigno Key
-            if (content[0] != ' ')
-            {
-                int numDelete = Key.ParseBrailleInverse(brailleText, content[0], content[1], content[2]);
-            }
-            else
-                content.RemoveAt(0);
+            Key = new BrailleKey();
+            int numDelete = Key.ParseBrailleInverse(brailleText, content[0], content[1], content[2]);
+            content.RemoveRange(0, numDelete);
+            brailleText.AddSpace();
+
             //asigno Time
-            Time.ParseBrailleInverse(brailleText, content[0], content[1], content[2]);
+            Time = new BrailleTime();
+            numDelete = Time.ParseBrailleInverse(brailleText, content);
+            content.RemoveRange(0, numDelete);
+            brailleText.AddSpace();
+            brailleText.JumpLine();
 
             return res;
         }

@@ -46,6 +46,11 @@ namespace LiveDots
         public int ParseBrailleInverse(BrailleText brailleText, char v1, char v2, char v3)
         {
             List<string> L = new List<string>();
+            if (v1 == ' ')
+            {
+                return 1;
+            }
+
             int res = 0;
             if (v1 == '3')
             {
@@ -57,18 +62,18 @@ namespace LiveDots
                     {
                         L.Add("146");
                         this.Fifths = 3;
-                        res = 3;
+                        res = 4;
                     }
                     else
                     {
                         this.Fifths = 2;
-                        res = 2;
+                        res = 3;
                     }
                 }
                 else
                 {
                     this.Fifths = 1;
-                    res = 1;
+                    res = 2;
                 }
             }
             else if (v1 == '#')
@@ -110,7 +115,7 @@ namespace LiveDots
                     L.Add("126");
                     this.Fifths = -6;
                 }
-                res = 3;
+                res = 4;
             }
             else if (v1 == '(')
             {
@@ -124,21 +129,23 @@ namespace LiveDots
                         L.Add("126");
 
                         this.Fifths = -3;
-                        res = 3;
+                        res = 4;
                     }
                     else
                     {
                         this.Fifths = -2;
-                        res = 2;
+                        res = 3;
                     }
                 }
                 else
                 {
                     this.Fifths = -1;
-                    res = 1;
+                    res = 2;
                 }
             }
+            else { this.Fifths = 0; }
             brailleText.AddText(L);
+            ParseText(brailleText);
             return res;
         }
 
