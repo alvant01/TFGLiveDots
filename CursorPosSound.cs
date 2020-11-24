@@ -21,18 +21,20 @@ namespace LiveDots
     {
         private bool played;
         ScorePlayer reproductor;
-        Score nota;
-        public CursorPosSound(ScorePlayer r)
+        Score nota;// partitura
+        public CursorPosSound(ScorePlayer r) // le paso scoreplayer aunque en realidad no es muy necesario si se pudiera usar un mismo midi
         {
             played = true;
             nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
+            /*no creo que  sea la mejor manera de hacerlo, prefiero crear un musicalSymbol y usar eso para tocar la nota, en vez de crear una partitura todo el rato
+             * MusicalSymbol no tiene nada de documentacion en internet
+             */
             if (reproductor != null) ((IDisposable)reproductor).Dispose();
             reproductor = r;
             reproductor = new MyMidiTaskScorePlayer(nota);
-            //    new MyMidiTaskScorePlayer(nota, new MidiDevice(2, "Cursor")); // cannot insert different devices, no idea why
+            //reproductor = new MyMidiTaskScorePlayer(nota, new MidiDevice(2, "Cursor")); // cannot insert different devices, no idea why
         }
 
-        //public void play(Pitch pitch, RhythmicDuration duration)
         public void play(Pitch pitch, RhythmicDuration duration)
         {
             if (!played)
@@ -40,8 +42,8 @@ namespace LiveDots
                 // no consigo hacer que se reproduzca una nota, se van añadiendo
                 nota.FirstStaff.Elements.Add(new Note(pitch, duration));
                 reproductor.Play();
-                nota.FirstStaff.Elements.Clear();
-                //reproductor.PlayElement(new Note(pitch,duration)); ?
+                nota.FirstStaff.Elements.Clear(); // no borra los elementos introducidos
+                reproductor.PlayElement(new Note(pitch,duration));// ? No se como pasarle un MusicalSymbol
                 played = true;
             }
 

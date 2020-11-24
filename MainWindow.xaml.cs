@@ -259,7 +259,7 @@ namespace LiveDots
                     {
                         cursorSound.setPlay(false);
                     }
-                    cursorSound.play(Pitch.C5, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
+                    cursorSound.play(Pitch.G1, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
                 }
 
                 //Si va pa tras
