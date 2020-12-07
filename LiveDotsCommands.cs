@@ -30,14 +30,12 @@ namespace LiveDots
             {
                 if (openFileDialog.FileName.ToLower().Contains(".musicxml_braille"))
                 {
-
-                    //Idea
-
                     //Sacar de archivo
                     List<char> content = new List<char>();
                     window.FileNameXml = openFileDialog.FileName;
-                    string aux = File.ReadAllText(window.FileNameXml);
-                    content.AddRange(aux);
+                    //string aux = File.ReadAllText(window.FileNameXml); 
+                    content.AddRange(File.ReadAllText(window.FileNameXml));
+                    // content.AddRange(aux);
                     //Convertir en arbol braile
                     //Parsear Atributos
                     BrailleText bt = new BrailleText();

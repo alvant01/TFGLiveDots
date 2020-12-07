@@ -10,10 +10,18 @@ namespace LiveDots
 
         public BrailleAttribute Attribute { get; set; }
 
+
+
         public BrailleMeasure()
         {
             Staffs = new List<BrailleStaff>();
             //Attribute = new BrailleAttribute();
+        }
+        public BrailleMeasure(Object o)
+        {
+            Staffs = new List<BrailleStaff>();
+            //Attribute = new BrailleAttribute();
+            this.Attribute = (BrailleAttribute)o;
         }
 
 
@@ -35,19 +43,21 @@ namespace LiveDots
         /// 
         /// </summary>
         /// <returns>Atribute of the Part</returns>
-        internal Attribute ParseBraille(List<char> content, BrailleText brailleText)
+        internal BrailleAttribute ParseBraille(List<char> content, BrailleText brailleText)
         {
-            Attribute res = null;
-            Attribute = new BrailleAttribute();
-            res = Attribute.ParseBraille(content, brailleText);
-            content.RemoveAt(0); //\n
-            BrailleStaff staff = new BrailleStaff();
-
-            while (content.Count != 0)
-            {
-                staff.ParseBraille(content, brailleText);
-                brailleText.AddSpace();
+            BrailleAttribute res = null;
+            
+            if (Attribute == null)
+            {   
+                Attribute = new BrailleAttribute();
+                res = Attribute.ParseBraille(content, brailleText);
+                content.RemoveAt(0); //\n
             }
+
+            BrailleStaff staff = new BrailleStaff();
+            staff.ParseBraille(content, brailleText );
+            this.Staffs.Add(staff);
+            brailleText.AddSpace();
 
 
 

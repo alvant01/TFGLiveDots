@@ -46,32 +46,18 @@ namespace LiveDots
 
         internal void ParseBraille(List<char> content, BrailleText brailleText)
         {
-            //Hacer Bucle
-            /*while (content[0] != '\n')
+           while (content.Count != 0 )
             {
-                BrailleNote n = new BrailleNote();
-
-                n.ParseBrailleInverse(brailleText, content);
-
-                if (content[0] == '(' && content[1] == 'k')
+                if (content[0] == ' ')
                 {
-                    content.RemoveRange(0, 2);
-                    return;
+                    content.RemoveAt(0);
+                    break;
                 }
-            }
-            if(content[0] == '\n')
-            {
-                content.RemoveAt(0);
-                brailleText.JumpLine();
-            }*/
-
-            while (content.Count != 0)
-            {
                 BrailleNote n = new BrailleNote();
 
                 n.ParseBrailleInverse(brailleText, content);
+                this.Notes.Add(n);
             }
-            int i = 0;
         }
     }
 }

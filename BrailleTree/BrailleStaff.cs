@@ -44,6 +44,7 @@ namespace LiveDots
             BrailleVoice voice = new BrailleVoice();
 
             voice.ParseBraille(content, brailleText);
+            this.Voices.Add(voice);
         }
     }
 }

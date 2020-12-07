@@ -27,20 +27,9 @@ namespace LiveDots
                 StopCommand?.FireCanExecuteChanged();
             }
         }
-        public string SourceBraile
-        {
-            //TO DO
-            get { return null; }
-
-            set 
-            {
-                
-            }
-        }
 
         public static readonly DependencyProperty SourceXmlProperty = DependencyProperty.Register("SourceXml", typeof(string), typeof(Window));
-        public static readonly DependencyProperty SourceXmlBrailleProperty = DependencyProperty.Register("SourceBraille", typeof(string), typeof(Window));
-
+ 
         public string Braille
         {
             get { return (string)GetValue(BrailleProperty); }

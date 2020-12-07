@@ -34,9 +34,8 @@ namespace LiveDots
             brailleText.JumpLine();
         }
 
-        public Attribute ParseBraille(List<char> content, BrailleText brailleText)
+        public BrailleAttribute ParseBraille(List<char> content, BrailleText brailleText)
         {
-            Attribute res = null;
 
             content.RemoveRange(0, 5);
             brailleText.AddSpace(4);
@@ -59,7 +58,7 @@ namespace LiveDots
             brailleText.AddSpace();
             brailleText.JumpLine();
 
-            return res;
+            return this;
         }
     }
 }
