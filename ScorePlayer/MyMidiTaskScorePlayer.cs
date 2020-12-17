@@ -61,7 +61,7 @@ namespace LiveDots
 
         public override async void PlayElement(MusicalSymbol element)
         {
-            var note = element as Note;
+            var note = element as Note;            
             if (note == null || note.Staff == null) return;
 
             if (note.TieType == NoteTieType.Stop || note.TieType == NoteTieType.StopAndStartAnother) return;

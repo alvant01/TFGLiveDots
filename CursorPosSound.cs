@@ -25,7 +25,10 @@ namespace LiveDots
         public CursorPosSound(MainWindow viewModel) // le paso scoreplayer aunque en realidad no es muy necesario si se pudiera usar un mismo midi
         {
             mainWindow = viewModel;
-            played = true;
+            MusicalSymbol musicalSymbol;
+            Note note = null;
+            //string s_ = note.Step;         
+            played = true;            
             nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
             /*no creo que  sea la mejor manera de hacerlo, prefiero crear un musicalSymbol y usar eso para tocar la nota, en vez de crear una partitura todo el rato
              * MusicalSymbol no tiene nada de documentacion en internet, playElement no funciona tampoco
@@ -42,7 +45,7 @@ namespace LiveDots
                 nota.FirstStaff.Elements.Add(new Note(pitch, duration));
                 //reproductor.Play();
                 nota.FirstStaff.Elements.Clear(); // no borra los elementos introducidos
-                //reproductor.PlayElement(new Note(pitch,duration)); //? No se como pasarle un MusicalSymbol
+                mainWindow.player.PlayElement(new Note(pitch,duration)); //? No se como pasarle un MusicalSymbol
                 played = true;
             }
 

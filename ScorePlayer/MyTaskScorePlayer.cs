@@ -144,7 +144,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
                 WasPaused = false;
             }
             ///Hasta aquí trozo problematico, si da problemas quitar. Sirve para no perder notas al pausar y volver a reproducir
-            while (timelineIterator.MoveNext()) //intrakeable el error --> System.InvalidOperationException: 'La secuencia no contiene elementos', ocurre al pasar de notas con las flechas
+            while (timelineIterator.MoveNext()) //intrakeable el error --> System.InvalidOperationExcoeption: 'La secuencia no contiene elementos', ocurre al pasar de notas con las flechas
 
             {
                 var timelineElement = timelineIterator.Current;
