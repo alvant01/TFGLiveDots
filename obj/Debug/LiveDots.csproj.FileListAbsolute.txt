@@ -378,11 +378,11 @@ C:\Users\alvaro\Documents\GitHub\TFGLiveDots\obj\Debug\LiveDots.Properties.Resou
 C:\Users\alvaro\Documents\GitHub\TFGLiveDots\obj\Debug\LiveDots.csproj.GenerateResource.cache
 C:\Users\alvaro\Documents\GitHub\TFGLiveDots\obj\Debug\LiveDots.csproj.CoreCompileInputs.cache
 C:\Users\alvaro\Documents\GitHub\TFGLiveDots\obj\Debug\LiveDots.csproj.CopyComplete
+C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\Manufaktura.Controls.dll
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\LiveDots.exe.config
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\LiveDots.exe
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\LiveDots.pdb
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\Manufaktura.Controls.Desktop.dll
-C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\Manufaktura.Controls.dll
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\Manufaktura.Controls.WPF.dll
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\Manufaktura.Core.Serialization.dll
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\Manufaktura.Music.dll
@@ -428,7 +428,6 @@ C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\System.Memory
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\System.Reflection.DispatchProxy.xml
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.csprojAssemblyReference.cache
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.exe.config
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\Guide.g.cs
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\MainWindow.g.cs
@@ -439,9 +438,9 @@ C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\Guide.baml
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\MainWindow.baml
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.g.resources
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.Properties.Resources.resources
+C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.ViewerRES.resources
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.csproj.GenerateResource.cache
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.csproj.CoreCompileInputs.cache
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.csproj.CopyComplete
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.exe
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.pdb
-C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.ViewerRES.resources

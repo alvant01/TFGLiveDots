@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace LiveDots {
-    using Manufaktura.Controls.Model;
     using System;
     
     
@@ -235,11 +234,9 @@ namespace LiveDots {
         /// <summary>
         ///   Looks up a localized string similar to B2.
         /// </summary>
-        /// WIP
-        internal static Note Si_blanca {
+        internal static string Si_blanca {
             get {
-                //se devolveria la nota directamente
-                return (Note)ResourceManager.GetObject("Si blanca", resourceCulture);
+                return ResourceManager.GetString("Si blanca", resourceCulture);
             }
         }
         

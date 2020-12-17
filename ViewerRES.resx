@@ -118,66 +118,88 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Do corchea" xml:space="preserve">
-    <value>C</value>
+    <value>C1/2</value>
   </data>
   <data name="Do negra" xml:space="preserve">
     <value>C1</value>
+  </data>
+  <data name="Do redonda" xml:space="preserve">
+    <value>C4</value>
   </data>
   <data name="Fa blanca" xml:space="preserve">
     <value>F2</value>
   </data>
   <data name="Fa corchea" xml:space="preserve">
-    <value>F</value>
+    <value>F1/2</value>
   </data>
   <data name="Fa negra" xml:space="preserve">
     <value>F1</value>
+  </data>
+  <data name="Fa redonda" xml:space="preserve">
+    <value>F4</value>
   </data>
   <data name="La blanca" xml:space="preserve">
     <value>A2</value>
   </data>
   <data name="La corchea" xml:space="preserve">
-    <value>A</value>
+    <value>A1/2</value>
   </data>
   <data name="La negra" xml:space="preserve">
     <value>A1</value>
+  </data>
+  <data name="La redonda" xml:space="preserve">
+    <value>A4</value>
   </data>
   <data name="Mi blanca" xml:space="preserve">
     <value>E2</value>
   </data>
   <data name="Mi corchea" xml:space="preserve">
-    <value>E</value>
+    <value>E1/2</value>
   </data>
   <data name="Mi negra" xml:space="preserve">
     <value>E1</value>
+  </data>
+  <data name="Mi redonda" xml:space="preserve">
+    <value>E4</value>
   </data>
   <data name="Re blanca" xml:space="preserve">
     <value>D2</value>
   </data>
   <data name="Re corchea" xml:space="preserve">
-    <value>D</value>
+    <value>D1/2</value>
   </data>
   <data name="Re negra" xml:space="preserve">
     <value>D1</value>
+  </data>
+  <data name="Re redonda" xml:space="preserve">
+    <value>D4</value>
   </data>
   <data name="Si blanca" xml:space="preserve">
     <value>B2</value>
   </data>
   <data name="Si corchea" xml:space="preserve">
-    <value>B</value>
+    <value>B1/2</value>
   </data>
   <data name="Si negra" xml:space="preserve">
     <value>B1</value>
+  </data>
+  <data name="Si redonda" xml:space="preserve">
+    <value>B4</value>
   </data>
   <data name="Sol blanca" xml:space="preserve">
     <value>G2</value>
     <comment>Half</comment>
   </data>
   <data name="Sol corchea" xml:space="preserve">
-    <value>G</value>
+    <value>G1/2</value>
     <comment>Eighth</comment>
   </data>
   <data name="Sol negra" xml:space="preserve">
     <value>G1</value>
     <comment>Quarter</comment>
+  </data>
+  <data name="Sol redonda" xml:space="preserve">
+    <value>G4</value>
+    <comment>Whole</comment>
   </data>
 </root>
