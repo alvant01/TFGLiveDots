@@ -8,11 +8,38 @@ using System.Windows.Input;
 using System.Threading;
 using Manufaktura.Music.Model; // temporal
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace LiveDots
 {
     public partial class MainWindow : Window
     {
+        private void init()
+        {
+            noteViewer1.IsSelectable = true;
+            noteViewer1.PreviewMouseLeftButtonUp += noteViewer1_PreviewMouseLeftButtonUp;
+            //noteViewer1.QueryCursor += NoteViewer1_QueryCursor;
+
+
+            text1.IsReadOnly = false;
+            text1.SelectionChanged += text1_SelectionChanged;
+            text1.TextChanged += text1_TextChanged;
+        }
+
+        /*
+         * Here we have to update viewer, backward and forward with the new info
+         */
+        private void text1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Console.WriteLine(text1.Text);            
+        }
+
+        private void NoteViewer1_QueryCursor(object sender, QueryCursorEventArgs e)
+        {
+            Console.WriteLine(e);
+        }
+
+
         public string SourceXml
         {
             get { return (string)GetValue(SourceXmlProperty); }
@@ -22,7 +49,7 @@ namespace LiveDots
                 var score = value.ToScore();
                 if (player != null) ((IDisposable)player).Dispose();
                 player = new MyMidiTaskScorePlayer(score);
-                cursorSound = new CursorPosSound(this);
+                //cursorSound = new CursorPosSound(this);
                 PlayCommand?.FireCanExecuteChanged();
                 PauseCommand?.FireCanExecuteChanged();
                 StopCommand?.FireCanExecuteChanged();
@@ -115,9 +142,9 @@ namespace LiveDots
 
         public MainWindow()
         {
-
-            DicBraille d = new DicBraille();
-
+            
+            DicBraille d = new DicBraille(); 
+            
             try
             {
                 string fuentes = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "fuentes\\edico_es_br6.ttf");
@@ -132,7 +159,8 @@ namespace LiveDots
             }
             Thread.Sleep(2000);
 
-            InitializeComponent();
+            InitializeComponent();         
+            this.Loaded += MainWindow_Loaded;
             this.DataContext = this;
 
             PlayCommand = new PlayCommand(this);
@@ -154,6 +182,14 @@ namespace LiveDots
             ScoreZoomFactor = 1.3;
             BrailleSize = 34;
             FontSize = 24;
+        }
+
+        /*
+         * Executed when the window is completely ready for interaction
+         */
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            init();
         }
 
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
@@ -257,9 +293,9 @@ namespace LiveDots
                     else nota = false;
                     if (!Viewer.IsInMiddle() && nota) // si la celda en la que esta situada es una nota distinta, haz que suene
                     {
-                        cursorSound.setPlay(false);
+                        //cursorSound.setPlay(false);
                     }
-                    cursorSound.play(Pitch.G1, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
+            //        cursorSound.play(Pitch.G1, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
                 }
 
                 //Si va pa tras
