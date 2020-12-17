@@ -21,8 +21,8 @@ namespace LiveDots
                 SetValue(SourceXmlProperty, value);
                 var score = value.ToScore();
                 if (player != null) ((IDisposable)player).Dispose();
-                //player = new MyMidiTaskScorePlayer(score);
-                cursorSound = new CursorPosSound(cursor);
+                player = new MyMidiTaskScorePlayer(score);
+                cursorSound = new CursorPosSound(this);
                 PlayCommand?.FireCanExecuteChanged();
                 PauseCommand?.FireCanExecuteChanged();
                 StopCommand?.FireCanExecuteChanged();

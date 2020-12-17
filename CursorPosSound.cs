@@ -20,18 +20,17 @@ namespace LiveDots
     public class CursorPosSound
     {
         private bool played;
-        ScorePlayer reproductor;
+        protected MainWindow mainWindow;
         Score nota;// partitura
-        public CursorPosSound(ScorePlayer r) // le paso scoreplayer aunque en realidad no es muy necesario si se pudiera usar un mismo midi
+        public CursorPosSound(MainWindow viewModel) // le paso scoreplayer aunque en realidad no es muy necesario si se pudiera usar un mismo midi
         {
+            mainWindow = viewModel;
             played = true;
             nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
             /*no creo que  sea la mejor manera de hacerlo, prefiero crear un musicalSymbol y usar eso para tocar la nota, en vez de crear una partitura todo el rato
-             * MusicalSymbol no tiene nada de documentacion en internet
+             * MusicalSymbol no tiene nada de documentacion en internet, playElement no funciona tampoco
              */
-            if (reproductor != null) ((IDisposable)reproductor).Dispose();
-            reproductor = r;
-            reproductor = new MyMidiTaskScorePlayer(nota);
+            //mainWindow.player.PlayElement();
             //reproductor = new MyMidiTaskScorePlayer(nota, new MidiDevice(2, "Cursor")); // cannot insert different devices, no idea why
         }
 
@@ -41,9 +40,9 @@ namespace LiveDots
             {
                 // no consigo hacer que se reproduzca una nota, se van añadiendo
                 nota.FirstStaff.Elements.Add(new Note(pitch, duration));
-                reproductor.Play();
+                //reproductor.Play();
                 nota.FirstStaff.Elements.Clear(); // no borra los elementos introducidos
-                reproductor.PlayElement(new Note(pitch,duration));// ? No se como pasarle un MusicalSymbol
+                //reproductor.PlayElement(new Note(pitch,duration)); //? No se como pasarle un MusicalSymbol
                 played = true;
             }
 
