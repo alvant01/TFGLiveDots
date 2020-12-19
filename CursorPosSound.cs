@@ -21,13 +21,12 @@ namespace LiveDots
     {
         private bool played;
         protected MainWindow mainWindow;
+        StaffForNotes myMusical = new StaffForNotes();
         Score nota;// partitura
         public CursorPosSound(MainWindow viewModel) // le paso scoreplayer aunque en realidad no es muy necesario si se pudiera usar un mismo midi
         {
             mainWindow = viewModel;
-            MusicalSymbol musicalSymbol;
             Note note = null;
-            //string s_ = note.Step;         
             played = true;            
             nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
             /*no creo que  sea la mejor manera de hacerlo, prefiero crear un musicalSymbol y usar eso para tocar la nota, en vez de crear una partitura todo el rato
@@ -43,9 +42,16 @@ namespace LiveDots
             {
                 // no consigo hacer que se reproduzca una nota, se van añadiendo
                 nota.FirstStaff.Elements.Add(new Note(pitch, duration));
-                //reproductor.Play();
+                /*
                 nota.FirstStaff.Elements.Clear(); // no borra los elementos introducidos
-                mainWindow.player.PlayElement(new Note(pitch,duration)); //? No se como pasarle un MusicalSymbol
+                */
+                Note note = new Note();
+                note.Pitch.StepName = Manufaktura.Music.Model.Step.C;
+
+                /*Staff staff = new Staff();
+                note.Staff = staff;*/
+               //note.Staff =
+                mainWindow.player.PlayElement(note);
                 played = true;
             }
 

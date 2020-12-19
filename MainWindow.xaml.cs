@@ -49,7 +49,7 @@ namespace LiveDots
                 var score = value.ToScore();
                 if (player != null) ((IDisposable)player).Dispose();
                 player = new MyMidiTaskScorePlayer(score);
-                //cursorSound = new CursorPosSound(this);
+                cursorSound = new CursorPosSound(this);
                 PlayCommand?.FireCanExecuteChanged();
                 PauseCommand?.FireCanExecuteChanged();
                 StopCommand?.FireCanExecuteChanged();
@@ -79,7 +79,7 @@ namespace LiveDots
 
         public string FileNameXml;
         public string FileNameBraille;
-        public ScorePlayer player;
+        public MyMidiTaskScorePlayer player;
         public ScorePlayer cursor;
         public BrailleText BrailleText;
         public BrailleMusicViewer Viewer;
@@ -293,9 +293,9 @@ namespace LiveDots
                     else nota = false;
                     if (!Viewer.IsInMiddle() && nota) // si la celda en la que esta situada es una nota distinta, haz que suene
                     {
-                        //cursorSound.setPlay(false);
+                        cursorSound.setPlay(false);
                     }
-            //        cursorSound.play(Pitch.G1, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
+                    cursorSound.play(Pitch.G1, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
                 }
 
                 //Si va pa tras

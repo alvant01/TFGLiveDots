@@ -61,6 +61,15 @@ namespace LiveDots {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C2.
+        /// </summary>
+        internal static string Do_blanca {
+            get {
+                return ResourceManager.GetString("Do blanca", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C1/2.
         /// </summary>
         internal static string Do_corchea {
