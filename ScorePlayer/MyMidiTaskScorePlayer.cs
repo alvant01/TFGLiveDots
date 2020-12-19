@@ -68,11 +68,13 @@ namespace LiveDots
             if (note.TieType == NoteTieType.Stop || note.TieType == NoteTieType.StopAndStartAnother) return;
             var firstNoteInMeasure = element.Measure?.Elements.IndexOf(note) == 0;
 
-            var channelNumber = GetChannelNumber(Score.Staves.IndexOf(note.Staff)); // no entiendo que busca en el staff
+            //var channelNumber = GetChannelNumber(Score.Staves.IndexOf(note.Staff)); // no entiendo que busca en el staff
+            var channelNumber = 1;
             //var actualChannelNumber = (pitchesPlaying[channelNumber].Contains(note.MidiPitch)) ? channelNumber + 1 : channelNumber;
             var actualChannelNumber = 1; //test
 
-            if (!pitchesPlaying[channelNumber].Contains(note.MidiPitch)) pitchesPlaying[channelNumber].Add(note.MidiPitch);
+            //if (!pitchesPlaying[channelNumber].Contains(note.MidiPitch)) 
+                pitchesPlaying[channelNumber].Add(note.MidiPitch);
             outDevice.Send(note, true, actualChannelNumber, firstNoteInMeasure ? 127 : 100);
 
             await Task.Delay(new RhythmicDuration(note.BaseDuration.DenominatorAsPowerOfTwo, note.NumberOfDots).ToTimeSpan(Tempo));

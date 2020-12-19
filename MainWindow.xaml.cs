@@ -295,7 +295,7 @@ namespace LiveDots
                     {
                         cursorSound.setPlay(false);
                     }
-                    cursorSound.play(Pitch.G1, RhythmicDuration.Half); // placeholder, necesitamos alguna manera de acceder a la nota
+                    cursorSound.play(Pitch.F2, RhythmicDuration.Half); // AVERIGUAMOS la nota con el resoruces creado
                 }
 
                 //Si va pa tras

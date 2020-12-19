@@ -46,12 +46,13 @@ namespace LiveDots
                 nota.FirstStaff.Elements.Clear(); // no borra los elementos introducidos
                 */
                 Note note = new Note();
-                note.Pitch.StepName = Manufaktura.Music.Model.Step.C;
+                //cambiando esto no funciona
+                note.Pitch.StepName = Manufaktura.Music.Model.Step.B;
 
                 /*Staff staff = new Staff();
                 note.Staff = staff;*/
                //note.Staff =
-                mainWindow.player.PlayElement(note);
+                mainWindow.player.PlayElement(new Note(pitch,duration));
                 played = true;
             }
 
