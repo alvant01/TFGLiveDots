@@ -282,7 +282,7 @@ namespace LiveDots
             if (Viewer != null && Moved)
             {
                 Moved = false;
-                //Si va pa lante
+                //Si va para delante
                 if (text1.CaretIndex - Viewer.GetCurrent() == 1)
                 {
                     text1.CaretIndex += Viewer.GetCurrentForward() - 1;
@@ -295,10 +295,13 @@ namespace LiveDots
                     {
                         cursorSound.setPlay(false);
                     }
-                    cursorSound.play(Pitch.F2, RhythmicDuration.Half); // AVERIGUAMOS la nota con el resoruces creado
+                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources?
+                    if (ViewerRES.G1_2 == Viewer.GetElement(Viewer.GetCurrent()).Trim())//test
+                        Console.WriteLine(ViewerRES.C2); //entra si la nota es la mima
+                    cursorSound.play(Pitch.F2, RhythmicDuration.Half); // AVERIGUAMOS la nota con el resources creado
                 }
 
-                //Si va pa tras
+                //Si va para atras
                 else if (text1.CaretIndex - Viewer.GetCurrent() == -1)
                 {
                     text1.CaretIndex = text1.CaretIndex - Viewer.GetCurrentBackward() + 1;

@@ -69,7 +69,7 @@ namespace LiveDots
             var firstNoteInMeasure = element.Measure?.Elements.IndexOf(note) == 0;
 
             //var channelNumber = GetChannelNumber(Score.Staves.IndexOf(note.Staff)); // no entiendo que busca en el staff
-            var channelNumber = 1;
+            var channelNumber = 1; //test
             //var actualChannelNumber = (pitchesPlaying[channelNumber].Contains(note.MidiPitch)) ? channelNumber + 1 : channelNumber;
             var actualChannelNumber = 1; //test
 

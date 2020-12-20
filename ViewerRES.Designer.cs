@@ -61,254 +61,254 @@ namespace LiveDots {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C2.
+        ///   Looks up a localized string similar to La negra.
         /// </summary>
-        internal static string Do_blanca {
+        internal static string A1 {
             get {
-                return ResourceManager.GetString("Do blanca", resourceCulture);
+                return ResourceManager.GetString("A1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C1/2.
+        ///   Looks up a localized string similar to La corchea.
         /// </summary>
-        internal static string Do_corchea {
+        internal static string A1_2 {
             get {
-                return ResourceManager.GetString("Do corchea", resourceCulture);
+                return ResourceManager.GetString("A1/2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C1.
+        ///   Looks up a localized string similar to La blanca.
         /// </summary>
-        internal static string Do_negra {
+        internal static string A2 {
             get {
-                return ResourceManager.GetString("Do negra", resourceCulture);
+                return ResourceManager.GetString("A2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C4.
+        ///   Looks up a localized string similar to La redonda.
         /// </summary>
-        internal static string Do_redonda {
+        internal static string A4 {
             get {
-                return ResourceManager.GetString("Do redonda", resourceCulture);
+                return ResourceManager.GetString("A4", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to F2.
+        ///   Looks up a localized string similar to Si negra.
         /// </summary>
-        internal static string Fa_blanca {
+        internal static string B1 {
             get {
-                return ResourceManager.GetString("Fa blanca", resourceCulture);
+                return ResourceManager.GetString("B1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to F1/2.
+        ///   Looks up a localized string similar to Si corchea.
         /// </summary>
-        internal static string Fa_corchea {
+        internal static string B1_2 {
             get {
-                return ResourceManager.GetString("Fa corchea", resourceCulture);
+                return ResourceManager.GetString("B1/2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to F1.
+        ///   Looks up a localized string similar to Si blanca.
         /// </summary>
-        internal static string Fa_negra {
+        internal static string B2 {
             get {
-                return ResourceManager.GetString("Fa negra", resourceCulture);
+                return ResourceManager.GetString("B2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to F4.
+        ///   Looks up a localized string similar to Si redonda.
         /// </summary>
-        internal static string Fa_redonda {
+        internal static string B4 {
             get {
-                return ResourceManager.GetString("Fa redonda", resourceCulture);
+                return ResourceManager.GetString("B4", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A2.
+        ///   Looks up a localized string similar to Do negra.
         /// </summary>
-        internal static string La_blanca {
+        internal static string C1 {
             get {
-                return ResourceManager.GetString("La blanca", resourceCulture);
+                return ResourceManager.GetString("C1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A1/2.
+        ///   Looks up a localized string similar to Do corchea.
         /// </summary>
-        internal static string La_corchea {
+        internal static string C1_2 {
             get {
-                return ResourceManager.GetString("La corchea", resourceCulture);
+                return ResourceManager.GetString("C1/2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A1.
+        ///   Looks up a localized string similar to Do blanca.
         /// </summary>
-        internal static string La_negra {
+        internal static string C2 {
             get {
-                return ResourceManager.GetString("La negra", resourceCulture);
+                return ResourceManager.GetString("C2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A4.
+        ///   Looks up a localized string similar to Do redonda.
         /// </summary>
-        internal static string La_redonda {
+        internal static string C4 {
             get {
-                return ResourceManager.GetString("La redonda", resourceCulture);
+                return ResourceManager.GetString("C4", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E2.
+        ///   Looks up a localized string similar to Re negra.
         /// </summary>
-        internal static string Mi_blanca {
+        internal static string D1 {
             get {
-                return ResourceManager.GetString("Mi blanca", resourceCulture);
+                return ResourceManager.GetString("D1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E1/2.
+        ///   Looks up a localized string similar to Re corchea.
         /// </summary>
-        internal static string Mi_corchea {
+        internal static string D1_2 {
             get {
-                return ResourceManager.GetString("Mi corchea", resourceCulture);
+                return ResourceManager.GetString("D1/2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E1.
+        ///   Looks up a localized string similar to Re blanca.
         /// </summary>
-        internal static string Mi_negra {
+        internal static string D2 {
             get {
-                return ResourceManager.GetString("Mi negra", resourceCulture);
+                return ResourceManager.GetString("D2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E4.
+        ///   Looks up a localized string similar to Re redonda.
         /// </summary>
-        internal static string Mi_redonda {
+        internal static string D4 {
             get {
-                return ResourceManager.GetString("Mi redonda", resourceCulture);
+                return ResourceManager.GetString("D4", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to D2.
+        ///   Looks up a localized string similar to Mi negra.
         /// </summary>
-        internal static string Re_blanca {
+        internal static string E1 {
             get {
-                return ResourceManager.GetString("Re blanca", resourceCulture);
+                return ResourceManager.GetString("E1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to D1/2.
+        ///   Looks up a localized string similar to Mi corchea.
         /// </summary>
-        internal static string Re_corchea {
+        internal static string E1_2 {
             get {
-                return ResourceManager.GetString("Re corchea", resourceCulture);
+                return ResourceManager.GetString("E1/2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to D1.
+        ///   Looks up a localized string similar to Mi blanca.
         /// </summary>
-        internal static string Re_negra {
+        internal static string E2 {
             get {
-                return ResourceManager.GetString("Re negra", resourceCulture);
+                return ResourceManager.GetString("E2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to D4.
+        ///   Looks up a localized string similar to Mi redonda.
         /// </summary>
-        internal static string Re_redonda {
+        internal static string E4 {
             get {
-                return ResourceManager.GetString("Re redonda", resourceCulture);
+                return ResourceManager.GetString("E4", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to B2.
+        ///   Looks up a localized string similar to Fa negra.
         /// </summary>
-        internal static string Si_blanca {
+        internal static string F1 {
             get {
-                return ResourceManager.GetString("Si blanca", resourceCulture);
+                return ResourceManager.GetString("F1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to B1/2.
+        ///   Looks up a localized string similar to Fa corchea.
         /// </summary>
-        internal static string Si_corchea {
+        internal static string F1_2 {
             get {
-                return ResourceManager.GetString("Si corchea", resourceCulture);
+                return ResourceManager.GetString("F1/2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to B1.
+        ///   Looks up a localized string similar to Fa blanca.
         /// </summary>
-        internal static string Si_negra {
+        internal static string F2 {
             get {
-                return ResourceManager.GetString("Si negra", resourceCulture);
+                return ResourceManager.GetString("F2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to B4.
+        ///   Looks up a localized string similar to Fa redonda.
         /// </summary>
-        internal static string Si_redonda {
+        internal static string F4 {
             get {
-                return ResourceManager.GetString("Si redonda", resourceCulture);
+                return ResourceManager.GetString("F4", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to G2.
+        ///   Looks up a localized string similar to Sol negra.
         /// </summary>
-        internal static string Sol_blanca {
+        internal static string G1 {
             get {
-                return ResourceManager.GetString("Sol blanca", resourceCulture);
+                return ResourceManager.GetString("G1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to G1/2.
+        ///   Looks up a localized string similar to Sol corchea.
         /// </summary>
-        internal static string Sol_corchea {
+        internal static string G1_2 {
             get {
-                return ResourceManager.GetString("Sol corchea", resourceCulture);
+                return ResourceManager.GetString("G1/2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to G1.
+        ///   Looks up a localized string similar to Sol blanca.
         /// </summary>
-        internal static string Sol_negra {
+        internal static string G2 {
             get {
-                return ResourceManager.GetString("Sol negra", resourceCulture);
+                return ResourceManager.GetString("G2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to G4.
+        ///   Looks up a localized string similar to Sol redonda.
         /// </summary>
-        internal static string Sol_redonda {
+        internal static string G4 {
             get {
-                return ResourceManager.GetString("Sol redonda", resourceCulture);
+                return ResourceManager.GetString("G4", resourceCulture);
             }
         }
     }
