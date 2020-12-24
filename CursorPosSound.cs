@@ -57,6 +57,10 @@ namespace LiveDots
             }
 
         }
+        public bool getPlay()
+        {
+            return played;
+        }
         public void setPlay(bool p)
         {
             played = p;

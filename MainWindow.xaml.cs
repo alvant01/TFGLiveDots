@@ -9,6 +9,9 @@ using System.Threading;
 using Manufaktura.Music.Model; // temporal
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using System.Resources;
+using System.Globalization;
+using System.Collections;
 
 namespace LiveDots
 {
@@ -276,9 +279,74 @@ namespace LiveDots
             DecreaseBrailleSize();
         }
 
+        private void setNote(string rKey)
+        {
+            Pitch pitch = null;
+            RhythmicDuration rhythmicDuration = RhythmicDuration.Quarter;
+            //todo en la misma tonalidad pero funciona
+            switch (rKey[0])
+            {
+                case 'A':
+                    pitch = Pitch.A4;
+                    break;
+                case 'B':
+                    pitch = Pitch.B4;
+                    break;
+                case 'C':
+                    pitch = Pitch.C4;
+                    break;
+                case 'D':
+                    pitch = Pitch.D4;
+                    break;
+                case 'E':
+                    pitch = Pitch.E4;
+                    break; 
+                case 'F':
+                    pitch = Pitch.F4;
+                    break;
+                case 'G':
+                    pitch = Pitch.G4;
+                    break;
+
+            }
+            string rDuration = rKey.Substring(1);
+            switch(rDuration)
+            {
+                case "1/2":
+                    rhythmicDuration = RhythmicDuration.Eighth;
+                    break;
+                case "1":
+                    rhythmicDuration = RhythmicDuration.Quarter;
+                    break;
+                case "2":
+                    rhythmicDuration = RhythmicDuration.Half;
+                    break;
+                case "4":
+                    rhythmicDuration = RhythmicDuration.Whole;
+                    break;
+            }
+            cursorSound.play(pitch, rhythmicDuration);
+        }
+        private void getNote(string ViewerValue)
+        {
+            ResourceManager MyResourceClass = new ResourceManager(typeof(ViewerRES));
+
+            ResourceSet resourceSet =
+                ViewerRES.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            foreach (DictionaryEntry entry in resourceSet)
+            {
+                string resourceKey = entry.Key.ToString();
+                string resourceValue = (string)entry.Value;
+                if (resourceValue == ViewerValue)
+                {
+                    setNote(resourceKey);
+                    cursorSound.play(Pitch.A1, RhythmicDuration.Half);
+                    break;
+                }
+            }
+        }
         private void text1_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
             if (Viewer != null && Moved)
             {
                 Moved = false;
@@ -287,20 +355,7 @@ namespace LiveDots
                 {
                     text1.CaretIndex += Viewer.GetCurrentForward() - 1;
                     Viewer.UpdateIndex(text1.CaretIndex);
-                    var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
-                    bool nota;
-                    if (s.Value != "Espacio" && s.Value != "Clave" && s.Value != "Armadura" && s.Value != "Compás" && s.Value != "Salto") nota = true;
-                    else nota = false;
-                    if (!Viewer.IsInMiddle() && nota) // si la celda en la que esta situada es una nota distinta, haz que suene
-                    {
-                        cursorSound.setPlay(false);
-                    }
-                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources?
-                    if (ViewerRES.G1_2 == Viewer.GetElement(Viewer.GetCurrent()).Trim())//test
-                        Console.WriteLine(ViewerRES.C2); //entra si la nota es la mima
-                    cursorSound.play(Pitch.F2, RhythmicDuration.Half); // AVERIGUAMOS la nota con el resources creado
                 }
-
                 //Si va para atras
                 else if (text1.CaretIndex - Viewer.GetCurrent() == -1)
                 {
@@ -311,6 +366,20 @@ namespace LiveDots
                 {
                     Viewer.UpdateIndex(text1.CaretIndex);
                 }
+
+                var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
+                if (!Viewer.IsInMiddle() &&
+                    s.Value != "Espacio" && s.Value != "Clave" && s.Value != "Armadura" && s.Value != "Compás" && s.Value != "Salto") // si la celda en la que esta situada es una nota distinta, haz que suene
+                {
+                    cursorSound.setPlay(false);
+                }
+                if (!cursorSound.getPlay())
+                {
+                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente pero bueno
+                    //funciona asi como esta, no es lo mas optimo
+                    getNote(Viewer.GetElement(Viewer.GetCurrent()).Trim());
+                }
+
                 Moved = true;
             }
         }
