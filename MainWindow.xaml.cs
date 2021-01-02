@@ -329,21 +329,25 @@ namespace LiveDots
         }
         private void getNote(string ViewerValue)
         {
-            ResourceManager MyResourceClass = new ResourceManager(typeof(ViewerRES));
-
-            ResourceSet resourceSet =
-                ViewerRES.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-            foreach (DictionaryEntry entry in resourceSet)
-            {
-                string resourceKey = entry.Key.ToString();
-                string resourceValue = (string)entry.Value;
-                if (resourceValue == ViewerValue)
-                {
-                    setNote(resourceKey);
-                    cursorSound.play(Pitch.A1, RhythmicDuration.Half);
-                    break;
-                }
-            }
+             ResourceManager MyResourceClass = new ResourceManager(typeof(ViewerRES));
+            //Metodo 1, con un for, poco optimo
+            /*
+             ResourceSet resourceSet =
+                 ViewerRES.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+             foreach (DictionaryEntry entry in resourceSet)
+             {
+                 string resourceKey = entry.Key.ToString();
+                 string resourceValue = (string)entry.Value;
+                 if (resourceValue == ViewerValue)
+                 {
+                     setNote(resourceKey);
+                     //cursorSound.play(Pitch.A1, RhythmicDuration.Half);
+                     break;
+                 }
+             }*/
+            //Metodo 2, lo busca con el string directamente, pero he duplicado el resources por comodidad, se limpiara mas adelante
+            string key = MyResourceClass.GetString(ViewerValue);
+            if(key != null) setNote(key);
         }
         private void text1_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -367,6 +371,7 @@ namespace LiveDots
                     Viewer.UpdateIndex(text1.CaretIndex);
                 }
 
+                //Quiza se pueda dar uso a la armadura para averiguar que tonalidad usar, pero implicaria usar un switch?, de momento usa el tono 4 (algo que no comprendo de musica)
                 var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
                 if (!Viewer.IsInMiddle() &&
                     s.Value != "Espacio" && s.Value != "Clave" && s.Value != "Armadura" && s.Value != "Compás" && s.Value != "Salto") // si la celda en la que esta situada es una nota distinta, haz que suene
@@ -375,7 +380,7 @@ namespace LiveDots
                 }
                 if (!cursorSound.getPlay())
                 {
-                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente pero bueno
+                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
                     //funciona asi como esta, no es lo mas optimo
                     getNote(Viewer.GetElement(Viewer.GetCurrent()).Trim());
                 }
