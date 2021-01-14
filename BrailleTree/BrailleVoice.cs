@@ -53,10 +53,28 @@ namespace LiveDots
                     content.RemoveAt(0);
                     break;
                 }
-                BrailleNote n = new BrailleNote();
+                else if (content[1] == 'k' && content[0] == '(')
+                {
+                    content.RemoveRange(0, 2);
+                }
+                else if (content[0] == '\n')
+                {
+                    brailleText.JumpLine();
+                    content.RemoveAt(0);
+                }
+                else if (content[0] == '\r')
+                {
+                    //brailleText.JumpLine();
+                    content.RemoveAt(0);
+                }
+                else
+                {
+                    BrailleNote n = new BrailleNote();
 
-                n.ParseBrailleInverse(brailleText, content);
-                this.Notes.Add(n);
+                    n.ParseBrailleInverse(brailleText, content);
+                    this.Notes.Add(n);
+                }
+
             }
         }
     }

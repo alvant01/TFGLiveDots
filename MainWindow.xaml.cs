@@ -257,6 +257,12 @@ namespace LiveDots
         {
             new Guide().Show();
         }
+
+        public void changeXML(string xml)
+        {
+            //noteViewer1.XmlSource = xml;
+            this.SourceXml = xml;
+        }
     }
 
 }

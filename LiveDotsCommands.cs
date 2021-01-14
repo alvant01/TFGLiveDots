@@ -1,10 +1,15 @@
-﻿using Manufaktura.Controls.Parser;
+﻿using LiveDots.MusicXmlBraile;
+using Manufaktura.Controls.Parser;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace LiveDots
 {
@@ -47,14 +52,21 @@ namespace LiveDots
                     window.Viewer = window.BrailleText.GetViewer();
                     window.Braille = window.BrailleText.GetBrailleString();
 
+                    MusicXmlBraileParser mp = new MusicXmlBraileParser();
+                    string xml = mp.createXML(bs);
+
+                    window.changeXML(xml);
+
+                    File.WriteAllText("foo.musicxml", xml);
+
                     window.Moved = true;
                     LiveDotsCOMObj.SetCurrent(window.BrailleText.GetViewer());
 
-                }
+                    }
                 else
                 {
                     window.FileNameXml = openFileDialog.FileName;
-                    window.SourceXml = File.ReadAllText(window.FileNameXml);
+                    window.changeXML(File.ReadAllText(window.FileNameXml));
 
                     BrailleScore bs = Converter.Xml2Braille(window.FileNameXml);
                     window.BrailleText = new BrailleText(bs);

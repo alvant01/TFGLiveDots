@@ -332,7 +332,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        </note>
+      </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
         </barline>

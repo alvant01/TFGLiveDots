@@ -29,7 +29,7 @@ namespace LiveDots
     public class BrailleNote : BrailleElement
     {
         //public Pitch pitch { get; set; }
-        //public Duration duration { get; set; } //Usaremos la variable type de music xml que nos da directamente la figura a representar, en lugar de duration, que es relativo al compás en que se esté mediendo
+        public int duration { get; set; } //Usaremos la variable type de music xml que nos da directamente la figura a representar, en lugar de duration, que es relativo al compás en que se esté mediendo
 
         public Step Step { get; set; }
         public Octave Octave { get; set; }
@@ -131,6 +131,27 @@ namespace LiveDots
             return txt;
         }
 
+        public int getToctaveNum()
+        {
+            switch (this.Octave)
+            {
+                case Octave.First:
+                    return 1;
+                case Octave.Second:
+                    return 2;
+                case Octave.Third:
+                    return 3;
+                case Octave.Fourth:
+                    return 4;
+                case Octave.Fifth:
+                    return 5;
+                case Octave.Sixth:
+                    return 6;
+                case Octave.Seventh:
+                    return 7;
+            }
+            return 0;
+        }
         public static int Octave2Int(Octave o)
         {
             switch (o)
@@ -634,26 +655,7 @@ namespace LiveDots
         public void ParseBrailleInverse(BrailleText brailleText, List<char> content)
         {
             List<string> L = new List<string>();
-            string s = "";
-            int i;
-            if (content[1] == 'k' && content[0] == '(')
-            {
-                content.RemoveRange(0, 2);
-                return;
-            }
-                i =0;
-            if (content[0] == '\n')
-            {
-                brailleText.JumpLine();
-                content.RemoveAt(0);
-                return;
-            }
-            if (content[0] == ' ')
-            {
-                brailleText.AddSpace();
-                content.RemoveAt(0);            
-                return;
-            }
+
             switch (content[0]) //silencios
             {
                 case 'm':
@@ -679,6 +681,7 @@ namespace LiveDots
             }
             if (IsRest)
             {
+                addDuration();
                 brailleText.AddText(L);
                 content.RemoveAt(0);
                 ParseText(brailleText);
@@ -767,6 +770,10 @@ namespace LiveDots
                     Octave = Octave.Seventh;
                     this.PrintOctave = true;
                     content.RemoveAt(0);
+                    break;
+                default:
+                    Octave = Octave.Fourth;
+                    this.PrintOctave = true;
                     break;
             }
             //Steps
@@ -918,11 +925,34 @@ namespace LiveDots
                     this.Step = Step.G;
                     this.Type = "eighth";
                     break;
+                default:
+                    this.Step = Step.A;
+                    break;
             } ///Notas
+            addDuration();
             content.RemoveAt(0);
             brailleText.AddText(L);
             ParseText(brailleText);
 
+        }
+
+        private void addDuration()
+        {
+            switch (this.Type)
+            {
+                case "whole":
+                    this.duration = 8;
+                    break;
+                case "half":
+                    this.duration = 4;
+                    break;
+                case "quarter":
+                    this.duration = 2;
+                    break;
+                case "eighth":
+                    this.duration = 1;
+                    break;
+            }
         }
     }
 }

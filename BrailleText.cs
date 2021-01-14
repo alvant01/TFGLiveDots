@@ -95,6 +95,10 @@ namespace LiveDots
         {
             return Viewer;
         }
+        public string getText()
+        {
+           return this.Viewer.GetText();
+        }
 
     }
 }

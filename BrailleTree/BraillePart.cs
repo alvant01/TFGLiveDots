@@ -24,9 +24,11 @@ namespace LiveDots
 
         public void Parse(BrailleText brailleText)
         {
+            int i = 0;
             foreach (BrailleMeasure M in Measures)
             {
                 M.Parse(brailleText);
+                i++;
             }
 
         }

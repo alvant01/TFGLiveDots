@@ -24,7 +24,7 @@ namespace MusicXml
 
             var partNodes = document.SelectNodes("score-partwise/part-list/score-part");
 
-            if (partNodes != null)
+                if (partNodes != null)
             {
                 foreach (XmlNode partNode in partNodes)
                 {
