@@ -22,14 +22,18 @@ namespace LiveDots
         private bool played;
         protected MainWindow mainWindow;
         StaffForNotes myMusical = new StaffForNotes();
+        //string clave_;
         public CursorPosSound(MainWindow viewModel)
         {
             mainWindow = viewModel;
-            played = true;            
+            played = true;
+
             //nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
             //reproductor = new MyMidiTaskScorePlayer(nota, new MidiDevice(2, "Cursor")); // cannot insert different devices, no idea why
         }
-
+        /*public void setClave(string clave){
+            clave_ = clave;
+        }*/
         public void play(Pitch pitch, RhythmicDuration duration)
         {
             if (!played)

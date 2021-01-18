@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Resources;
 using System.Globalization;
 using System.Collections;
+using System.Linq;
 
 namespace LiveDots
 {
@@ -232,7 +233,7 @@ namespace LiveDots
             BrailleText = new BrailleText(bs);
             Braille = BrailleText.GetBrailleString();
             Viewer = BrailleText.GetViewer();
-
+            
             LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
             //MessageBox.Show("Ha habido cambios");
         }
@@ -279,36 +280,94 @@ namespace LiveDots
             DecreaseBrailleSize();
         }
 
-        private void setNote(string rKey)
+        private void setNote(string rKey, string octava)
         {
             Pitch pitch = null;
             RhythmicDuration rhythmicDuration = RhythmicDuration.Quarter;
             //todo en la misma tonalidad pero funciona
-            switch (rKey[0])
+            switch (octava)
             {
-                case 'A':
-                    pitch = Pitch.A4;
+                case "Quinta":
+                    switch (rKey[0])
+                    {
+                        case 'A':
+                            pitch = Pitch.A5;
+                            break;
+                        case 'B':
+                            pitch = Pitch.B5;
+                            break;
+                        case 'C':
+                            pitch = Pitch.C5;
+                            break;
+                        case 'D':
+                            pitch = Pitch.D5;
+                            break;
+                        case 'E':
+                            pitch = Pitch.E5;
+                            break;
+                        case 'F':
+                            pitch = Pitch.F5;
+                            break;
+                        case 'G':
+                            pitch = Pitch.G5;
+                            break;
+                    }
                     break;
-                case 'B':
-                    pitch = Pitch.B4;
+                case "Cuarta":
+                    switch (rKey[0])
+                    {
+                        case 'A':
+                            pitch = Pitch.A4;
+                            break;
+                        case 'B':
+                            pitch = Pitch.B4;
+                            break;
+                        case 'C':
+                            pitch = Pitch.C4;
+                            break;
+                        case 'D':
+                            pitch = Pitch.D4;
+                            break;
+                        case 'E':
+                            pitch = Pitch.E4;
+                            break;
+                        case 'F':
+                            pitch = Pitch.F4;
+                            break;
+                        case 'G':
+                            pitch = Pitch.G4;
+                            break;
+                    }
                     break;
-                case 'C':
-                    pitch = Pitch.C4;
+                default:
+                    switch (rKey[0])
+                    {
+                        //cuarta octava
+                        case 'A':
+                            pitch = Pitch.A4;
+                            break;
+                        case 'B':
+                            pitch = Pitch.B4;
+                            break;
+                        case 'C':
+                            pitch = Pitch.C4;
+                            break;
+                        case 'D':
+                            pitch = Pitch.D4;
+                            break;
+                        case 'E':
+                            pitch = Pitch.E4;
+                            break;
+                        case 'F':
+                            pitch = Pitch.F4;
+                            break;
+                        case 'G':
+                            pitch = Pitch.G4;
+                            break;
+                    }
                     break;
-                case 'D':
-                    pitch = Pitch.D4;
-                    break;
-                case 'E':
-                    pitch = Pitch.E4;
-                    break; 
-                case 'F':
-                    pitch = Pitch.F4;
-                    break;
-                case 'G':
-                    pitch = Pitch.G4;
-                    break;
-
             }
+          
             string rDuration = rKey.Substring(1);
             switch(rDuration)
             {
@@ -327,7 +386,7 @@ namespace LiveDots
             }
             cursorSound.play(pitch, rhythmicDuration);
         }
-        private void getNote(string ViewerValue)
+        private void getNote(string ViewerValue, string octava)
         {
              ResourceManager MyResourceClass = new ResourceManager(typeof(ViewerRES));
             //Metodo 1, con un for, poco optimo
@@ -347,7 +406,8 @@ namespace LiveDots
              }*/
             //Metodo 2, lo busca con el string directamente, pero he duplicado el resources por comodidad, se limpiara mas adelante
             string key = MyResourceClass.GetString(ViewerValue);
-            if(key != null) setNote(key);
+            string clave = Viewer.GetElement(5).Trim(); // quiza esto influya en los tonos
+            if(key != null) setNote(key, octava);
         }
         private void text1_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -378,11 +438,26 @@ namespace LiveDots
                 {
                     cursorSound.setPlay(false);
                 }
+                else if (Viewer.GetCurrentBackward() == 1 && Viewer.GetCurrentForward() == 1)
+                {
+                    cursorSound.setPlay(false);
+                }
                 if (!cursorSound.getPlay())
                 {
                     //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
                     //funciona asi como esta, no es lo mas optimo
-                    getNote(Viewer.GetElement(Viewer.GetCurrent()).Trim());
+                    string nota = Viewer.GetElement(Viewer.GetCurrent()).Trim();
+
+                    string aux_nota = nota.Split(' ').Skip(1).FirstOrDefault();
+                    string num_octava = null;
+                    if (aux_nota == "octava")
+                    {
+                        num_octava = aux_nota.Split(' ')[0];
+                        var WordsArray = nota.Split();
+                        //coge los ultimos dos, que contienen las notas
+                        nota= WordsArray[WordsArray.Length -2] + ' ' + WordsArray[WordsArray.Length - 1];
+                    }
+                    getNote(nota, num_octava);
                 }
 
                 Moved = true;
