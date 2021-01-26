@@ -27,10 +27,20 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 
-# Build Results of an ATL Project
-[Dd]ebugPS/
-[Rr]eleasePS/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+Debug/
+Release/
+x64/
+x86/
 dlldata.c
+*.exe
+*.pdb
+*.manifest
+*.cache
 
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
