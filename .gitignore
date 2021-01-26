@@ -38,9 +38,14 @@ x64/
 x86/
 dlldata.c
 *.exe
+*.cs
 *.pdb
 *.manifest
 *.cache
+bin/Debug
+bin/Release
+obj/Debug
+obj/Release
 
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
