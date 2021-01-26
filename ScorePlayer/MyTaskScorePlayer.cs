@@ -144,20 +144,25 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
                 WasPaused = false;
             }
             ///Hasta aquí trozo problematico, si da problemas quitar. Sirve para no perder notas al pausar y volver a reproducir
-            while (timelineIterator.MoveNext())
+            while (timelineIterator.MoveNext()) //intrakeable el error --> System.InvalidOperationExcoeption: 'La secuencia no contiene elementos', ocurre al pasar de notas con las flechas
+
             {
                 var timelineElement = timelineIterator.Current;
-                if (State != PlaybackState.Playing) break;
-
-                if (previousElement != null && timelineElement.When > previousElement.When)
+                try
                 {
-                    await Task.Delay(lastAwaitedDuration == TimeSpan.Zero ? previousElement.When : previousElement.When - lastAwaitedDuration);
-                    PlayQueue(simultaneousElements);
-                    lastAwaitedDuration = previousElement.When;
-                }
+                    if (State != PlaybackState.Playing) break;
 
-                simultaneousElements.Enqueue(timelineElement);
-                previousElement = timelineElement;
+                    if (previousElement != null && timelineElement.When > previousElement.When)
+                    {
+                        await Task.Delay(lastAwaitedDuration == TimeSpan.Zero ? previousElement.When : previousElement.When - lastAwaitedDuration);
+                        PlayQueue(simultaneousElements);
+                        lastAwaitedDuration = previousElement.When;
+                    }
+
+                    simultaneousElements.Enqueue(timelineElement);
+                    previousElement = timelineElement;
+                }
+                catch (Exception) {}
             }
 
             if (simultaneousElements.Any())

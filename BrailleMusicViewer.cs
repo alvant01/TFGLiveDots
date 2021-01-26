@@ -40,6 +40,7 @@ namespace LiveDots
             MyMainWindow = window;
         }
 
+        //devuelve el texto entero
         public string GetText()
         {
             string txt = "";
@@ -161,7 +162,7 @@ namespace LiveDots
             return txt;
         }
 
-        bool IsInMiddle()
+        public bool IsInMiddle()
         {
             return Current > 0 && Current < Viewer.Count && (Viewer[Current] == Viewer[Current - 1]);
         }

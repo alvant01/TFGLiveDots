@@ -6,13 +6,44 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Threading;
-
-
+using Manufaktura.Music.Model; // temporal
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Resources;
+using System.Globalization;
+using System.Collections;
+using System.Linq;
 
 namespace LiveDots
 {
     public partial class MainWindow : Window
     {
+        private void init()
+        {
+            noteViewer1.IsSelectable = true;
+            noteViewer1.PreviewMouseLeftButtonUp += noteViewer1_PreviewMouseLeftButtonUp;
+            //noteViewer1.QueryCursor += NoteViewer1_QueryCursor;
+
+
+            text1.IsReadOnly = false;
+            text1.SelectionChanged += text1_SelectionChanged;
+            text1.TextChanged += text1_TextChanged;
+        }
+
+        /*
+         * Here we have to update viewer, backward and forward with the new info
+         */
+        private void text1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Console.WriteLine(text1.Text);            
+        }
+
+        private void NoteViewer1_QueryCursor(object sender, QueryCursorEventArgs e)
+        {
+            Console.WriteLine(e);
+        }
+
+
         public string SourceXml
         {
             get { return (string)GetValue(SourceXmlProperty); }
@@ -22,6 +53,7 @@ namespace LiveDots
                 var score = value.ToScore();
                 if (player != null) ((IDisposable)player).Dispose();
                 player = new MyMidiTaskScorePlayer(score);
+                cursorSound = new CursorPosSound(this);
                 PlayCommand?.FireCanExecuteChanged();
                 PauseCommand?.FireCanExecuteChanged();
                 StopCommand?.FireCanExecuteChanged();
@@ -40,10 +72,12 @@ namespace LiveDots
 
         public string FileNameXml;
         public string FileNameBraille;
-        public ScorePlayer player;
+        public MyMidiTaskScorePlayer player;
+        public ScorePlayer cursor;
         public BrailleText BrailleText;
         public BrailleMusicViewer Viewer;
         public bool Moved;
+        public CursorPosSound cursorSound;
 
 
         public new int FontSize
@@ -101,9 +135,9 @@ namespace LiveDots
 
         public MainWindow()
         {
-
-            DicBraille d = new DicBraille();
-
+            
+            DicBraille d = new DicBraille(); 
+            
             try
             {
                 string fuentes = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "fuentes\\edico_es_br6.ttf");
@@ -118,7 +152,8 @@ namespace LiveDots
             }
             Thread.Sleep(2000);
 
-            InitializeComponent();
+            InitializeComponent();         
+            this.Loaded += MainWindow_Loaded;
             this.DataContext = this;
 
             PlayCommand = new PlayCommand(this);
@@ -140,6 +175,14 @@ namespace LiveDots
             ScoreZoomFactor = 1.3;
             BrailleSize = 34;
             FontSize = 24;
+        }
+
+        /*
+         * Executed when the window is completely ready for interaction
+         */
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            init();
         }
 
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
@@ -170,11 +213,16 @@ namespace LiveDots
             string nuevo = parser.ParseBack(noteViewer1.InnerScore).ToString();
             System.IO.File.WriteAllText("prueba.xml", nuevo);
 
+            //======================================================
+            //Alvar:temporal
+            SourceXml = File.ReadAllText("prueba.xml");
+            //======================================================
+
             BrailleScore bs = Converter.Xml2Braille("prueba.xml");
             BrailleText = new BrailleText(bs);
             Braille = BrailleText.GetBrailleString();
             Viewer = BrailleText.GetViewer();
-
+            
             LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
             //MessageBox.Show("Ha habido cambios");
         }
@@ -221,20 +269,147 @@ namespace LiveDots
             DecreaseBrailleSize();
         }
 
+        private void setNote(string rKey, string octava)
+        {
+            Pitch pitch = null;
+            RhythmicDuration rhythmicDuration = RhythmicDuration.Quarter;
+            //todo en la misma tonalidad pero funciona
+            switch (octava)
+            {
+                case "Quinta":
+                    switch (rKey[0])
+                    {
+                        case 'A':
+                            pitch = Pitch.A5;
+                            break;
+                        case 'B':
+                            pitch = Pitch.B5;
+                            break;
+                        case 'C':
+                            pitch = Pitch.C5;
+                            break;
+                        case 'D':
+                            pitch = Pitch.D5;
+                            break;
+                        case 'E':
+                            pitch = Pitch.E5;
+                            break;
+                        case 'F':
+                            pitch = Pitch.F5;
+                            break;
+                        case 'G':
+                            pitch = Pitch.G5;
+                            break;
+                    }
+                    break;
+                case "Cuarta":
+                    switch (rKey[0])
+                    {
+                        case 'A':
+                            pitch = Pitch.A4;
+                            break;
+                        case 'B':
+                            pitch = Pitch.B4;
+                            break;
+                        case 'C':
+                            pitch = Pitch.C4;
+                            break;
+                        case 'D':
+                            pitch = Pitch.D4;
+                            break;
+                        case 'E':
+                            pitch = Pitch.E4;
+                            break;
+                        case 'F':
+                            pitch = Pitch.F4;
+                            break;
+                        case 'G':
+                            pitch = Pitch.G4;
+                            break;
+                    }
+                    break;
+                default:
+                    switch (rKey[0])
+                    {
+                        //cuarta octava
+                        case 'A':
+                            pitch = Pitch.A4;
+                            break;
+                        case 'B':
+                            pitch = Pitch.B4;
+                            break;
+                        case 'C':
+                            pitch = Pitch.C4;
+                            break;
+                        case 'D':
+                            pitch = Pitch.D4;
+                            break;
+                        case 'E':
+                            pitch = Pitch.E4;
+                            break;
+                        case 'F':
+                            pitch = Pitch.F4;
+                            break;
+                        case 'G':
+                            pitch = Pitch.G4;
+                            break;
+                    }
+                    break;
+            }
+          
+            string rDuration = rKey.Substring(1);
+            switch(rDuration)
+            {
+                case "1/2":
+                    rhythmicDuration = RhythmicDuration.Eighth;
+                    break;
+                case "1":
+                    rhythmicDuration = RhythmicDuration.Quarter;
+                    break;
+                case "2":
+                    rhythmicDuration = RhythmicDuration.Half;
+                    break;
+                case "4":
+                    rhythmicDuration = RhythmicDuration.Whole;
+                    break;
+            }
+            cursorSound.play(pitch, rhythmicDuration);
+        }
+        private void getNote(string ViewerValue, string octava)
+        {
+             ResourceManager MyResourceClass = new ResourceManager(typeof(ViewerRES));
+            //Metodo 1, con un for, poco optimo
+            /*
+             ResourceSet resourceSet =
+                 ViewerRES.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+             foreach (DictionaryEntry entry in resourceSet)
+             {
+                 string resourceKey = entry.Key.ToString();
+                 string resourceValue = (string)entry.Value;
+                 if (resourceValue == ViewerValue)
+                 {
+                     setNote(resourceKey);
+                     //cursorSound.play(Pitch.A1, RhythmicDuration.Half);
+                     break;
+                 }
+             }*/
+            //Metodo 2, lo busca con el string directamente, pero he duplicado el resources por comodidad, se limpiara mas adelante
+            string key = MyResourceClass.GetString(ViewerValue);
+            string clave = Viewer.GetElement(5).Trim(); // quiza esto influya en los tonos
+            if(key != null) setNote(key, octava);
+        }
         private void text1_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
             if (Viewer != null && Moved)
             {
                 Moved = false;
-                //Si va pa lante
+                //Si va para delante
                 if (text1.CaretIndex - Viewer.GetCurrent() == 1)
                 {
                     text1.CaretIndex += Viewer.GetCurrentForward() - 1;
                     Viewer.UpdateIndex(text1.CaretIndex);
                 }
-
-                //Si va pa tras
+                //Si va para atras
                 else if (text1.CaretIndex - Viewer.GetCurrent() == -1)
                 {
                     text1.CaretIndex = text1.CaretIndex - Viewer.GetCurrentBackward() + 1;
@@ -244,6 +419,36 @@ namespace LiveDots
                 {
                     Viewer.UpdateIndex(text1.CaretIndex);
                 }
+
+                //Quiza se pueda dar uso a la armadura para averiguar que tonalidad usar, pero implicaria usar un switch?, de momento usa el tono 4 (algo que no comprendo de musica)
+                var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
+                if (!Viewer.IsInMiddle() &&
+                    s.Value != "Espacio" && s.Value != "Clave" && s.Value != "Armadura" && s.Value != "Compás" && s.Value != "Salto") // si la celda en la que esta situada es una nota distinta, haz que suene
+                {
+                    cursorSound.setPlay(false);
+                }
+                else if (Viewer.GetCurrentBackward() == 1 && Viewer.GetCurrentForward() == 1)
+                {
+                    cursorSound.setPlay(false);
+                }
+                if (!cursorSound.getPlay())
+                {
+                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
+                    //funciona asi como esta, no es lo mas optimo
+                    string nota = Viewer.GetElement(Viewer.GetCurrent()).Trim();
+
+                    string aux_nota = nota.Split(' ').Skip(1).FirstOrDefault();
+                    string num_octava = null;
+                    if (aux_nota == "octava")
+                    {
+                        num_octava = aux_nota.Split(' ')[0];
+                        var WordsArray = nota.Split();
+                        //coge los ultimos dos, que contienen las notas
+                        nota= WordsArray[WordsArray.Length -2] + ' ' + WordsArray[WordsArray.Length - 1];
+                    }
+                    getNote(nota, num_octava);
+                }
+
                 Moved = true;
             }
         }

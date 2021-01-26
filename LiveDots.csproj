@@ -295,6 +295,7 @@
     <Compile Include="BrailleSignPrueba.cs" />
     <Compile Include="BrailleTree\BrailleChord.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="CursorPosSound.cs" />
     <Compile Include="DicBraille.cs" />
     <Compile Include="BrailleTree\BrailleMeasure.cs" />
     <Compile Include="BrailleTree\BrailleNote.cs" />
@@ -325,12 +326,18 @@
     <Compile Include="MusicXml\Domain\Score.cs" />
     <Compile Include="MusicXml\Domain\Time.cs" />
     <Compile Include="MusicXml\MusicXmlParser.cs" />
+    <Compile Include="StaffForNotes.cs" />
     <Compile Include="ScorePlayer\MyChannelSelectingTaskScorePlayer.cs" />
     <Compile Include="ScorePlayer\MyMidiTaskScorePlayer.cs" />
     <Compile Include="ScorePlayer\MyTaskScorePlayer.cs" />
     <Compile Include="Translator.cs" />
     <Compile Include="Tuplet.cs" />
     <Compile Include="BrailleTree\BrailleVoice.cs" />
+    <Compile Include="ViewerRES.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewerRES.resx</DependentUpon>
+    </Compile>
     <Page Include="Guide.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -366,6 +373,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewerRES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewerRES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app1.manifest" />
     <None Include="bravura_metadata.json" />

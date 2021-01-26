@@ -91,6 +91,7 @@ namespace LiveDots
                         switch (score.Parts[i].Measures[j].MeasureElements[k].Type)
                         {
                             case MeasureElementType.Note:
+                                //aqui hay ejemplo de como hacer una nota, quiza nos sirva
                                 Note noteAux = (Note)score.Parts[i].Measures[j].MeasureElements[k].Element;
                                 BrailleNote n = Xml2Note(noteAux);
 
