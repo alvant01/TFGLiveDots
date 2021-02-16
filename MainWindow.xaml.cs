@@ -13,7 +13,7 @@ using System.Resources;
 using System.Globalization;
 using System.Collections;
 using System.Linq;
-
+using System.Xml;
 namespace LiveDots
 {
     public partial class MainWindow : Window
@@ -24,10 +24,22 @@ namespace LiveDots
             noteViewer1.PreviewMouseLeftButtonUp += noteViewer1_PreviewMouseLeftButtonUp;
             //noteViewer1.QueryCursor += NoteViewer1_QueryCursor;
 
-
             text1.IsReadOnly = false;
             text1.SelectionChanged += text1_SelectionChanged;
             text1.TextChanged += text1_TextChanged;
+
+
+            //if not found create xml
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.LoadXml("Notas.xml");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + " -XML not found");
+                CreateXML.createDocument();
+            }
         }
 
         /*
@@ -57,6 +69,7 @@ namespace LiveDots
                 PlayCommand?.FireCanExecuteChanged();
                 PauseCommand?.FireCanExecuteChanged();
                 StopCommand?.FireCanExecuteChanged();
+    
             }
         }
 
@@ -78,7 +91,7 @@ namespace LiveDots
         public BrailleMusicViewer Viewer;
         public bool Moved;
         public CursorPosSound cursorSound;
-
+        public XmlDocument xDoc;
 
         public new int FontSize
         {
