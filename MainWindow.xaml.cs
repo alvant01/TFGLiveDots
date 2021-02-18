@@ -284,14 +284,13 @@ namespace LiveDots
             DecreaseBrailleSize();
         }
 
+        //rkey viene con la nota [A-G] y la duracion del tono, octava viene con la tonalidad [primera-sexta]
         private void setNote(string rKey, string octava)
         {
             Pitch pitch = null;
             RhythmicDuration rhythmicDuration = RhythmicDuration.Quarter;
-            //todo en la misma tonalidad pero funciona
 
-                //pitch = noteDic._NoteDic[rKey[0] + "4"].pitch_;
-
+            //mira el tono de la octava y busca en el diccionario esa nota, de default coge el tono 4            
             string numTono = "";
             switch (octava)
             {

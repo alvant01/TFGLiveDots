@@ -23,6 +23,8 @@ namespace LiveDots
             {
                 string text = node.InnerText; //or loop through its children as well
             }*/
+
+            //mira las notas que hay en el xml, y las mete todas en el diccionario
             XmlNodeList tonos = notasXML.GetElementsByTagName("Nota");
             for (int j = 0; j < tonos.Count; j++)
             {
@@ -30,7 +32,6 @@ namespace LiveDots
                 //noteForSound.rhythmicDuration_ = RhythmicDuration.;
                 _NoteDic.Add(tonos[j].InnerText.ToString(), noteForSound);
             }
-            NoteForSound aux = _NoteDic["C1"];
         }
 
         private void rellenarString(out string[] o)
