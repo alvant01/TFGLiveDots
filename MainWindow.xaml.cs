@@ -28,18 +28,19 @@ namespace LiveDots
             text1.SelectionChanged += text1_SelectionChanged;
             text1.TextChanged += text1_TextChanged;
 
-
+//----------------------
             //if not found create xml
             XmlDocument xDoc = new XmlDocument();
             try
             {
-                xDoc.LoadXml("Notas.xml");
+                xDoc.Load("Notas.xml");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message + " -XML not found");
                 CreateXML.createDocument();
             }
+            noteDic = new NoteDictionary(xDoc);            
         }
 
         /*
@@ -92,6 +93,7 @@ namespace LiveDots
         public bool Moved;
         public CursorPosSound cursorSound;
         public XmlDocument xDoc;
+        NoteDictionary noteDic;
 
         public new int FontSize
         {
@@ -287,89 +289,35 @@ namespace LiveDots
             Pitch pitch = null;
             RhythmicDuration rhythmicDuration = RhythmicDuration.Quarter;
             //todo en la misma tonalidad pero funciona
+
+                //pitch = noteDic._NoteDic[rKey[0] + "4"].pitch_;
+
+            string numTono = "";
             switch (octava)
             {
-                case "Quinta":
-                    switch (rKey[0])
-                    {
-                        case 'A':
-                            pitch = Pitch.A5;
-                            break;
-                        case 'B':
-                            pitch = Pitch.B5;
-                            break;
-                        case 'C':
-                            pitch = Pitch.C5;
-                            break;
-                        case 'D':
-                            pitch = Pitch.D5;
-                            break;
-                        case 'E':
-                            pitch = Pitch.E5;
-                            break;
-                        case 'F':
-                            pitch = Pitch.F5;
-                            break;
-                        case 'G':
-                            pitch = Pitch.G5;
-                            break;
-                    }
+                case "Primera":
+                    numTono = "1";
                     break;
-                case "Cuarta":
-                    switch (rKey[0])
-                    {
-                        case 'A':
-                            pitch = Pitch.A4;
-                            break;
-                        case 'B':
-                            pitch = Pitch.B4;
-                            break;
-                        case 'C':
-                            pitch = Pitch.C4;
-                            break;
-                        case 'D':
-                            pitch = Pitch.D4;
-                            break;
-                        case 'E':
-                            pitch = Pitch.E4;
-                            break;
-                        case 'F':
-                            pitch = Pitch.F4;
-                            break;
-                        case 'G':
-                            pitch = Pitch.G4;
-                            break;
-                    }
+                case "Segunda":
+                    numTono = "2";
+                    break;
+                case "Tercera":
+                    numTono = "3";
                     break;
                 default:
-                    switch (rKey[0])
-                    {
-                        //cuarta octava
-                        case 'A':
-                            pitch = Pitch.A4;
-                            break;
-                        case 'B':
-                            pitch = Pitch.B4;
-                            break;
-                        case 'C':
-                            pitch = Pitch.C4;
-                            break;
-                        case 'D':
-                            pitch = Pitch.D4;
-                            break;
-                        case 'E':
-                            pitch = Pitch.E4;
-                            break;
-                        case 'F':
-                            pitch = Pitch.F4;
-                            break;
-                        case 'G':
-                            pitch = Pitch.G4;
-                            break;
-                    }
+                case "Cuarta":
+                    numTono = "4";
+                    break;
+                case "Quinta":
+                    numTono = "5";
+                    break;
+                case "Sexta":
+                    numTono = "6";
                     break;
             }
-          
+            pitch = noteDic._NoteDic[rKey[0] + numTono].pitch_;
+           
+
             string rDuration = rKey.Substring(1);
             switch(rDuration)
             {
@@ -454,7 +402,7 @@ namespace LiveDots
                     string num_octava = null;
                     if (aux_nota == "octava")
                     {
-                        num_octava = aux_nota.Split(' ')[0];
+                        num_octava = nota.Split(' ')[0];
                         var WordsArray = nota.Split();
                         //coge los ultimos dos, que contienen las notas
                         nota= WordsArray[WordsArray.Length -2] + ' ' + WordsArray[WordsArray.Length - 1];
