@@ -14,6 +14,7 @@ using Manufaktura.Controls.Model;
 using Manufaktura.Music.Model.MajorAndMinor;
 using Manufaktura.Music.Model;
 using Manufaktura.Controls.Desktop.Audio.Midi;
+using System.Xml;
 
 namespace LiveDots
 {
@@ -21,12 +22,27 @@ namespace LiveDots
     {
         private bool played;
         protected MainWindow mainWindow;
-        StaffForNotes myMusical = new StaffForNotes();
+        NoteDictionary noteDic;
+
+        //StaffForNotes myMusical = new StaffForNotes();
         //string clave_;
         public CursorPosSound(MainWindow viewModel)
         {
             mainWindow = viewModel;
             played = true;
+
+            //if not found create xml
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.Load("Notas.xml");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + " -XML not found");
+                CreateXML.createDocument();
+            }
+            noteDic = new NoteDictionary(xDoc);
 
             //nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
             //reproductor = new MyMidiTaskScorePlayer(nota, new MidiDevice(2, "Cursor")); // cannot insert different devices, no idea why
@@ -34,7 +50,7 @@ namespace LiveDots
         /*public void setClave(string clave){
             clave_ = clave;
         }*/
-        public void play(Pitch pitch, RhythmicDuration duration)
+        private void Play(Pitch pitch, RhythmicDuration duration)
         {
             if (!played)
             {
@@ -54,13 +70,25 @@ namespace LiveDots
             }
 
         }
-        public bool getPlay()
+        public bool GetPlay()
         {
             return played;
         }
-        public void setPlay(bool p)
+        public void SetPlay(bool p)
         {
             played = p;
+        }
+
+        public void TransformStringToNoteAndPlay(string ViewerValue, string octava)
+        {
+            string nota = StringToNote.getNote(ViewerValue);
+            octava = StringToNote.GetNote(octava);
+            if (nota != null)
+            {
+                Pitch pitch = noteDic._NoteDic[nota[0] + octava].pitch_;
+                RhythmicDuration rhythmicDuration = StringToNote.SetRitmo(nota);
+                Play(pitch, rhythmicDuration);
+            }
         }
     }
 }

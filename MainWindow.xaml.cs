@@ -6,12 +6,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Threading;
-using Manufaktura.Music.Model; // temporal
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Resources;
-using System.Globalization;
-using System.Collections;
+
 using System.Linq;
 using System.Xml;
 namespace LiveDots
@@ -39,8 +36,7 @@ namespace LiveDots
             {
                 Console.WriteLine(e.Message + " -XML not found");
                 CreateXML.createDocument();
-            }
-            noteDic = new NoteDictionary(xDoc);            
+            }     
         }
 
         /*
@@ -92,8 +88,6 @@ namespace LiveDots
         public BrailleMusicViewer Viewer;
         public bool Moved;
         public CursorPosSound cursorSound;
-        public XmlDocument xDoc;
-        NoteDictionary noteDic;
 
         public new int FontSize
         {
@@ -283,81 +277,7 @@ namespace LiveDots
         {
             DecreaseBrailleSize();
         }
-
-        //rkey viene con la nota [A-G] y la duracion del tono, octava viene con la tonalidad [primera-sexta]
-        private void setNote(string rKey, string octava)
-        {
-            Pitch pitch = null;
-            RhythmicDuration rhythmicDuration = RhythmicDuration.Quarter;
-
-            //mira el tono de la octava y busca en el diccionario esa nota, de default coge el tono 4            
-            string numTono = "";
-            switch (octava)
-            {
-                case "Primera":
-                    numTono = "1";
-                    break;
-                case "Segunda":
-                    numTono = "2";
-                    break;
-                case "Tercera":
-                    numTono = "3";
-                    break;
-                default:
-                case "Cuarta":
-                    numTono = "4";
-                    break;
-                case "Quinta":
-                    numTono = "5";
-                    break;
-                case "Sexta":
-                    numTono = "6";
-                    break;
-            }
-            pitch = noteDic._NoteDic[rKey[0] + numTono].pitch_;
-           
-
-            string rDuration = rKey.Substring(1);
-            switch(rDuration)
-            {
-                case "1/2":
-                    rhythmicDuration = RhythmicDuration.Eighth;
-                    break;
-                case "1":
-                    rhythmicDuration = RhythmicDuration.Quarter;
-                    break;
-                case "2":
-                    rhythmicDuration = RhythmicDuration.Half;
-                    break;
-                case "4":
-                    rhythmicDuration = RhythmicDuration.Whole;
-                    break;
-            }
-            cursorSound.play(pitch, rhythmicDuration);
-        }
-        private void getNote(string ViewerValue, string octava)
-        {
-             ResourceManager MyResourceClass = new ResourceManager(typeof(ViewerRES));
-            //Metodo 1, con un for, poco optimo
-            /*
-             ResourceSet resourceSet =
-                 ViewerRES.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-             foreach (DictionaryEntry entry in resourceSet)
-             {
-                 string resourceKey = entry.Key.ToString();
-                 string resourceValue = (string)entry.Value;
-                 if (resourceValue == ViewerValue)
-                 {
-                     setNote(resourceKey);
-                     //cursorSound.play(Pitch.A1, RhythmicDuration.Half);
-                     break;
-                 }
-             }*/
-            //Metodo 2, lo busca con el string directamente, pero he duplicado el resources por comodidad, se limpiara mas adelante
-            string key = MyResourceClass.GetString(ViewerValue);
-            string clave = Viewer.GetElement(5).Trim(); // quiza esto influya en los tonos
-            if(key != null) setNote(key, octava);
-        }
+                
         private void text1_SelectionChanged(object sender, RoutedEventArgs e)
         {
             if (Viewer != null && Moved)
@@ -385,13 +305,13 @@ namespace LiveDots
                 if (!Viewer.IsInMiddle() &&
                     s.Value != "Espacio" && s.Value != "Clave" && s.Value != "Armadura" && s.Value != "Compás" && s.Value != "Salto") // si la celda en la que esta situada es una nota distinta, haz que suene
                 {
-                    cursorSound.setPlay(false);
+                    cursorSound.SetPlay(false);
                 }
                 else if (Viewer.GetCurrentBackward() == 1 && Viewer.GetCurrentForward() == 1)
                 {
-                    cursorSound.setPlay(false);
+                    cursorSound.SetPlay(false);
                 }
-                if (!cursorSound.getPlay())
+                if (!cursorSound.GetPlay())
                 {
                     //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
                     //funciona asi como esta, no es lo mas optimo
@@ -406,7 +326,8 @@ namespace LiveDots
                         //coge los ultimos dos, que contienen las notas
                         nota= WordsArray[WordsArray.Length -2] + ' ' + WordsArray[WordsArray.Length - 1];
                     }
-                    getNote(nota, num_octava);
+                    //getNote(nota, num_octava);
+                    cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
                 }
 
                 Moved = true;
