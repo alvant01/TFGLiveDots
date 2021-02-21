@@ -44,9 +44,9 @@ namespace LiveDots
                     //Convertir en arbol braile
                     //Parsear Atributos
                     BrailleText bt = new BrailleText();
-                    BrailleScore bs = new BrailleScore();
+                    BXBrailleScore bs = new BXBrailleScore();
 
-                    bs.ParseBraille(content, bt);
+                    bs.Parse(content, bt);
 
                     window.BrailleText = bt;
                     window.Viewer = window.BrailleText.GetViewer();

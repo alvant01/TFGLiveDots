@@ -3,87 +3,131 @@ using System.Collections.Generic;
 
 namespace LiveDots
 {
-    public class BrailleKey : BrailleElement
+    public class BXBrailleKey : BXBrailleElement
     {
 
         public int Fifths { get; set; }
         public string Mode { get; set; }
 
-        public void Parse(BrailleText brailleText)
+        public void Parse(List<char> content, BrailleText brailleText)
         {
-            ParseBraille(brailleText);
-            ParseText(brailleText);
+            throw new NotImplementedException();
         }
-
-        public void ParseBraille(BrailleText brailleText)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <param name="v3"></param>
+        /// <returns>number of parameters needed for the Key</returns>
+        public int Parse(BrailleText brailleText, char v1, char v2, char v3)
         {
             List<string> L = new List<string>();
-
-            switch (Fifths)
+            if (v1 == ' ')
             {
-                case 1: L.Add("146"); break;
-                case 2: L.Add("146"); L.Add("146"); break;
-                case 3: L.Add("146"); L.Add("146"); L.Add("146"); break;
-                case 4: L.Add("3456"); L.Add("145"); L.Add("146"); break;
-                case 5: L.Add("3456"); L.Add("15"); L.Add("146"); break;
-                case 6: L.Add("3456"); L.Add("124"); L.Add("146"); break;
-                case -1: L.Add("126"); break;
-                case -2: L.Add("126"); L.Add("126"); break;
-                case -3: L.Add("126"); L.Add("126"); L.Add("126"); break;
-                case -4: L.Add("3456"); L.Add("145"); L.Add("126"); break;
-                case -5: L.Add("3456"); L.Add("15"); L.Add("126"); break;
-                case -6: L.Add("3456"); L.Add("124"); L.Add("126"); break;
+                return 1;
             }
+
+            int res = 0;
+            if (v1 == '3')
+            {
+                L.Add("146");
+                if (v2 == '3')
+                {
+                    L.Add("146");
+                    if (v3 == '3')
+                    {
+                        L.Add("146");
+                        this.Fifths = 3;
+                        res = 4;
+                    }
+                    else
+                    {
+                        this.Fifths = 2;
+                        res = 3;
+                    }
+                }
+                else
+                {
+                    this.Fifths = 1;
+                    res = 2;
+                }
+            }
+            else if (v1 == '#')
+            {
+                L.Add("3456");
+                if (v2 == 'd' && v3 == '3')
+                {
+                    L.Add("145");
+                    L.Add("146");
+                    this.Fifths = 4;
+                }
+                else if (v2 == 'e' && v3 == '3')
+                {
+                    L.Add("15");
+                    L.Add("146");
+                    this.Fifths = 5;
+                }
+                else if (v2 == 'f' && v3 == '3')
+                {
+                    L.Add("124");
+                    L.Add("146");
+                    this.Fifths = 6;
+                }
+                else if (v2 == 'd' && v3 == '(')
+                {
+                    L.Add("145");
+                    L.Add("126");
+                    this.Fifths = -4;
+                }
+                else if (v2 == 'e' && v3 == '(')
+                {
+                    L.Add("15");
+                    L.Add("126");
+                    this.Fifths = -5;
+                }
+                else if (v2 == 'f' && v3 == '(')
+                {
+                    L.Add("124");
+                    L.Add("126");
+                    this.Fifths = -6;
+                }
+                res = 4;
+            }
+            else if (v1 == '(')
+            {
+                L.Add("126");
+                if (v2 == '(')
+                {
+                    L.Add("126");
+
+                    if (v3 == '(')
+                    {
+                        L.Add("126");
+
+                        this.Fifths = -3;
+                        res = 4;
+                    }
+                    else
+                    {
+                        this.Fifths = -2;
+                        res = 3;
+                    }
+                }
+                else
+                {
+                    this.Fifths = -1;
+                    res = 2;
+                }
+            }
+            else { this.Fifths = 0; }
             brailleText.AddText(L);
+            ParseText(brailleText);
+            return res;
         }
-    
 
 
-        public List<int> getAlters()
-        {
-            List<int> L = new List<int>(new int[] { 0, 0, 0, 0, 0, 0, 0 });
-            switch (Mode)
-            {
-                case "Major":
-                    switch (Fifths)
-                    {
-                        case 1: L[3] = 1; break;
-                        case 2: L[3] = 1; L[0] = 1; break;
-                        case 3: L[3] = 1; L[0] = 1; L[4] = 1; break;
-                        case 4: L[3] = 1; L[0] = 1; L[4] = 1; L[1] = 1; break;
-                        case 5: L[3] = 1; L[0] = 1; L[4] = 1; L[1] = 1; L[5] = 1; break;
-                        case 6: L[3] = 1; L[0] = 1; L[4] = 1; L[1] = 1; L[5] = 1; L[2] = 1; break;
-                        case -1: L[6] = -1; break;
-                        case -2: L[6] = -1; L[2] = -1; break;
-                        case -3: L[6] = -1; L[2] = -1; L[5] = -1; break;
-                        case -4: L[6] = -1; L[2] = -1; L[5] = -1; L[1] = -1; break;
-                        case -5: L[6] = -1; L[2] = -1; L[5] = -1; L[1] = -1; L[4] = -1; break;
-                        case -6: L[6] = -1; L[2] = -1; L[5] = -1; L[1] = -1; L[4] = -1; L[0] = -1; break;
 
-                    }
-                    break;
-                default:
-                    switch (Fifths)
-                    {
-                        case 1: L[3] = 1; break;
-                        case 2: L[3] = 1; L[0] = 1; break;
-                        case 3: L[3] = 1; L[0] = 1; L[4] = 1; break;
-                        case 4: L[3] = 1; L[0] = 1; L[4] = 1; L[1] = 1; break;
-                        case 5: L[3] = 1; L[0] = 1; L[4] = 1; L[1] = 1; L[5] = 1; break;
-                        case 6: L[3] = 1; L[0] = 1; L[4] = 1; L[1] = 1; L[5] = 1; L[2] = 1; break;
-                        case -1: L[6] = -1; break;
-                        case -2: L[6] = -1; L[2] = -1; break;
-                        case -3: L[6] = -1; L[2] = -1; L[5] = -1; break;
-                        case -4: L[6] = -1; L[2] = -1; L[5] = -1; L[1] = -1; break;
-                        case -5: L[6] = -1; L[2] = -1; L[5] = -1; L[1] = -1; L[4] = -1; break;
-                        case -6: L[6] = -1; L[2] = -1; L[5] = -1; L[1] = -1; L[4] = -1; L[0] = -1; break;
-
-                    }
-
-                    break;
-            }
-            return L;
-        }
 
         public void ParseText(BrailleText brailleText)
         {

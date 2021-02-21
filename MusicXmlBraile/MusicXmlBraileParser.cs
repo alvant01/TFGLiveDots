@@ -10,12 +10,12 @@ namespace LiveDots.MusicXmlBraile
 {
     class MusicXmlBraileParser
     {
-        public string createXML(BrailleScore bs)
+        public string createXML(BXBrailleScore bs)
         {
             string xml = "";
 
             int countPart = 1;
-            foreach (BraillePart part in bs.Parts)
+            foreach (BXBraillePart part in bs.Parts)
             {
                 xml += "<score-partwise>\r\n";
 
@@ -38,10 +38,10 @@ namespace LiveDots.MusicXmlBraile
             return xml;
         }
 
-        private string measureXML(string xml, List<BrailleMeasure> measures)
+        private string measureXML(string xml, List<BXBrailleMeasure> measures)
         {
             int countMeasure = 1;
-            foreach (BrailleMeasure bm in measures)
+            foreach (BXBrailleMeasure bm in measures)
             {
                 
                 xml += "<measure number=\"" + countMeasure + "\">\r\n";
@@ -56,7 +56,7 @@ namespace LiveDots.MusicXmlBraile
             return xml;
         }
 
-        public string measureXML(string xml, BrailleMeasure bm, int count)
+        public string measureXML(string xml, BXBrailleMeasure bm, int count)
         {
             if (count == 1)
             {
@@ -78,30 +78,30 @@ namespace LiveDots.MusicXmlBraile
 
                 xml += "</attributes>\r\n";
             }
-            foreach (BrailleStaff staff in bm.Staffs)
+            foreach (BXBrailleStaff staff in bm.Staffs)
             {
                 xml = staffXML(xml, staff.Voices);
             }
             return xml;
         }
 
-        private string staffXML(string xml, List<BrailleVoice> voices)
+        private string staffXML(string xml, List<BXBrailleVoice> voices)
         {
-            foreach (BrailleVoice bv in voices)
+            foreach (BXBrailleVoice bv in voices)
             {
                 xml = voiceXML(xml, bv);
             }
             return xml;
         }
-        public string voiceXML(string xml, BrailleVoice bv)
+        public string voiceXML(string xml, BXBrailleVoice bv)
         {
-            foreach (BrailleNote note in bv.Notes)
+            foreach (BXBrailleNote note in bv.Notes)
             {
                 xml = noteXML(xml, note);
             }
             return xml;
         }
-        public string noteXML(string xml, BrailleNote bn)
+        public string noteXML(string xml, BXBrailleNote bn)
         {
             xml += "<note>\r\n";
             if (bn.IsRest)
@@ -122,7 +122,10 @@ namespace LiveDots.MusicXmlBraile
                 xml += "<duration>" + bn.duration + "</duration>\r\n"; //mirar
                 xml += "<voice>" + 1 + "</voice>\r\n"; //mirar
                 xml += "<type>" + bn.Type + "</type>\r\n";
-                xml += "<stem>up</stem>\r\n";
+                if(bn.getToctaveNum() <=4)
+                    xml += "<stem>up</stem>\r\n";
+                else
+                    xml += "<stem>down</stem>\r\n";
 
             }
             xml += "</note>\r\n";

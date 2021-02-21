@@ -39,29 +39,5 @@ namespace LiveDots
             }
 
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Atribute of the Part</returns>
-        internal BrailleAttribute ParseBraille(List<char> content, BrailleText brailleText)
-        {
-            BrailleAttribute res = null;
-            
-            if (Attribute == null)
-            {   
-                Attribute = new BrailleAttribute();
-                res = Attribute.ParseBraille(content, brailleText);
-                content.RemoveAt(0); //\n
-            }
-
-            BrailleStaff staff = new BrailleStaff();
-            staff.ParseBraille(content, brailleText );
-            this.Staffs.Add(staff);
-            brailleText.AddSpace();
-
-
-
-            return res;
-        }
     }
 }

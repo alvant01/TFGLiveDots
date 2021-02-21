@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace LiveDots
 {
-    public class BrailleClef : BrailleElement
+    public class BXBrailleClef : BXBrailleElement
     {
-        public BrailleClef()
+        public BXBrailleClef()
         {
             Sign = "G";
             Line = 2;
@@ -15,7 +15,7 @@ namespace LiveDots
 
         }
 
-        public BrailleClef(string s, int l, int c, string h)
+        public BXBrailleClef(string s, int l, int c, string h)
         {
             Sign = s;
             Line = l;
@@ -24,7 +24,7 @@ namespace LiveDots
             //clef_octave_change = c;
 
         }
-        public BrailleClef(string s, int l, int c, string h, string o)
+        public BXBrailleClef(string s, int l, int c, string h, string o)
         {
             Sign = s;
             Line = l;
@@ -40,83 +40,89 @@ namespace LiveDots
         //Indica que la clave de sol tiene un ocho por encima o por debajo. Valores:"up","down",null
         public string Ocho { get; set; }
 
-        // public int clef_octave_change { get; set; }
-
-        public void Parse(BrailleText brailleText)
+        public int ParseBrailleInverse(BrailleText brailleText, char sign, char line, char hand, char ochoIni, char ocho)
         {
-            ParseBraille(brailleText);
-            ParseText(brailleText);
-        }
-
-        public void ParseBraille(BrailleText brailleText)
-        {
+            int res = 3;
             List<string> L = new List<string>();
             L.Add("345");
-            //Revisar
-            if (Sign == "G")
+            switch (sign)
             {
-                L.Add("34");
-                //Si Line!=2
-                if (Line == 1)
-                    L.Add("4");
-                else if (Line == 3)
-                    L.Add("456");
-                else if (Line == 4)
-                    L.Add("5");
-                else if (Line == 5)
-                    L.Add("46");
+                case 'í':
+                    this.Sign = "G";
+                    L.Add("34");
+                    break;
 
-                if (Hand == "left")
-                    L.Add("13");
-                else
-                    L.Add("123");
-
-
-                if (Ocho == "up")
-                {
+                case '#':
+                    this.Sign = "F";
                     L.Add("3456");
+                    break;
+                case 'ó':
+                    this.Sign = "C";
+                    L.Add("346");
+                    break;
+            }
+            switch (line)
+            {
+                case '\'':
+                    this.Line = 1;
+                    L.Add("4");
+                    break;
+                case '%':
+                    this.Line = 2;
+                    L.Add("456");
+                    break;
+                case '`':
+                    this.Line = 2;
+                    L.Add("5");
+                    break;
+                case '{':
+                    this.Line = 2;
+                    L.Add("46");
+                    break;
+                default: // line = 2;
+                    res = 2;
+                    this.Line = 2;
+                    ochoIni = hand;
+                    hand = line;
+                    break;
+            }
+            //Hand
+            if (hand == 'l')
+            {
+               this.Hand = "right";
+               L.Add("123");
+            }
+            else
+            {
+                this.Hand = "left";
+                 L.Add("13");
+            }
+
+            //ocho
+            if (ochoIni == '#')
+            {
+                if (ocho == 'h')
+                {
                     L.Add("125");
+                    this.Ocho = "up";
                 }
-                else if (Ocho == "down")
-                {
-                    L.Add("3456");
-                    L.Add("236");
-                }
-            }
-            else if (Sign == "F")
-            {
-                L.Add("3456");
-                //Si Line!=4
-                if (Line == 1)
-                    L.Add("4");
-                else if (Line == 2)
-                    L.Add("45");
-                else if (Line == 3)
-                    L.Add("456");
-                else if (Line == 5)
-                    L.Add("46");
-
-                if (Hand == "right")
-                    L.Add("13");
                 else
-                    L.Add("123");
+                {
+                    L.Add("236");
+                    this.Ocho = "down";
+                }
+                res = 5;
             }
-            else if (Sign == "C")
+            else
             {
-                L.Add("346");
-                //Si Line!=3
-                if (Line == 1)
-                    L.Add("4");
-                else if (Line == 2)
-                    L.Add("45");
-                else if (Line == 4)
-                    L.Add("5");
-                else if (Line == 5)
-                    L.Add("46");
-                L.Add("123");
+                this.Ocho = null;
             }
+
+
 
             brailleText.AddText(L);
+            ParseText(brailleText);
+            return res;
         }
 
         public void ParseText(BrailleText brailleText)
@@ -274,6 +280,11 @@ namespace LiveDots
 
             brailleText.AddViewer(txt, tam);
 
+        }
+
+        public void Parse(List<char> content, BrailleText brailleText)
+        {
+            throw new NotImplementedException();
         }
     }
 }

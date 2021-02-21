@@ -37,14 +37,5 @@ namespace LiveDots
                 V.Parse(brailleText);
             }
         }
-
-        internal void ParseBraille(List<char> content, BrailleText brailleText)
-        {
-            //Hacer bucle
-            BrailleVoice voice = new BrailleVoice();
-
-            voice.ParseBraille(content, brailleText);
-            this.Voices.Add(voice);
-        }
     }
 }

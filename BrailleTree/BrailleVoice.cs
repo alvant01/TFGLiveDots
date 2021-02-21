@@ -43,39 +43,5 @@ namespace LiveDots
                 N.Parse(brailleText);
             }
         }
-
-        internal void ParseBraille(List<char> content, BrailleText brailleText)
-        {
-           while (content.Count != 0 )
-            {
-                if (content[0] == ' ')
-                {
-                    content.RemoveAt(0);
-                    break;
-                }
-                else if (content[1] == 'k' && content[0] == '(')
-                {
-                    content.RemoveRange(0, 2);
-                }
-                else if (content[0] == '\n')
-                {
-                    brailleText.JumpLine();
-                    content.RemoveAt(0);
-                }
-                else if (content[0] == '\r')
-                {
-                    //brailleText.JumpLine();
-                    content.RemoveAt(0);
-                }
-                else
-                {
-                    BrailleNote n = new BrailleNote();
-
-                    n.ParseBrailleInverse(brailleText, content);
-                    this.Notes.Add(n);
-                }
-
-            }
-        }
     }
 }

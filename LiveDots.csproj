@@ -287,6 +287,17 @@
     </ApplicationDefinition>
     <Compile Include="BrailleMusicViewer.cs" />
     <Compile Include="BrailleText.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleAttribute.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleClef.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleElement.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleKey.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleMeasure.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleNote.cs" />
+    <Compile Include="BrailleToXMLCode\BXBraillePart.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleScore.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleStaff.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleTime.cs" />
+    <Compile Include="BrailleToXMLCode\BXBrailleVoice.cs" />
     <Compile Include="BrailleTree\BrailleAttribute.cs" />
     <Compile Include="BrailleTree\BrailleElement.cs" />
     <Compile Include="BrailleTree\BrailleKey.cs" />
@@ -303,6 +314,10 @@
     <Compile Include="BrailleTree\BraillePitch.cs" />
     <Compile Include="BrailleTree\BrailleStaff.cs" />
     <Compile Include="BrailleTree\BrailleTime.cs" />
+    <Compile Include="Factorias\FactoryLoad.cs" />
+    <Compile Include="Factorias\FactoryLoadBraille.cs" />
+    <Compile Include="Factorias\FactoryLoadImp.cs" />
+    <Compile Include="Factorias\FactoryLoadXML.cs" />
     <Compile Include="Guide.xaml.cs">
       <DependentUpon>Guide.xaml</DependentUpon>
     </Compile>

@@ -444,3 +444,4 @@ C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.cspr
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.csproj.CopyComplete
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.exe
 C:\Users\Miguel Zhefan\Desktop\4º\TFG\Final\TFGLiveDots\obj\Debug\LiveDots.pdb
+C:\Users\alvaro\Documents\GitHub\TFGLiveDots\obj\Debug\LiveDots.ViewerRES.resources
