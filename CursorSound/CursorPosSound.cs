@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Manufaktura.Controls.Audio;
-using Manufaktura.Controls.Linq;
-using Manufaktura.Controls.Parser;
-using Manufaktura.Model.MVVM;
-using Manufaktura.Controls;
-using Manufaktura.Controls.WPF;
-using Manufaktura.Music;
 using Manufaktura.Controls.Model;
-using Manufaktura.Music.Model.MajorAndMinor;
 using Manufaktura.Music.Model;
-using Manufaktura.Controls.Desktop.Audio.Midi;
 using System.Xml;
+using System.Threading.Tasks;
+
 
 namespace LiveDots
 {
@@ -50,7 +39,7 @@ namespace LiveDots
         /*public void setClave(string clave){
             clave_ = clave;
         }*/
-        private void Play(Pitch pitch, RhythmicDuration duration)
+        private async void Play(Pitch pitch, RhythmicDuration duration)
         {
             if (!played)
             {
@@ -64,8 +53,34 @@ namespace LiveDots
                 //Intento de hacer staff para que no pete el error del playElement, no funciona
                 /*Staff staff = new Staff();
                 note.Staff = staff;*/
-               //note.Staff =
-                mainWindow.player.PlayElement(new Note(pitch,duration));
+                //note.Staff =
+                mainWindow.player.PlayElement(new Note(pitch, duration));
+
+                // https://physics.stackexchange.com/questions/15900/converting-notes-to-milliseconds https://guitargearfinder.com/guides/convert-ms-milliseconds-bpm-beats-per-minute-vice-versa/
+                //https://rechneronline.de/musik/note-length.php
+                //varia con el tempo
+
+                //temporal con el tempo de 100
+                int timespan = 0;
+                if (duration == RhythmicDuration.Eighth)
+                {
+                    timespan = 300;
+                }
+                else if (duration == RhythmicDuration.Quarter)
+                {
+                    timespan = 600;
+                }
+
+                else if (duration == RhythmicDuration.Eighth)
+                {
+                    timespan = 1200;
+                }
+                else if (duration == RhythmicDuration.Whole)
+                {
+                    timespan = 2400;
+                }
+                //esperar a la duracion de la nota
+                await Task.Delay(timespan);
                 played = true;
             }
 
@@ -81,7 +96,7 @@ namespace LiveDots
 
         public void TransformStringToNoteAndPlay(string ViewerValue, string octava)
         {
-            string nota = StringToNote.getNote(ViewerValue);
+            string nota = StringToNote.GetResNote(ViewerValue);
             octava = StringToNote.GetNote(octava);
             if (nota != null)
             {

@@ -32,35 +32,21 @@ namespace LiveDots
             }
             return rhythmicDuration;
         }
+        //Mira que octava es y lo transforma a numero
         public static string GetNote(string octava)
         {
-            //mira el tono de la octava y busca en el diccionario esa nota, de default coge el tono 4            
-            string numTono = "";
-            switch (octava)
+            string numTono = octava switch
             {
-                case "Primera":
-                    numTono = "1";
-                    break;
-                case "Segunda":
-                    numTono = "2";
-                    break;
-                case "Tercera":
-                    numTono = "3";
-                    break;
-                default:
-                case "Cuarta":
-                    numTono = "4";
-                    break;
-                case "Quinta":
-                    numTono = "5";
-                    break;
-                case "Sexta":
-                    numTono = "6";
-                    break;
-            }
+                "Primera" => "1",
+                "Segunda" => "2",
+                "Tercera" => "3",
+                "Quinta" => "5",
+                "Sexta" => "6",
+                _ => "4",
+            };
             return numTono;
         }
-        public static string getNote(string ViewerValue)
+        public static string GetResNote(string ViewerValue)
         {
             ResourceManager MyResourceClass = new ResourceManager(typeof(ViewerRES));
 
