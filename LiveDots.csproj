@@ -306,7 +306,11 @@
     <Compile Include="BrailleSignPrueba.cs" />
     <Compile Include="BrailleTree\BrailleChord.cs" />
     <Compile Include="Converter.cs" />
-    <Compile Include="CursorPosSound.cs" />
+    <Compile Include="CursorSound\CreateXML.cs" />
+    <Compile Include="CursorSound\CursorPosSound.cs" />
+    <Compile Include="CursorSound\NoteDictionary.cs" />
+    <Compile Include="CursorSound\NoteForSound.cs" />
+    <Compile Include="CursorSound\StringToNote.cs" />
     <Compile Include="DicBraille.cs" />
     <Compile Include="BrailleTree\BrailleMeasure.cs" />
     <Compile Include="BrailleTree\BrailleNote.cs" />
