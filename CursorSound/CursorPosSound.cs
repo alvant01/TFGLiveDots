@@ -61,7 +61,10 @@ namespace LiveDots
                 //varia con el tempo
 
                 //temporal con el tempo de 100
+                int tempo = mainWindow.player.Tempo.BeatsPerMinute;
                 int timespan = 0;
+                var aux = duration.ToTimeSpan(mainWindow.player.Tempo);
+
                 if (duration == RhythmicDuration.Eighth)
                 {
                     timespan = 300;
@@ -80,7 +83,7 @@ namespace LiveDots
                     timespan = 2400;
                 }
                 //esperar a la duracion de la nota
-                await Task.Delay(timespan);
+                await Task.Delay(aux);
                 played = true;
             }
 
