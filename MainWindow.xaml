@@ -83,6 +83,7 @@
                        FontFamily ="edico_es_br6" FontSize="{Binding BrailleSize}"                      
                        IsReadOnly="True"
                        IsReadOnlyCaretVisible="True"
+					   SelectedText="text1_selectedtext"
                        />
         </ScrollViewer>
       </Grid>

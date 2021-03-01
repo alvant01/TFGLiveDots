@@ -24,8 +24,9 @@ namespace LiveDots
             text1.IsReadOnly = false;
             text1.SelectionChanged += text1_SelectionChanged;
             text1.TextChanged += text1_TextChanged;
+            //text1.SelectedText = text1_selectedtext;
 
-//----------------------
+            //----------------------
             //if not found create xml
             XmlDocument xDoc = new XmlDocument();
             try
@@ -47,6 +48,10 @@ namespace LiveDots
             Console.WriteLine(text1.Text);            
         }
 
+        private void text1_selectedtext(object sender, TextChangedEventArgs e)
+        {
+            Console.WriteLine(text1.SelectedText);
+        }
         private void NoteViewer1_QueryCursor(object sender, QueryCursorEventArgs e)
         {
             Console.WriteLine(e);
@@ -282,6 +287,18 @@ namespace LiveDots
         {
             if (Viewer != null && Moved)
             {
+                Console.WriteLine(text1.SelectedText.Length);
+                if (text1.SelectedText != "" || text1.SelectedText.Length > 1)
+                {
+                    Console.WriteLine(text1.SelectedText);
+                    string a ="";
+                    for(int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
+                    {
+                        a += Viewer.GetElement(i).Trim() + " ";
+                    }
+                    Console.WriteLine(a);
+                }
+                else Console.WriteLine("Poco texto");
                 Moved = false;
                 //Si va para delante
                 if (text1.CaretIndex - Viewer.GetCurrent() == 1)
