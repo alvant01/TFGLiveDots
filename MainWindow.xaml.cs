@@ -11,6 +11,8 @@ using System.Windows.Controls;
 
 using System.Linq;
 using System.Xml;
+using System.Collections.Generic;
+
 namespace LiveDots
 {
     public partial class MainWindow : Window
@@ -287,18 +289,6 @@ namespace LiveDots
         {
             if (Viewer != null && Moved)
             {
-                Console.WriteLine(text1.SelectedText.Length);
-                if (text1.SelectedText != "" || text1.SelectedText.Length > 1)
-                {
-                    Console.WriteLine(text1.SelectedText);
-                    string a ="";
-                    for(int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
-                    {
-                        a += Viewer.GetElement(i).Trim() + " ";
-                    }
-                    Console.WriteLine(a);
-                }
-                else Console.WriteLine("Poco texto");
                 Moved = false;
                 //Si va para delante
                 if (text1.CaretIndex - Viewer.GetCurrent() == 1)
@@ -316,6 +306,22 @@ namespace LiveDots
                 {
                     Viewer.UpdateIndex(text1.CaretIndex);
                 }
+
+                Console.WriteLine(text1.SelectedText.Length);
+                List<string> ListNotas = new List<string>();
+                //mas de una palabra seleccionada
+                if (text1.SelectedText.Length > 1)
+                {
+                    Console.WriteLine(text1.SelectedText);
+                    string selectedTextNotes = "";
+                    for (int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
+                    {
+                        selectedTextNotes += Viewer.GetElement(i).Trim() + " ";
+                    }
+                    ListNotas = StringToNote.BrailleToStringNote(Viewer.GetCurrent(), Viewer.GetCurrent() + text1.SelectedText.Length, Viewer);
+                    //Console.WriteLine(a);
+                }
+                else Console.WriteLine("Poco texto");
 
                 //Quiza se pueda dar uso a la armadura para averiguar que tonalidad usar, pero implicaria usar un switch?, de momento usa el tono 4 (algo que no comprendo de musica)
                 var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
@@ -343,8 +349,28 @@ namespace LiveDots
                         //coge los ultimos dos, que contienen las notas
                         nota= WordsArray[WordsArray.Length -2] + ' ' + WordsArray[WordsArray.Length - 1];
                     }
-                    //getNote(nota, num_octava);
-                    cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
+                    //tocaria solo si hay una nota
+                    if(ListNotas.Count < 2)
+                        cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
+                    else
+                    {
+                        //tocar todas las notas de la lista, wip, no funciona bien, aunque eso si, si que guarda todo
+                        foreach(string it in ListNotas)
+                        {
+                            string temporal = it;
+
+                            string temporal_aux_nota = temporal.Split(' ').Skip(1).FirstOrDefault();
+                            string temporal_num_octava = null;
+                            if (temporal_aux_nota == "octava")
+                            {
+                                temporal_num_octava = temporal.Split(' ')[0];
+                                var WordsArray = temporal.Split();
+                                //coge los ultimos dos, que contienen las notas
+                                temporal = WordsArray[WordsArray.Length - 2] + ' ' + WordsArray[WordsArray.Length - 1];
+                            }
+                            cursorSound.TransformStringToNoteAndPlay(temporal, temporal_num_octava);
+                        }
+                    }
                 }
 
                 Moved = true;

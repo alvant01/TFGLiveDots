@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LiveDots
@@ -55,6 +56,21 @@ namespace LiveDots
             //string clave = Viewer.GetElement(5).Trim(); // quiza esto influya en los tonos
             if (key != null) return key;
             else return null;
+        }
+        public static List<string> BrailleToStringNote(int ini_index, int fin_index, BrailleMusicViewer viewer)
+        {
+            List<string> lista_notas = new List<string>();
+            for (int i = ini_index; i < fin_index; i++)
+            {
+                string aux = viewer.GetElement(i).Trim();
+
+                var aux_first_word = Regex.Match(aux, @"^([\w\-]+)");          
+                if (aux_first_word.ToString() != "Espacio"  && aux_first_word.ToString() != "Clave" && aux_first_word.ToString() != "Armadura"
+                    && aux_first_word.ToString() != "Compás" && aux_first_word.ToString() != "Salto")
+
+                    lista_notas.Add(aux);
+            }
+            return lista_notas;
         }
     }
 }

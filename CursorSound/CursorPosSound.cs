@@ -39,7 +39,7 @@ namespace LiveDots
         /*public void setClave(string clave){
             clave_ = clave;
         }*/
-        private async void Play(Pitch pitch, RhythmicDuration duration)
+        private /*async*/ void Play(Pitch pitch, RhythmicDuration duration)
         {
             if (!played)
             {
@@ -83,7 +83,7 @@ namespace LiveDots
 
                 played = true;
                 //esperar a la duracion de la nota
-                await Task.Delay(duration.ToTimeSpan(mainWindow.player.Tempo));
+                //await Task.Delay(duration.ToTimeSpan(mainWindow.player.Tempo));
             }
 
         }
