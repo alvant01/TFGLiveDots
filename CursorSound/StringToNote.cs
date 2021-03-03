@@ -72,6 +72,18 @@ namespace LiveDots
             }
             return lista_notas;
         }
+        public static void SetNoteForPlay(ref string nota, out string num_octava)
+        {
+            num_octava = null;
+            string aux_nota = nota.Split(' ').Skip(1).FirstOrDefault();
+            if (aux_nota == "octava")
+            {
+                num_octava = nota.Split(' ')[0];
+                var WordsArray = nota.Split();
+                //coge los ultimos dos, que contienen las notas
+                nota = WordsArray[WordsArray.Length - 2] + ' ' + WordsArray[WordsArray.Length - 1];
+            }
+        }
     }
 }
 

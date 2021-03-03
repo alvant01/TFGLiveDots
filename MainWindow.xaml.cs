@@ -309,10 +309,14 @@ namespace LiveDots
 
                 Console.WriteLine(text1.SelectedText.Length);
                 List<string> ListNotas = new List<string>();
+                bool bigText = false;
                 //mas de una palabra seleccionada
                 if (text1.SelectedText.Length > 1)
                 {
+                    cursorSound.SetPlay(false);
+                    bigText = true;
                     Console.WriteLine(text1.SelectedText);
+                    //temporal
                     string selectedTextNotes = "";
                     for (int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
                     {
@@ -336,29 +340,26 @@ namespace LiveDots
                 }
                 if (!cursorSound.GetPlay())
                 {
-                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
-                    //funciona asi como esta, no es lo mas optimo
-                    string nota = Viewer.GetElement(Viewer.GetCurrent()).Trim();
-
-                    string aux_nota = nota.Split(' ').Skip(1).FirstOrDefault();
-                    string num_octava = null;
-                    if (aux_nota == "octava")
+                    // si no hay texto seleccionado 
+                    if (!bigText)
                     {
-                        num_octava = nota.Split(' ')[0];
-                        var WordsArray = nota.Split();
-                        //coge los ultimos dos, que contienen las notas
-                        nota= WordsArray[WordsArray.Length -2] + ' ' + WordsArray[WordsArray.Length - 1];
-                    }
-                    //tocaria solo si hay una nota
-                    if(ListNotas.Count < 2)
+                        //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
+                        //funciona asi como esta, no es lo mas optimo
+                        string nota = Viewer.GetElement(Viewer.GetCurrent()).Trim();
+                        StringToNote.SetNoteForPlay(ref nota, out string num_octava);
+
+                        //tocaria solo si hay una nota
+                        //if (ListNotas.Count < 2)
                         cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
-                    else
+                    }
+                    else if (bigText)
                     {
                         //tocar todas las notas de la lista, wip, no funciona bien, aunque eso si, si que guarda todo
-                        foreach(string it in ListNotas)
+                        foreach (string it in ListNotas)
                         {
                             string temporal = it;
-
+                            StringToNote.SetNoteForPlay(ref temporal, out string num_octava);
+                            /*
                             string temporal_aux_nota = temporal.Split(' ').Skip(1).FirstOrDefault();
                             string temporal_num_octava = null;
                             if (temporal_aux_nota == "octava")
@@ -367,8 +368,8 @@ namespace LiveDots
                                 var WordsArray = temporal.Split();
                                 //coge los ultimos dos, que contienen las notas
                                 temporal = WordsArray[WordsArray.Length - 2] + ' ' + WordsArray[WordsArray.Length - 1];
-                            }
-                            cursorSound.TransformStringToNoteAndPlay(temporal, temporal_num_octava);
+                            }*/
+                            cursorSound.TransformStringToNoteAndPlay(temporal, num_octava);
                         }
                     }
                 }
