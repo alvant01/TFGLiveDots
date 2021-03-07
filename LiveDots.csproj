@@ -318,6 +318,7 @@
     <Compile Include="BrailleTree\BraillePitch.cs" />
     <Compile Include="BrailleTree\BrailleStaff.cs" />
     <Compile Include="BrailleTree\BrailleTime.cs" />
+    <Compile Include="DicInverse.cs" />
     <Compile Include="Factorias\FactoryLoad.cs" />
     <Compile Include="Factorias\FactoryLoadBraille.cs" />
     <Compile Include="Factorias\FactoryLoadImp.cs" />

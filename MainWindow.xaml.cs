@@ -47,7 +47,14 @@ namespace LiveDots
          */
         private void text1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Console.WriteLine(text1.Text);            
+            Console.WriteLine(text1.Text);
+            char compas = text1.Text[text1.Text.IndexOf('#') + 1];
+            char[] div = { ' ', '\n' };
+            string[] text = text1.Text.Split(div, StringSplitOptions.RemoveEmptyEntries);
+
+            MessageBox.Show("Tus cambios no son validos");
+
+            Console.WriteLine(Viewer.GetText());
         }
 
         private void text1_selectedtext(object sender, TextChangedEventArgs e)
