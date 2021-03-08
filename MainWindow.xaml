@@ -39,7 +39,16 @@
                 </MenuItem>
             </Menu>
             <Button x:Name="PlayButton" Width="{Binding FontSize}" Command="{Binding PlayCommand}" AutomationProperties.Name="Reproducir">
-                <Image Source="Icons/Play.png"/>
+                <Image Source="Icons/Play.png" Height="33" RenderTransformOrigin="0.5,0.5" Width="551">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
             </Button>
             <Button  Width="{Binding FontSize}" Command="{Binding PauseCommand}" AutomationProperties.Name="Pausar">
                 <Image Source="Icons/Pause.png"/>
@@ -59,21 +68,23 @@
           <RowDefinition Height="1*"/>
           <RowDefinition Height="5"/>
           <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        
-        <ScrollViewer Grid.Row="0"
+          <RowDefinition Height="5"/>
+          <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0"
                           HorizontalScrollBarVisibility="Auto"
                           VerticalScrollBarVisibility="Auto"
                           >
-            <ManufakturaControls:NoteViewer x:Name="noteViewer1"  
+                <ManufakturaControls:NoteViewer x:Name="noteViewer1"  
                                     ZoomFactor="{Binding ScoreZoomFactor}"
                                     HorizontalAlignment="Center" Margin="50,50,200,50"
                                     VerticalAlignment="Top"
                                     RenderingMode="SinglePage"
                                     XmlSource="{Binding SourceXml}"
                                     />
-        </ScrollViewer>
-        <GridSplitter Grid.Row ="1" Height="5" HorizontalAlignment="Stretch" Focusable="False"/>
+            </ScrollViewer>
+            <GridSplitter Grid.Row ="1" Height="5" HorizontalAlignment="Stretch" Focusable="False"/>
         <ScrollViewer Grid.Row="2"
                 HorizontalScrollBarVisibility="Auto"
                 VerticalScrollBarVisibility="Auto">
@@ -86,6 +97,13 @@
 					   SelectedText="text1_selectedtext"
                        />
         </ScrollViewer>
+            <GridSplitter Grid.Row ="3" Height="5" HorizontalAlignment="Stretch" Focusable="False"/>
+            <TextBox Grid.Row ="4" Name="text2" 
+                       TextWrapping="Wrap"                                           
+                       IsReadOnly="False"
+                       IsReadOnlyCaretVisible="True"
+					   SelectedText="AQUI SE METE EL INPUT THIS IS A PRUEBA"
+            />
       </Grid>
     </DockPanel>
 </Window>
