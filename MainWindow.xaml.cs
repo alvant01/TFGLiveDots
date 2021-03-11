@@ -52,7 +52,7 @@ namespace LiveDots
             char[] div = { ' ', '\n' };
             string[] text = text1.Text.Split(div, StringSplitOptions.RemoveEmptyEntries);
 
-            MessageBox.Show("Tus cambios no son validos");
+            //MessageBox.Show("Tus cambios no son validos");
 
             Console.WriteLine(Viewer.GetText());
         }
