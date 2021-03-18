@@ -18,7 +18,9 @@ namespace LiveDots.Factories
 
             return instance;
         }
-        public abstract void load(object obj);
+        public abstract BrailleScore GetBrailleScore();
+
+        public abstract BXBrailleScore GetBXBrailleScore();
 
         //public abstract 
     }

@@ -1,4 +1,5 @@
-﻿using LiveDots.MusicXmlBraile;
+﻿using LiveDots.Factories;
+using LiveDots.MusicXmlBraile;
 using Manufaktura.Controls.Parser;
 using Microsoft.Win32;
 using System;
@@ -44,7 +45,8 @@ namespace LiveDots
                     //Convertir en arbol braile
                     //Parsear Atributos
                     BrailleText bt = new BrailleText();
-                    BXBrailleScore bs = new BXBrailleScore();
+
+                    BXBrailleScore bs = FactoryLoad.GetInstance().GetBXBrailleScore();
 
                     bs.Parse(content, bt);
 
@@ -106,7 +108,13 @@ namespace LiveDots
             MainWindow window = sender as MainWindow;
             MusicXmlParser parser = new MusicXmlParser();
             string NewXml = parser.ParseBack(window.noteViewer1.InnerScore).ToString();
-            System.IO.File.WriteAllText(window.FileNameXml, NewXml);
+            string xmlName = window.FileNameXml;
+            int i = 0;
+            while (xmlName[i] != '.')
+            { i++; }
+            xmlName = xmlName.Substring(0,i);
+            xmlName = xmlName + "aa.musicxml";
+            System.IO.File.WriteAllText(xmlName, NewXml);
             // Decir que se ha guardado
         }
 

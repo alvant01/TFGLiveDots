@@ -8,9 +8,14 @@ namespace LiveDots.Factories
 {
     public class FactoryLoadImp : FactoryLoad
     {
-        public override void load(object obj)
+        public override BrailleScore GetBrailleScore()
         {
-            throw new NotImplementedException();
+            return new BrailleScore();
+        }
+
+        public override BXBrailleScore GetBXBrailleScore()
+        {
+            return new BXBrailleScore();
         }
     }
 }

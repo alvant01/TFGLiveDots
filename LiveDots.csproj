@@ -320,9 +320,7 @@
     <Compile Include="BrailleTree\BrailleTime.cs" />
     <Compile Include="DicInverse.cs" />
     <Compile Include="Factorias\FactoryLoad.cs" />
-    <Compile Include="Factorias\FactoryLoadBraille.cs" />
     <Compile Include="Factorias\FactoryLoadImp.cs" />
-    <Compile Include="Factorias\FactoryLoadXML.cs" />
     <Compile Include="Guide.xaml.cs">
       <DependentUpon>Guide.xaml</DependentUpon>
     </Compile>
