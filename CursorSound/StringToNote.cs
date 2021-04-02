@@ -21,6 +21,7 @@ namespace LiveDots
                 case "1/2":
                     rhythmicDuration = RhythmicDuration.Eighth;
                     break;
+                default:
                 case "1":
                     rhythmicDuration = RhythmicDuration.Quarter;
                     break;
@@ -83,6 +84,30 @@ namespace LiveDots
                 //coge los ultimos dos, que contienen las notas
                 nota = WordsArray[WordsArray.Length - 2] + ' ' + WordsArray[WordsArray.Length - 1];
             }
+        }
+        public static int BPMToMs(int BPM, RhythmicDuration duration)
+        {
+            float ms = 60000 / BPM; //60000 miliseconds equals one minute
+            int beat = 0;
+           
+            if (duration == RhythmicDuration.Eighth)
+            {
+                beat = (int) ms / 2;
+            }
+            else if (duration == RhythmicDuration.Quarter)
+            {
+                beat = (int) ms;
+            }
+
+            else if (duration == RhythmicDuration.Half)
+            {
+                beat = (int) ms*2;
+            }
+            else if (duration == RhythmicDuration.Whole)
+            {
+                beat = (int)ms*4;
+            }
+            return beat;
         }
     }
 }

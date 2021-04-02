@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Linq;
 using System.Xml;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LiveDots
 {
@@ -292,7 +293,7 @@ namespace LiveDots
             DecreaseBrailleSize();
         }
                 
-        private void text1_SelectionChanged(object sender, RoutedEventArgs e)
+        private async void text1_SelectionChanged(object sender, RoutedEventArgs e)
         {
             if (Viewer != null && Moved)
             {
@@ -355,8 +356,7 @@ namespace LiveDots
                         string nota = Viewer.GetElement(Viewer.GetCurrent()).Trim();
                         StringToNote.SetNoteForPlay(ref nota, out string num_octava);
 
-                        //tocaria solo si hay una nota
-                        //if (ListNotas.Count < 2)
+                        //tocaria solo si hay una nota     
                         cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
                     }
                     else if (bigText)
@@ -377,6 +377,9 @@ namespace LiveDots
                                 temporal = WordsArray[WordsArray.Length - 2] + ' ' + WordsArray[WordsArray.Length - 1];
                             }*/
                             cursorSound.TransformStringToNoteAndPlay(temporal, num_octava);
+                            //await Task.Delay((int)(player.Tempo.BeatsPerMinute/0.5));
+                            int awaiting_time = StringToNote.BPMToMs(player.Tempo.BeatsPerMinute, cursorSound.GetRhythmicDuration(temporal));
+                            await Task.Delay(awaiting_time);
                         }
                     }
                 }

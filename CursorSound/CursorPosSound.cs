@@ -39,51 +39,20 @@ namespace LiveDots
         /*public void setClave(string clave){
             clave_ = clave;
         }*/
-        private /*async*/ void Play(Pitch pitch, RhythmicDuration duration)
+        private void Play(Pitch pitch, RhythmicDuration duration)
         {
             if (!played)
             {
-                /*
-                nota.FirstStaff.Elements.Clear(); // no borra los elementos introducidos
-                */
                 Note note = new Note();
                 //cambiando esto no funciona
                 note.Pitch.StepName = Manufaktura.Music.Model.Step.B;
 
-                //Intento de hacer staff para que no pete el error del playElement, no funciona
-                /*Staff staff = new Staff();
-                note.Staff = staff;*/
-                //note.Staff =
                 mainWindow.player.PlayElement(new Note(pitch, duration));
 
                 // https://physics.stackexchange.com/questions/15900/converting-notes-to-milliseconds https://guitargearfinder.com/guides/convert-ms-milliseconds-bpm-beats-per-minute-vice-versa/
                 //https://rechneronline.de/musik/note-length.php
                 //varia con el tempo
-
-                //temporal con el tempo de 100
-                int tempo = mainWindow.player.Tempo.BeatsPerMinute;
-                int timespan = 0;
-                if (duration == RhythmicDuration.Eighth)
-                {
-                    timespan = 300;
-                }
-                else if (duration == RhythmicDuration.Quarter)
-                {
-                    timespan = 600;
-                }
-
-                else if (duration == RhythmicDuration.Eighth)
-                {
-                    timespan = 1200;
-                }
-                else if (duration == RhythmicDuration.Whole)
-                {
-                    timespan = 2400;
-                }
-
-                played = true;
-                //esperar a la duracion de la nota
-                //await Task.Delay(duration.ToTimeSpan(mainWindow.player.Tempo));
+                //played = true;
             }
 
         }
@@ -106,6 +75,11 @@ namespace LiveDots
                 RhythmicDuration rhythmicDuration = StringToNote.SetRitmo(nota);
                 Play(pitch, rhythmicDuration);
             }
+        }
+        public RhythmicDuration GetRhythmicDuration(string ViewerValue)
+        {
+            string nota = StringToNote.GetResNote(ViewerValue);
+            return StringToNote.SetRitmo(nota); 
         }
     }
 }
