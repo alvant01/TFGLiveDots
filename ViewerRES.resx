@@ -117,54 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="A1" xml:space="preserve">
-    <value>La negra</value>
-  </data>
-  <data name="A1/2" xml:space="preserve">
-    <value>La corchea</value>
-  </data>
-  <data name="A2" xml:space="preserve">
-    <value>La blanca</value>
-  </data>
-  <data name="A4" xml:space="preserve">
-    <value>La redonda</value>
-  </data>
-  <data name="B1" xml:space="preserve">
-    <value>Si negra</value>
-  </data>
-  <data name="B1/2" xml:space="preserve">
-    <value>Si corchea</value>
-  </data>
-  <data name="B2" xml:space="preserve">
-    <value>Si blanca</value>
-  </data>
-  <data name="B4" xml:space="preserve">
-    <value>Si redonda</value>
-  </data>
-  <data name="C1" xml:space="preserve">
-    <value>Do negra</value>
-  </data>
-  <data name="C1/2" xml:space="preserve">
-    <value>Do corchea</value>
-  </data>
-  <data name="C2" xml:space="preserve">
-    <value>Do blanca</value>
-  </data>
-  <data name="C4" xml:space="preserve">
-    <value>Do redonda</value>
-  </data>
-  <data name="D1" xml:space="preserve">
-    <value>Re negra</value>
-  </data>
-  <data name="D1/2" xml:space="preserve">
-    <value>Re corchea</value>
-  </data>
-  <data name="D2" xml:space="preserve">
-    <value>Re blanca</value>
-  </data>
-  <data name="D4" xml:space="preserve">
-    <value>Re redonda</value>
-  </data>
   <data name="Do blanca" xml:space="preserve">
     <value>C2</value>
   </data>
@@ -177,30 +129,6 @@
   <data name="Do redonda" xml:space="preserve">
     <value>C4</value>
   </data>
-  <data name="E1" xml:space="preserve">
-    <value>Mi negra</value>
-  </data>
-  <data name="E1/2" xml:space="preserve">
-    <value>Mi corchea</value>
-  </data>
-  <data name="E2" xml:space="preserve">
-    <value>Mi blanca</value>
-  </data>
-  <data name="E4" xml:space="preserve">
-    <value>Mi redonda</value>
-  </data>
-  <data name="F1" xml:space="preserve">
-    <value>Fa negra</value>
-  </data>
-  <data name="F1/2" xml:space="preserve">
-    <value>Fa corchea</value>
-  </data>
-  <data name="F2" xml:space="preserve">
-    <value>Fa blanca</value>
-  </data>
-  <data name="F4" xml:space="preserve">
-    <value>Fa redonda</value>
-  </data>
   <data name="Fa blanca" xml:space="preserve">
     <value>F2</value>
   </data>
@@ -212,22 +140,6 @@
   </data>
   <data name="Fa redonda" xml:space="preserve">
     <value>F4</value>
-  </data>
-  <data name="G1" xml:space="preserve">
-    <value>Sol negra</value>
-    <comment>Quarter</comment>
-  </data>
-  <data name="G1/2" xml:space="preserve">
-    <value>Sol corchea</value>
-    <comment>Eighth</comment>
-  </data>
-  <data name="G2" xml:space="preserve">
-    <value>Sol blanca</value>
-    <comment>Half</comment>
-  </data>
-  <data name="G4" xml:space="preserve">
-    <value>Sol redonda</value>
-    <comment>Whole</comment>
   </data>
   <data name="La blanca" xml:space="preserve">
     <value>A2</value>
@@ -279,14 +191,18 @@
   </data>
   <data name="Sol blanca" xml:space="preserve">
     <value>G2</value>
+    <comment>Half</comment>
   </data>
   <data name="Sol corchea" xml:space="preserve">
     <value>G1/2</value>
+    <comment>Eighth</comment>
   </data>
   <data name="Sol negra" xml:space="preserve">
     <value>G1</value>
+    <comment>Quarter</comment>
   </data>
   <data name="Sol redonda" xml:space="preserve">
     <value>G4</value>
+    <comment>Whole</comment>
   </data>
 </root>

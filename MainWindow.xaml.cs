@@ -321,15 +321,14 @@ namespace LiveDots
                 //mas de una palabra seleccionada
                 if (text1.SelectedText.Length > 1)
                 {
-                    cursorSound.SetPlay(false);
                     bigText = true;
                     Console.WriteLine(text1.SelectedText);
-                    //temporal
+                    /*
                     string selectedTextNotes = "";
                     for (int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
                     {
                         selectedTextNotes += Viewer.GetElement(i).Trim() + " ";
-                    }
+                    }*/
                     ListNotas = StringToNote.BrailleToStringNote(Viewer.GetCurrent(), Viewer.GetCurrent() + text1.SelectedText.Length, Viewer);
                     //Console.WriteLine(a);
                 }
@@ -337,7 +336,7 @@ namespace LiveDots
 
                 //Quiza se pueda dar uso a la armadura para averiguar que tonalidad usar, pero implicaria usar un switch?, de momento usa el tono 4 (algo que no comprendo de musica)
                 var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
-                if (!Viewer.IsInMiddle() &&
+                /*if (!Viewer.IsInMiddle() &&
                     s.Value != "Espacio" && s.Value != "Clave" && s.Value != "Armadura" && s.Value != "Compás" && s.Value != "Salto") // si la celda en la que esta situada es una nota distinta, haz que suene
                 {
                     cursorSound.SetPlay(false);
@@ -346,44 +345,31 @@ namespace LiveDots
                 {
                     cursorSound.SetPlay(false);
                 }
-                if (!cursorSound.GetPlay())
+               */
+                // si no hay texto seleccionado 
+                if (!bigText)
                 {
-                    // si no hay texto seleccionado 
-                    if (!bigText)
-                    {
-                        //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
-                        //funciona asi como esta, no es lo mas optimo
-                        string nota = Viewer.GetElement(Viewer.GetCurrent()).Trim();
-                        StringToNote.SetNoteForPlay(ref nota, out string num_octava);
+                    //Comprobar con todo el resources el valor actual del viewer y crear un pitch y duration deseados, hacer esto en el resources? Duda pendiente
+                    //funciona asi como esta, no es lo mas optimo
+                    string nota = Viewer.GetElement(Viewer.GetCurrent()).Trim();
+                    StringToNote.SetNoteForPlay(ref nota, out string num_octava);
 
-                        //tocaria solo si hay una nota     
-                        cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
-                    }
-                    else if (bigText)
+                    //tocaria solo si hay una nota     
+                    cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
+                }
+                else if (bigText)
+                {
+                    //tocar todas las notas de la lista, espera el tiempo adecuado dependiendo de la BPM de la partitura y toca la siguiente nota tras acabar la espera
+                    foreach (string it in ListNotas)
                     {
-                        //tocar todas las notas de la lista, wip, no funciona bien, aunque eso si, si que guarda todo
-                        foreach (string it in ListNotas)
-                        {
-                            string temporal = it;
-                            StringToNote.SetNoteForPlay(ref temporal, out string num_octava);
-                            /*
-                            string temporal_aux_nota = temporal.Split(' ').Skip(1).FirstOrDefault();
-                            string temporal_num_octava = null;
-                            if (temporal_aux_nota == "octava")
-                            {
-                                temporal_num_octava = temporal.Split(' ')[0];
-                                var WordsArray = temporal.Split();
-                                //coge los ultimos dos, que contienen las notas
-                                temporal = WordsArray[WordsArray.Length - 2] + ' ' + WordsArray[WordsArray.Length - 1];
-                            }*/
-                            cursorSound.TransformStringToNoteAndPlay(temporal, num_octava);
-                            //await Task.Delay((int)(player.Tempo.BeatsPerMinute/0.5));
-                            int awaiting_time = StringToNote.BPMToMs(player.Tempo.BeatsPerMinute, cursorSound.GetRhythmicDuration(temporal));
-                            await Task.Delay(awaiting_time);
-                        }
+                        string temporal = it;
+                        StringToNote.SetNoteForPlay(ref temporal, out string num_octava);
+                        cursorSound.TransformStringToNoteAndPlay(temporal, num_octava);
+
+                        int awaiting_time = StringToNote.BPMToMs(player.Tempo.BeatsPerMinute, cursorSound.GetRhythmicDuration(temporal));
+                        await Task.Delay(awaiting_time);
                     }
                 }
-
                 Moved = true;
             }
         }

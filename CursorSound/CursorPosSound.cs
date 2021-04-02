@@ -11,14 +11,12 @@ namespace LiveDots
     {
         private bool played;
         protected MainWindow mainWindow;
-        NoteDictionary noteDic;
+        readonly NoteDictionary noteDic;
 
-        //StaffForNotes myMusical = new StaffForNotes();
-        //string clave_;
         public CursorPosSound(MainWindow viewModel)
         {
             mainWindow = viewModel;
-            played = true;
+            played = false;
 
             //if not found create xml
             XmlDocument xDoc = new XmlDocument();
@@ -32,13 +30,7 @@ namespace LiveDots
                 CreateXML.createDocument();
             }
             noteDic = new NoteDictionary(xDoc);
-
-            //nota = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
-            //reproductor = new MyMidiTaskScorePlayer(nota, new MidiDevice(2, "Cursor")); // cannot insert different devices, no idea why
         }
-        /*public void setClave(string clave){
-            clave_ = clave;
-        }*/
         private void Play(Pitch pitch, RhythmicDuration duration)
         {
             if (!played)
@@ -49,21 +41,19 @@ namespace LiveDots
 
                 mainWindow.player.PlayElement(new Note(pitch, duration));
 
-                // https://physics.stackexchange.com/questions/15900/converting-notes-to-milliseconds https://guitargearfinder.com/guides/convert-ms-milliseconds-bpm-beats-per-minute-vice-versa/
+                //https://guitargearfinder.com/guides/convert-ms-milliseconds-bpm-beats-per-minute-vice-versa/
                 //https://rechneronline.de/musik/note-length.php
-                //varia con el tempo
-                //played = true;
             }
 
         }
-        public bool GetPlay()
+       /*public bool GetPlay()
         {
             return played;
         }
         public void SetPlay(bool p)
         {
             played = p;
-        }
+        }*/
 
         public void TransformStringToNoteAndPlay(string ViewerValue, string octava)
         {
@@ -83,8 +73,3 @@ namespace LiveDots
         }
     }
 }
-
-/*Score creaScore()
-{ //score.FirstStaff.Elements.Add(new Note(Pitch.C5, RhythmicDuration.Quarter));
-return Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Manufaktura.Music.Model.Step.C, false));
-}*/
