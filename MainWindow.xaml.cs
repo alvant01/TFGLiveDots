@@ -307,12 +307,6 @@ namespace LiveDots
         private async void PlayGroupOfNotes()
         {
             Console.WriteLine(text1.SelectedText);
-            /*
-            string selectedTextNotes = "";
-            for (int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
-            {
-                selectedTextNotes += Viewer.GetElement(i).Trim() + " ";
-            }*/
             List<string> ListNotas = StringToNote.BrailleToStringNote(Viewer.GetCurrent(), Viewer.GetCurrent() + text1.SelectedText.Length, Viewer);
             cancellationTokenSource = new CancellationTokenSource();
             cancellationToken = cancellationTokenSource.Token;
