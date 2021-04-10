@@ -18,16 +18,16 @@ namespace LiveDots
 {
     public partial class MainWindow : Window
     {
-        private void init()
+        private void Init()
         {
+            playingGroupOfNotes = false;
             noteViewer1.IsSelectable = true;
-            noteViewer1.PreviewMouseLeftButtonUp += noteViewer1_PreviewMouseLeftButtonUp;
+            noteViewer1.PreviewMouseLeftButtonUp += NoteViewer1_PreviewMouseLeftButtonUp;
             //noteViewer1.QueryCursor += NoteViewer1_QueryCursor;
 
             text1.IsReadOnly = false;
-            text1.SelectionChanged += text1_SelectionChanged;
-            text1.TextChanged += text1_TextChanged;
-            //text1.SelectedText = text1_selectedtext;
+            text1.SelectionChanged += Text1_SelectionChanged;
+            text1.TextChanged += Text1_TextChanged;
 
             //----------------------
             //if not found create xml
@@ -46,7 +46,7 @@ namespace LiveDots
         /*
          * Here we have to update viewer, backward and forward with the new info
          */
-        private void text1_TextChanged(object sender, TextChangedEventArgs e)
+        private void Text1_TextChanged(object sender, TextChangedEventArgs e)
         {
             Console.WriteLine(text1.Text);
             char compas = text1.Text[text1.Text.IndexOf('#') + 1];
@@ -103,6 +103,7 @@ namespace LiveDots
         public BrailleMusicViewer Viewer;
         public bool Moved;
         public CursorPosSound cursorSound;
+        private bool playingGroupOfNotes;
 
         public new int FontSize
         {
@@ -206,7 +207,7 @@ namespace LiveDots
          */
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            init();
+            Init();
         }
 
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
@@ -231,7 +232,7 @@ namespace LiveDots
             LiveDotsCommands.Exit(this);
         }
 
-        private void noteViewer1_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void NoteViewer1_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             MusicXmlParser parser = new MusicXmlParser();
             string nuevo = parser.ParseBack(noteViewer1.InnerScore).ToString();
@@ -292,8 +293,46 @@ namespace LiveDots
         {
             DecreaseBrailleSize();
         }
-                
-        private async void text1_SelectionChanged(object sender, RoutedEventArgs e)
+
+        public CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        public CancellationToken cancellationToken;
+        private void setCancelInSelectionPlaying()
+        {
+            if (Viewer != null && Moved && playingGroupOfNotes) {
+                // se ha movido asi que se cancela el play anterior
+                cancellationTokenSource.Cancel();
+            }
+        }
+
+        private async void PlayGroupOfNotes()
+        {
+            Console.WriteLine(text1.SelectedText);
+            /*
+            string selectedTextNotes = "";
+            for (int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
+            {
+                selectedTextNotes += Viewer.GetElement(i).Trim() + " ";
+            }*/
+            List<string> ListNotas = StringToNote.BrailleToStringNote(Viewer.GetCurrent(), Viewer.GetCurrent() + text1.SelectedText.Length, Viewer);
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationToken = cancellationTokenSource.Token;
+            playingGroupOfNotes = true;
+            //tocar todas las notas de la lista, espera el tiempo adecuado dependiendo de la BPM de la partitura y toca la siguiente nota tras acabar la espera
+            foreach (string it in ListNotas)
+            {
+                string temporal = it;
+                StringToNote.SetNoteForPlay(ref temporal, out string num_octava);
+                cursorSound.TransformStringToNoteAndPlay(temporal, num_octava);
+
+                int awaiting_time = StringToNote.BPMToMs(player.Tempo.BeatsPerMinute, cursorSound.GetRhythmicDuration(temporal));
+                //si se ha movido el cursor, se deselecciona y se lanza un cancel request, que es controlado con esto y dejará de reproducir las notas restantes
+                if (!cancellationToken.IsCancellationRequested)
+                    await Task.Delay(awaiting_time);
+                else break;
+            }
+            playingGroupOfNotes = false;
+        }
+        private void ProcessSelectedNotesAndPlay()
         {
             if (Viewer != null && Moved)
             {
@@ -316,23 +355,12 @@ namespace LiveDots
                 }
 
                 Console.WriteLine(text1.SelectedText.Length);
-                List<string> ListNotas = new List<string>();
+ 
                 bool bigText = false;
                 //mas de una palabra seleccionada
-                if (text1.SelectedText.Length > 1)
-                {
-                    bigText = true;
-                    Console.WriteLine(text1.SelectedText);
-                    /*
-                    string selectedTextNotes = "";
-                    for (int i = Viewer.GetCurrent(); i < Viewer.GetCurrent() + text1.SelectedText.Length; i++)
-                    {
-                        selectedTextNotes += Viewer.GetElement(i).Trim() + " ";
-                    }*/
-                    ListNotas = StringToNote.BrailleToStringNote(Viewer.GetCurrent(), Viewer.GetCurrent() + text1.SelectedText.Length, Viewer);
-                    //Console.WriteLine(a);
-                }
-                else Console.WriteLine("Poco texto");
+                if (text1.SelectedText.Length > 1) bigText = true;
+                else Console.WriteLine("No hat selección");
+
 
                 //Quiza se pueda dar uso a la armadura para averiguar que tonalidad usar, pero implicaria usar un switch?, de momento usa el tono 4 (algo que no comprendo de musica)
                 var s = Regex.Match(Viewer.GetElement(), @"^([\w\-]+)");
@@ -357,21 +385,14 @@ namespace LiveDots
                     //tocaria solo si hay una nota     
                     cursorSound.TransformStringToNoteAndPlay(nota, num_octava);
                 }
-                else if (bigText)
-                {
-                    //tocar todas las notas de la lista, espera el tiempo adecuado dependiendo de la BPM de la partitura y toca la siguiente nota tras acabar la espera
-                    foreach (string it in ListNotas)
-                    {
-                        string temporal = it;
-                        StringToNote.SetNoteForPlay(ref temporal, out string num_octava);
-                        cursorSound.TransformStringToNoteAndPlay(temporal, num_octava);
-
-                        int awaiting_time = StringToNote.BPMToMs(player.Tempo.BeatsPerMinute, cursorSound.GetRhythmicDuration(temporal));
-                        await Task.Delay(awaiting_time);
-                    }
-                }
+                else if (bigText) PlayGroupOfNotes();
                 Moved = true;
             }
+        }
+        private  void Text1_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            setCancelInSelectionPlaying();
+            ProcessSelectedNotesAndPlay();
         }
 
         private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
