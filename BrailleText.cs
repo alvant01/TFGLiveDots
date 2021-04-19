@@ -42,6 +42,10 @@ namespace LiveDots
             LineCount += element.Count;
         }
 
+        public List<String> getText()
+        {
+            return this.Text;
+        }
         public void AddViewer(string element, int tam)
         {
             Viewer.AddElement(element, tam);
@@ -95,9 +99,10 @@ namespace LiveDots
         {
             return Viewer;
         }
-        public string getText()
+
+        public void concatenate(BrailleText text)
         {
-           return this.Viewer.GetText();
+            this.AddText(text.getText());
         }
 
     }

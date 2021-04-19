@@ -43,7 +43,7 @@ namespace LiveDots
                 }
                 else if (content[0] == '\r')
                 {
-                    //brailleText.JumpLine();
+                   // brailleText.JumpLine();
                     content.RemoveAt(0);
                 }
                 else
