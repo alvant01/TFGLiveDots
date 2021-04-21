@@ -220,6 +220,7 @@ namespace LiveDots
                     L.Add("24");//La corchea
                     this.Step = Step.A;
                     this.Type = "eighth";
+                    this.beam = true;
                     break;
 
                 case 'ú': //Si redondo
@@ -241,6 +242,7 @@ namespace LiveDots
                     L.Add("245");
                     this.Step = Step.B;
                     this.Type = "eighth";
+                    this.beam = true;
                     break;
 
                 case 'y': //Do redondo
@@ -262,6 +264,7 @@ namespace LiveDots
                     L.Add("145");
                     this.Step = Step.C;
                     this.Type = "eighth";
+                    this.beam = true;
                     break;
 
                 case 'z': //Re redondo
@@ -283,6 +286,7 @@ namespace LiveDots
                     L.Add("15");
                     this.Step = Step.D;
                     this.Type = "eighth";
+                    this.beam = true;
                     break;
 
                 case '&': //Mi redondo
@@ -304,6 +308,7 @@ namespace LiveDots
                     L.Add("124");
                     this.Step = Step.E;
                     this.Type = "eighth";
+                    this.beam = true;
                     break;
 
                 case '\\': //Fa redondo
@@ -325,6 +330,7 @@ namespace LiveDots
                     L.Add("1245");
                     this.Step = Step.F;
                     this.Type = "eighth";
+                    this.beam = true;
                     break;
 
                 case 'á': //Sol redondo
@@ -346,6 +352,7 @@ namespace LiveDots
                     L.Add("125");
                     this.Step = Step.G;
                     this.Type = "eighth";
+                    this.beam = true;
                     break;
                 default:
                     this.Step = Step.A;

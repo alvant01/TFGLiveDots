@@ -10,6 +10,8 @@ namespace LiveDots.MusicXmlBraile
 {
     class MusicXmlBraileParser
     {
+
+        private bool beam = false;
         public string createXML(BXBrailleScore bs)
         {
             string xml = "";
@@ -103,6 +105,10 @@ namespace LiveDots.MusicXmlBraile
         }
         public string noteXML(string xml, BXBrailleNote bn)
         {
+            if (!bn.beam && this.beam)
+            {
+                xml = changeBeamLastNote(xml);
+            }
             xml += "<note>\r\n";
             if (bn.IsRest)
             {
@@ -126,12 +132,36 @@ namespace LiveDots.MusicXmlBraile
                     xml += "<stem>up</stem>\r\n";
                 else
                     xml += "<stem>down</stem>\r\n";
-
+                if (bn.beam)
+                {
+                    if (!this.beam)
+                        xml += "<beam>begin</beam>\r\n";
+                    else
+                    {
+                        xml += "<beam>continue</beam>\r\n";
+                    }
+                    beam = true;
+                }
+                else
+                    beam = false;
             }
             xml += "</note>\r\n";
 
             return xml;
 
+        }
+
+        private string changeBeamLastNote(string xml)
+        {
+            string s = "<beam>";
+            string xmlAux;
+           // xml.Remove(xml.Length - 36, xml.Length);
+            int i = xml.LastIndexOf(s);
+            xmlAux = xml.Substring(i, xml.Length - i);
+            xml = xml.Remove(i);
+            xmlAux = xmlAux.Replace("continue", "end");
+            xml += xmlAux;
+            return xml ;
         }
     }
 }
