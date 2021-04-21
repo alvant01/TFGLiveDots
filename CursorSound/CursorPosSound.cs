@@ -69,7 +69,7 @@ namespace LiveDots
         public RhythmicDuration GetRhythmicDuration(string ViewerValue)
         {
             string nota = StringToNote.GetResNote(ViewerValue);
-            return StringToNote.SetRitmo(nota); 
+            return nota == null ? RhythmicDuration.Quarter : StringToNote.SetRitmo(nota) ; 
         }
     }
 }
