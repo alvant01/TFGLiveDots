@@ -1,3 +1,5 @@
+using LiveDots.Factories;
+using LiveDots.MusicXmlBraile;
 using Manufaktura.Controls.Audio;
 using Manufaktura.Controls.Linq;
 using Manufaktura.Controls.Parser;
@@ -46,16 +48,52 @@ namespace LiveDots
         /*
          * Here we have to update viewer, backward and forward with the new info
          */
+        bool c = true;
         private void Text1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Console.WriteLine(text1.Text);
-            char compas = text1.Text[text1.Text.IndexOf('#') + 1];
-            char[] div = { ' ', '\n' };
-            string[] text = text1.Text.Split(div, StringSplitOptions.RemoveEmptyEntries);
+        {           
+                Console.WriteLine(text1.Text);
+                char compas = text1.Text[text1.Text.IndexOf('#') + 1];
+                char[] div = { ' ', '\n' };
+                string[] text = text1.Text.Split(div, StringSplitOptions.RemoveEmptyEntries);
 
-            //MessageBox.Show("Tus cambios no son validos");
+                //MessageBox.Show("Tus cambios no son validos");
 
             Console.WriteLine(Viewer.GetText());
+
+            string g = "";
+            foreach (string s in BrailleText.getText())
+            {
+                g += s;
+            }
+
+            //Console.WriteLine(g);
+
+            //player?.Stop();
+            //LiveDotsCommands.Open(this);
+
+
+            //c = false;
+            List<char> con = new List<char>();
+            con.AddRange(text1.Text);
+
+            BrailleText bt = new BrailleText();
+
+            BXBrailleScore bs = FactoryLoad.GetInstance().GetBXBrailleScore();
+
+            bs.Parse(con, bt);
+
+            BrailleText = bt;
+            Viewer = BrailleText.GetViewer();
+            Braille = BrailleText.GetBrailleString();
+
+            MusicXmlBraileParser mp = new MusicXmlBraileParser();
+            string xml = mp.createXML(bs);
+
+            changeXML(xml);
+
+            Moved = true;
+            LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
+
         }
 
         private void text1_selectedtext(object sender, TextChangedEventArgs e)

@@ -2,7 +2,7 @@
 <score-partwise version="3.0">
   <identification>
     <software>Manufaktura.Controls</software>
-    <encoding-date>11/28/2020 00:26:32</encoding-date>
+    <encoding-date>04/27/2021 18:59:54</encoding-date>
   </identification>
   <defaults />
   <part-list>
@@ -33,8 +33,8 @@
       </note>
       <note>
         <pitch>
-          <step />
-          <octave>0</octave>
+          <step>G</step>
+          <octave>4</octave>
         </pitch>
         <duration>1</duration>
         <voice>1</voice>
@@ -100,7 +100,7 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
-        <stem default-y="28">down</stem>
+        <stem default-y="28">up</stem>
         <beam number="1">single</beam>
       </note>
       <note>
@@ -244,7 +244,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem default-y="28">down</stem>
+        <stem default-y="28">up</stem>
         <beam number="1">single</beam>
       </note>
       <note>
@@ -336,9 +336,7 @@
         <voice>1</voice>
         <type>quarter</type>
       </note>
-      <barline location="right">
-        <bar-style>light-heavy</bar-style>
-      </barline>
+      <barline />
     </measure>
   </part>
 </score-partwise>

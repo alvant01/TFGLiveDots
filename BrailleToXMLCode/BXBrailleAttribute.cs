@@ -17,10 +17,11 @@ namespace LiveDots
 
             content.RemoveRange(0, 5);
             brailleText.AddSpace(4);
-            BrailleText brailleTextAux  = new BrailleText();
+            //BrailleText brailleTextAux  = new BrailleText();
             //asigno clef
             Clef = new BXBrailleClef();
-            int num = Clef.ParseBrailleInverse(brailleTextAux, content[0], content[1], content[2], content[3], content[4]);
+            int num = Clef.ParseBrailleInverse(brailleText, content[0], content[1], content[2], content[3], content[4]);
+            //int num = Clef.ParseBrailleInverse(brailleTextAux, content[0], content[1], content[2], content[3], content[4]);
             content.RemoveRange(0, num);
 
             //asigno Key
@@ -37,7 +38,7 @@ namespace LiveDots
             brailleText.AddSpace();
             brailleText.JumpLine();
 
-            brailleText.concatenate(brailleTextAux);
+            //brailleText.concatenate(brailleTextAux);
 
             return this;
         }

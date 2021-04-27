@@ -18,6 +18,8 @@ namespace LiveDots
 
             brailleText.AddSpace(4);
 
+            if (Clef != null)
+                Clef.Parse(brailleText);
 
             if (Key != null)
             {
@@ -32,8 +34,8 @@ namespace LiveDots
 
             brailleText.JumpLine(); 
 
-            if (Clef != null)
-                Clef.Parse(brailleText);
+            //if (Clef != null)
+            //    Clef.Parse(brailleText);
         }
     }
 }
