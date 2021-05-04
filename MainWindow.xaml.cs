@@ -30,7 +30,7 @@ namespace LiveDots
             text1.IsReadOnly = false;
             text1.SelectionChanged += Text1_SelectionChanged;
             text1.TextChanged += Text1_TextChanged;
-
+            text1.PreviewKeyDown += Text1_Keydown;
             //----------------------
             //if not found create xml
             XmlDocument xDoc = new XmlDocument();
@@ -45,10 +45,52 @@ namespace LiveDots
             }     
         }
 
+
+        bool editing = false;
         /*
          * Here we have to update viewer, backward and forward with the new info
          */
-        bool c = true;
+        private void Text1_Keydown(object sender, KeyEventArgs e)
+        {
+            if(e.Key != Key.Left && e.Key != Key.Right && e.Key != Key.Up && e.Key != Key.Down)
+            {
+                editing = true;
+                Console.WriteLine("Editando " + editing);
+            }
+            if(e.Key == Key.Enter)
+            {
+                // try
+                // {
+                List<char> con = new List<char>();
+                con.AddRange(text1.Text);
+
+                BrailleText bt = new BrailleText();
+
+                BXBrailleScore bs = FactoryLoad.GetInstance().GetBXBrailleScore();
+
+                bs.Parse(con, bt);
+
+                BrailleText = bt;
+                Viewer = BrailleText.GetViewer();
+                Braille = BrailleText.GetBrailleString();
+
+                MusicXmlBraileParser mp = new MusicXmlBraileParser();
+                string xml = mp.createXML(bs);
+
+                changeXML(xml);
+
+                Moved = true;
+                LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
+
+                editing = false;
+                // }
+                /*catch (Exception x)
+                {
+                    Console.WriteLine("Error de edicion");
+                }*/
+            }
+        }
+        
         private void Text1_TextChanged(object sender, TextChangedEventArgs e)
         {           
                 Console.WriteLine(text1.Text);
@@ -70,30 +112,6 @@ namespace LiveDots
 
             //player?.Stop();
             //LiveDotsCommands.Open(this);
-
-
-            //c = false;
-            List<char> con = new List<char>();
-            con.AddRange(text1.Text);
-
-            BrailleText bt = new BrailleText();
-
-            BXBrailleScore bs = FactoryLoad.GetInstance().GetBXBrailleScore();
-
-            bs.Parse(con, bt);
-
-            BrailleText = bt;
-            Viewer = BrailleText.GetViewer();
-            Braille = BrailleText.GetBrailleString();
-
-            MusicXmlBraileParser mp = new MusicXmlBraileParser();
-            string xml = mp.createXML(bs);
-
-            changeXML(xml);
-
-            Moved = true;
-            LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
-
         }
 
         private void text1_selectedtext(object sender, TextChangedEventArgs e)
@@ -366,7 +384,7 @@ namespace LiveDots
         }
         private void ProcessSelectedNotesAndPlay()
         {
-            if (Viewer != null && Moved)
+            if (Viewer != null && Moved && !editing)
             {
                 Moved = false;
                 //Si va para delante

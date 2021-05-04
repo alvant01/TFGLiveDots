@@ -32,7 +32,7 @@ namespace LiveDots
                 brailleText.AddSpace();
             }
 
-            brailleText.JumpLine(); 
+            brailleText.JumpLine();
 
             //if (Clef != null)
             //    Clef.Parse(brailleText);

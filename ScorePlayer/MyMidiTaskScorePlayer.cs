@@ -79,8 +79,13 @@ namespace LiveDots
 
             //este await es para parar la nota al pasarse del rhytmic duration
             await Task.Delay(new RhythmicDuration(note.BaseDuration.DenominatorAsPowerOfTwo, note.NumberOfDots).ToTimeSpan(Tempo));
-
-            outDevice.Send(note, false, actualChannelNumber);
+            //try
+            //{
+                outDevice.Send(note, false, actualChannelNumber);
+            //}catch(Exception e)
+            //{
+            //    Console.WriteLine("Error de reproduccion");
+            //}
             if (pitchesPlaying[channelNumber].Contains(note.MidiPitch)) pitchesPlaying[channelNumber].Remove(note.MidiPitch);
         }
 

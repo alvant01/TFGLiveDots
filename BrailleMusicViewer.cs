@@ -98,8 +98,8 @@ namespace LiveDots
         }
 
         public string GetElement()
-        {
-            return Viewer[Current];
+        {          
+                return Viewer[Current];       
         }
 
         /*
