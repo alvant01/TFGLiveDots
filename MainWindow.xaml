@@ -71,7 +71,7 @@
           <RowDefinition Height="5"/>
           <RowDefinition Height="1*"/>
           <RowDefinition Height="5"/>
-          <RowDefinition Height="40"/>
+          <!--<RowDefinition Height="40"/>-->
             </Grid.RowDefinitions>
 
             <ScrollViewer Grid.Row="0"
@@ -98,14 +98,14 @@
                        IsReadOnlyCaretVisible="True"
 					   SelectedText="text1_selectedtext"
                        />
-        </ScrollViewer>
-            <GridSplitter Grid.Row ="3" Height="5" HorizontalAlignment="Stretch" Focusable="False"/>
+                </ScrollViewer>
+            <!-- <GridSplitter Grid.Row ="3" Height="5" HorizontalAlignment="Stretch" Focusable="False"/>
             <TextBox Grid.Row ="4" Name="text2" 
                        TextWrapping="Wrap"                                           
                        IsReadOnly="False"
                        IsReadOnlyCaretVisible="True"
-					   SelectedText="AQUI SE METE EL INPUT THIS IS A PRUEBA"
-            />
+					   SelectedText="" 
+            />-->
       </Grid>
     </DockPanel>
 </Window>

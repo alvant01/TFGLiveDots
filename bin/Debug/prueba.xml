@@ -2,7 +2,7 @@
 <score-partwise version="3.0">
   <identification>
     <software>Manufaktura.Controls</software>
-    <encoding-date>04/27/2021 18:59:54</encoding-date>
+    <encoding-date>05/05/2021 16:33:29</encoding-date>
   </identification>
   <defaults />
   <part-list>
@@ -58,7 +58,7 @@
     <measure number="2">
       <note>
         <pitch>
-          <step>A</step>
+          <step>G</step>
           <octave>4</octave>
         </pitch>
         <duration>2</duration>
@@ -80,31 +80,31 @@
       </note>
       <note>
         <pitch>
-          <step>C</step>
-          <octave>5</octave>
+          <step>G</step>
+          <octave>4</octave>
         </pitch>
-        <duration>2</duration>
+        <duration>1</duration>
         <voice>1</voice>
-        <type>quarter</type>
-        <stem default-y="28">down</stem>
-        <beam number="1">single</beam>
+        <type>eighth</type>
+        <stem default-y="28">up</stem>
+        <beam number="1">begin</beam>
+      </note>
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>1</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="28">up</stem>
+        <beam number="1">continue</beam>
       </note>
       <barline />
     </measure>
     <measure number="3">
       <note>
         <pitch>
-          <step>B</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>half</type>
-        <stem default-y="28">up</stem>
-        <beam number="1">single</beam>
-      </note>
-      <note>
-        <pitch>
           <step>G</step>
           <octave>4</octave>
         </pitch>
@@ -112,7 +112,7 @@
         <voice>1</voice>
         <type>eighth</type>
         <stem default-y="28">up</stem>
-        <beam number="1">begin</beam>
+        <beam number="1">continue</beam>
       </note>
       <note>
         <pitch>
@@ -124,12 +124,101 @@
         <type>eighth</type>
         <stem default-y="28">up</stem>
         <beam number="1">end</beam>
+      </note>
+      <note>
+        <rest />
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note>
+        <pitch>
+          <step>C</step>
+          <octave>5</octave>
+          <alter>1</alter>
+        </pitch>
+        <duration>1</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="28">up</stem>
+        <beam number="1">end</beam>
+      </note>
+      <note>
+        <rest />
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note>
+        <rest />
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note>
+        <rest />
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note>
+        <rest />
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note>
+        <pitch>
+          <step>F</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>2</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem default-y="28">up</stem>
+        <beam number="1">single</beam>
       </note>
       <barline />
     </measure>
     <measure number="4">
       <note>
         <pitch>
+          <step>B</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+        <stem default-y="28">up</stem>
+        <beam number="1">single</beam>
+      </note>
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>1</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="28">up</stem>
+        <beam number="1">begin</beam>
+      </note>
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>1</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="28">up</stem>
+        <beam number="1">end</beam>
+      </note>
+      <barline />
+    </measure>
+    <measure number="5">
+      <note>
+        <pitch>
           <step>A</step>
           <octave>4</octave>
         </pitch>
@@ -163,7 +252,7 @@
       </note>
       <barline />
     </measure>
-    <measure number="5">
+    <measure number="6">
       <note>
         <pitch>
           <step>C</step>
@@ -199,7 +288,7 @@
       </note>
       <barline />
     </measure>
-    <measure number="6">
+    <measure number="7">
       <note>
         <pitch>
           <step>G</step>
@@ -235,7 +324,7 @@
       </note>
       <barline />
     </measure>
-    <measure number="7">
+    <measure number="8">
       <note>
         <pitch>
           <step>B</step>
@@ -282,7 +371,7 @@
       </note>
       <barline />
     </measure>
-    <measure number="8">
+    <measure number="9">
       <note>
         <pitch>
           <step>E</step>
@@ -318,7 +407,7 @@
       </note>
       <barline />
     </measure>
-    <measure number="9">
+    <measure number="10">
       <note>
         <pitch>
           <step>C</step>
