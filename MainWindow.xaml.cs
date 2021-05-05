@@ -59,9 +59,9 @@ namespace LiveDots
             }
             if(e.Key == Key.Enter)
             {
-                // try
-                // {
-                List<char> con = new List<char>();
+                try
+                {
+                    List<char> con = new List<char>();
                 con.AddRange(text1.Text);
 
                 BrailleText bt = new BrailleText();
@@ -83,11 +83,12 @@ namespace LiveDots
                 LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
 
                 editing = false;
-                // }
-                /*catch (Exception x)
+                }
+                catch (Exception x)
                 {
                     Console.WriteLine("Error de edicion");
-                }*/
+                    MessageBox.Show("Tus cambios no son validos");
+                }
             }
         }
         
