@@ -52,7 +52,7 @@ namespace LiveDots
          */
         private void Text1_Keydown(object sender, KeyEventArgs e)
         {
-            if(e.Key != Key.Left && e.Key != Key.Right && e.Key != Key.Up && e.Key != Key.Down)
+            if(e.Key != Key.Tab && e.Key != Key.Left && e.Key != Key.Right && e.Key != Key.Up && e.Key != Key.Down)
             {
                 editing = true;
                 Console.WriteLine("Editando " + editing);
