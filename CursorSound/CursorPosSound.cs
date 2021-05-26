@@ -55,6 +55,11 @@ namespace LiveDots
             played = p;
         }*/
 
+        public void testOfTransformStringToNote(ref string ViewerValue,ref string octava)
+        {
+            ViewerValue = StringToNote.GetResNote(ViewerValue);
+            octava = StringToNote.GetNote(octava);
+        }
         public void TransformStringToNoteAndPlay(string ViewerValue, string octava)
         {
             string nota = StringToNote.GetResNote(ViewerValue);
