@@ -4,10 +4,6 @@ using System.Linq;
 
 namespace LiveDots
 {
-    enum BXHand
-    {
-        Left, Right
-    }
     public class BXBrailleStaff : BXBrailleElement
     {
         public int Id { get; set; }
@@ -17,12 +13,6 @@ namespace LiveDots
         public BXBrailleStaff()
         {
             Voices = new List<BXBrailleVoice>();
-        }
-
-        public BXBrailleStaff(List<BXBrailleVoice> v, int h)
-        {
-            Voices = v;
-            Id = h;
         }
 
         public void Parse(List<char> content, BrailleText brailleText)

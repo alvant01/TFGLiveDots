@@ -16,13 +16,6 @@ namespace LiveDots
             Notes = new List<BXBrailleNote>();
         }
 
-        public BXBrailleVoice(int st, int et, List<BXBrailleNote> n)
-        {
-            StartingTime = st;
-            EndingTime = et;
-            Notes = n;
-        }
-
         internal void Parse(List<char> content,  BrailleText brailleText)
         {
            while (content.Count != 0 )

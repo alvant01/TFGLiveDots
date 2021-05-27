@@ -24,13 +24,6 @@ namespace LiveDots
             LineCount = 0;
             score.Parse(this);
         }
-        public BrailleText(BrailleScore score, BrailleText bt)
-        {
-            Text = new List<string>();
-            Viewer = new BrailleMusicViewer();
-            LineCount = 0;
-            
-        }
 
         public void AddText(List<string> element)
         {
@@ -98,11 +91,6 @@ namespace LiveDots
         public BrailleMusicViewer GetViewer()
         {
             return Viewer;
-        }
-
-        public void concatenate(BrailleText text)
-        {
-            this.AddText(text.getText());
         }
 
     }

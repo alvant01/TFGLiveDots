@@ -14,26 +14,6 @@ namespace LiveDots
             //clef_octave_change = 0;
 
         }
-
-        public BXBrailleClef(string s, int l, int c, string h)
-        {
-            Sign = s;
-            Line = l;
-            Hand = h;
-            Ocho = null;
-            //clef_octave_change = c;
-
-        }
-        public BXBrailleClef(string s, int l, int c, string h, string o)
-        {
-            Sign = s;
-            Line = l;
-            Hand = h;
-            Ocho = o;
-            //clef_octave_change = c;
-
-        }
-
         public string Sign { get; set; }
         public int Line { get; set; }
         public string Hand { get; set; }

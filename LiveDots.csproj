@@ -302,8 +302,6 @@
     <Compile Include="BrailleTree\BrailleElement.cs" />
     <Compile Include="BrailleTree\BrailleKey.cs" />
     <Compile Include="BrailleTree\BrailleScore.cs" />
-    <Compile Include="BrailleSign.cs" />
-    <Compile Include="BrailleSignPrueba.cs" />
     <Compile Include="BrailleTree\BrailleChord.cs" />
     <Compile Include="Converter.cs" />
     <Compile Include="CursorSound\CreateXML.cs" />
@@ -318,7 +316,6 @@
     <Compile Include="BrailleTree\BraillePitch.cs" />
     <Compile Include="BrailleTree\BrailleStaff.cs" />
     <Compile Include="BrailleTree\BrailleTime.cs" />
-    <Compile Include="DicInverse.cs" />
     <Compile Include="Factorias\FactoryLoad.cs" />
     <Compile Include="Factorias\FactoryLoadImp.cs" />
     <Compile Include="Guide.xaml.cs">
@@ -344,12 +341,9 @@
     <Compile Include="MusicXml\Domain\Score.cs" />
     <Compile Include="MusicXml\Domain\Time.cs" />
     <Compile Include="MusicXml\MusicXmlParser.cs" />
-    <Compile Include="StaffForNotes.cs" />
     <Compile Include="ScorePlayer\MyChannelSelectingTaskScorePlayer.cs" />
     <Compile Include="ScorePlayer\MyMidiTaskScorePlayer.cs" />
     <Compile Include="ScorePlayer\MyTaskScorePlayer.cs" />
-    <Compile Include="Translator.cs" />
-    <Compile Include="Tuplet.cs" />
     <Compile Include="BrailleTree\BrailleVoice.cs" />
     <Compile Include="ViewerRES.Designer.cs">
       <AutoGen>True</AutoGen>

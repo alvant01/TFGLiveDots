@@ -12,21 +12,11 @@ namespace LiveDots
             Parts = new List<BraillePart>();
         }
 
-        public BrailleScore(List<BraillePart> p)
-        {
-            Parts = p;
-        }
-
         /* public void AppendParts(List<BraillePart> p)
          {
              Parts = Parts.Add(p);
 
          }*/
-        BraillePart part;
-        BrailleScore(BraillePart p)
-        {
-            part = p;
-        }
 
         public void Parse(BrailleText brailleText)
         {

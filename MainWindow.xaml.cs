@@ -62,32 +62,32 @@ namespace LiveDots
                 try
                 {
                     List<char> con = new List<char>();
-                con.AddRange(text1.Text);
+                    con.AddRange(text1.Text);
 
-                BrailleText bt = new BrailleText();
+                    BrailleText bt = new BrailleText();
 
-                BXBrailleScore bs = FactoryLoad.GetInstance().GetBXBrailleScore();
+                    BXBrailleScore bs = FactoryLoad.GetInstance().GetBXBrailleScore();
 
-                bs.Parse(con, bt);
+                    bs.Parse(con, bt);
 
-                BrailleText = bt;
-                Viewer = BrailleText.GetViewer();
-                Braille = BrailleText.GetBrailleString();
+                    BrailleText = bt;
+                    Viewer = BrailleText.GetViewer();
+                    Braille = BrailleText.GetBrailleString();
 
-                MusicXmlBraileParser mp = new MusicXmlBraileParser();
-                string xml = mp.createXML(bs);
+                    MusicXmlBraileParser mp = new MusicXmlBraileParser();
+                    string xml = mp.createXML(bs);
 
-                changeXML(xml);
+                    changeXML(xml);
 
-                Moved = true;
-                LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
+                    Moved = true;
+                    LiveDotsCOMObj.SetCurrent(BrailleText.GetViewer());
 
-                editing = false;
+                    editing = false;
                 }
                 catch (Exception x)
                 {
                     Console.WriteLine("Error de edicion");
-                    MessageBox.Show("Tus cambios no son validos");
+                    MessageBox.Show(x + "Tus cambios no son validos");
                 }
             }
         }
@@ -119,11 +119,6 @@ namespace LiveDots
         {
             Console.WriteLine(text1.SelectedText);
         }
-        private void NoteViewer1_QueryCursor(object sender, QueryCursorEventArgs e)
-        {
-            Console.WriteLine(e);
-        }
-
 
         public string SourceXml
         {
@@ -309,23 +304,6 @@ namespace LiveDots
             //MessageBox.Show("Ha habido cambios");
         }
 
-        /*
-        private void PlayMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            LiveDotsCommands.Play(this);
-        }
-
-        private void StopMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            player?.Stop();          
-        }
-
-        private void PauseMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            player?.Pause();
-        }
-        */
-
         private void IncreaseScoreSizeMenuItem_Click(object sender, RoutedEventArgs e)
         {
             IncreaseScoreSize();
@@ -440,7 +418,7 @@ namespace LiveDots
                 Moved = true;
             }
         }
-        private  void Text1_SelectionChanged(object sender, RoutedEventArgs e)
+        private void Text1_SelectionChanged(object sender, RoutedEventArgs e)
         {
             setCancelInSelectionPlaying();
             ProcessSelectedNotesAndPlay();
@@ -459,7 +437,7 @@ namespace LiveDots
         public void changeXML(string xml)
         {
             //noteViewer1.XmlSource = xml;
-            this.SourceXml = xml;
+            SourceXml = xml;
         }
     }
 

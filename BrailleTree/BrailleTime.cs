@@ -13,12 +13,6 @@ namespace LiveDots
 
         public BrailleTime() { }
 
-        public BrailleTime(int b, int bt)
-        {
-            Beats = b;
-            BeatType = bt;
-        }
-
         public void Parse(BrailleText brailleText)
         {
             ParseBraille(brailleText);

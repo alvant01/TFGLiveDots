@@ -20,12 +20,6 @@ namespace LiveDots
         First, Second, Third, Fourth, Fifth, Sixth, Seventh
     }
 
-    public enum Type2
-    {
-        Maxima, Long, Breve, Whole, Half, Quarter, Eighth, _16th, _32nd, _64th, _128th, _256th, _512th, _1024th
-    }
-
-
     public class BrailleNote : BrailleElement
     {
         //public Pitch pitch { get; set; }
@@ -43,8 +37,6 @@ namespace LiveDots
         public int Staff { get; set; }
 
         public bool IsRest { get; set; }
-
-        public bool IsDotted { get; set; }
         public int Alter { get; set; }
 
         public string Accidental { get; set; }
@@ -62,15 +54,6 @@ namespace LiveDots
         public BrailleNote()
         {
             Type = null;
-        }
-
-        public BrailleNote(Step s, Octave o, string t, int st)
-        {
-            Step = s;
-            Octave = o;
-            //Tuplet = tup;
-            Type = t;
-            Staff = st;
         }
 
         private string Octave2Braille()
@@ -133,27 +116,6 @@ namespace LiveDots
             return txt;
         }
 
-        public int getToctaveNum()
-        {
-            switch (this.Octave)
-            {
-                case Octave.First:
-                    return 1;
-                case Octave.Second:
-                    return 2;
-                case Octave.Third:
-                    return 3;
-                case Octave.Fourth:
-                    return 4;
-                case Octave.Fifth:
-                    return 5;
-                case Octave.Sixth:
-                    return 6;
-                case Octave.Seventh:
-                    return 7;
-            }
-            return 0;
-        }
         public static int Octave2Int(Octave o)
         {
             switch (o)
@@ -222,19 +184,6 @@ namespace LiveDots
                 return 8 * (o2 - o1) - s1 + s2;
             else
                 return 8 * (o1 - o2) - s2 + s1;
-        }
-
-        public static bool OctaveNeeded(BrailleNote n1, BrailleNote n2)
-        {
-            bool needed = false;
-            int interval = Interval(n1, n2);
-            if (n1 == null ||
-                (interval == 4 && n1.Octave != n2.Octave) ||
-                (interval == 5 && n1.Octave != n2.Octave) ||
-                interval >= 6)
-                needed = true;
-
-            return needed;
         }
 
         public static void CheckLast(BrailleNote nLast, BrailleNote n)
@@ -655,24 +604,6 @@ namespace LiveDots
             brailleText.AddViewer(txt, tam);
         }
 
-        private void addDuration()
-        {
-            switch (this.Type)
-            {
-                case "whole":
-                    this.duration = 8;
-                    break;
-                case "half":
-                    this.duration = 4;
-                    break;
-                case "quarter":
-                    this.duration = 2;
-                    break;
-                case "eighth":
-                    this.duration = 1;
-                    break;
-            }
-        }
     }
 }
 

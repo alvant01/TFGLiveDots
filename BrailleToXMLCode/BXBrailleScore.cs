@@ -12,17 +12,6 @@ namespace LiveDots
             Parts = new List<BXBraillePart>();
         }
 
-        public BXBrailleScore(List<BXBraillePart> p)
-        {
-            Parts = p;
-        }
-
-        BXBraillePart part;
-        BXBrailleScore(BXBraillePart p)
-        {
-            part = p;
-        }
-
         internal void Parse(List<char> content, BrailleText brailleText)
         {
             BXBraillePart p = new BXBraillePart();

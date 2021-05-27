@@ -11,19 +11,11 @@ namespace LiveDots
         public BrailleAttribute Attribute { get; set; }
 
 
-
         public BrailleMeasure()
         {
             Staffs = new List<BrailleStaff>();
             //Attribute = new BrailleAttribute();
         }
-        public BrailleMeasure(Object o)
-        {
-            Staffs = new List<BrailleStaff>();
-            //Attribute = new BrailleAttribute();
-            this.Attribute = (BrailleAttribute)o;
-        }
-
 
         /*public void AppendStaff(BrailleStaff[] s)
         {

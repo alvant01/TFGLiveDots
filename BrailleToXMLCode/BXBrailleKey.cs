@@ -14,12 +14,11 @@ namespace LiveDots
             throw new NotImplementedException();
         }
         /// <summary>
-        /// 
-        /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <param name="v3"></param>
-        /// <returns>number of parameters needed for the Key</returns>
+        /// <returns>number of parameters needed for the Key</returns
+        /// </summary>
         public int Parse(BrailleText brailleText, char v1, char v2, char v3)
         {
             List<string> L = new List<string>();
@@ -125,9 +124,6 @@ namespace LiveDots
             ParseText(brailleText);
             return res;
         }
-
-
-
 
         public void ParseText(BrailleText brailleText)
         {

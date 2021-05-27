@@ -10,8 +10,6 @@ namespace LiveDots
 
         public BXBrailleAttribute Attribute { get; set; }
 
-
-
         public BXBrailleMeasure()
         {
             Staffs = new List<BXBrailleStaff>();
@@ -43,9 +41,6 @@ namespace LiveDots
             staff.Parse(content, brailleText );
             this.Staffs.Add(staff);
             brailleText.AddSpace();
-
-
-
             return res;
         }
 

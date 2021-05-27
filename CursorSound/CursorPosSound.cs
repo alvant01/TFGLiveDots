@@ -9,14 +9,12 @@ namespace LiveDots
 {
     public class CursorPosSound
     {
-        private bool played;
         protected MainWindow mainWindow;
         readonly NoteDictionary noteDic;
 
         public CursorPosSound(MainWindow viewModel)
         {
             mainWindow = viewModel;
-            played = false;
 
             //if not found create xml
             XmlDocument xDoc = new XmlDocument();
@@ -32,29 +30,11 @@ namespace LiveDots
             noteDic = new NoteDictionary(xDoc);
         }
         private void Play(Pitch pitch, RhythmicDuration duration)
-        {
-            if (!played)
-            {
-                Note note = new Note();
-                //cambiando esto no funciona
-                note.Pitch.StepName = Manufaktura.Music.Model.Step.B;
-
-                mainWindow.player.PlayElement(new Note(pitch, duration));
-
-                //https://guitargearfinder.com/guides/convert-ms-milliseconds-bpm-beats-per-minute-vice-versa/
-                //https://rechneronline.de/musik/note-length.php
-            }
-
+        {                           
+            mainWindow.player.PlayElement(new Note(pitch, duration));              
+            //https://guitargearfinder.com/guides/convert-ms-milliseconds-bpm-beats-per-minute-vice-versa/             
+            //https://rechneronline.de/musik/note-length.php            
         }
-       /*public bool GetPlay()
-        {
-            return played;
-        }
-        public void SetPlay(bool p)
-        {
-            played = p;
-        }*/
-
         public void testOfTransformStringToNote(ref string ViewerValue,ref string octava)
         {
             ViewerValue = StringToNote.GetResNote(ViewerValue);

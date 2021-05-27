@@ -12,11 +12,6 @@ namespace LiveDots
             Measures = new List<BXBrailleMeasure>();
         }
 
-        public BXBraillePart(List<BXBrailleMeasure> m)
-        {
-            Measures = m;
-        }
-
         public void Parse(List<char> content, BrailleText brailleText)
         {
             //Hacer bucle

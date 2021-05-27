@@ -12,11 +12,6 @@ namespace LiveDots
             Measures = new List<BrailleMeasure>();
         }
 
-        public BraillePart(List<BrailleMeasure> m)
-        {
-            Measures = m;
-        }
-
         /*public void AppendMeasures(BrailleMeasure m)
         {
             Measures = Measures.Concat(m).ToArray();

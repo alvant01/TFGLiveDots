@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
-using System.Windows.Media;
 
 namespace LiveDots
 {
@@ -171,7 +169,6 @@ namespace LiveDots
                 return false;
             }
         }
-
 
     }
 }

@@ -37,8 +37,6 @@ namespace LiveDots
             brailleText.AddText(L);
         }
     
-
-
         public List<int> getAlters()
         {
             List<int> L = new List<int>(new int[] { 0, 0, 0, 0, 0, 0, 0 });

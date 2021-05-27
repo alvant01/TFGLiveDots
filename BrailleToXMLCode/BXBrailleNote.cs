@@ -4,27 +4,6 @@ using System.Linq;
 
 namespace LiveDots
 {
-    /*  enum Duration
-     {
-         Maxima, Long, Breve, Whole, Half, Quarter, Eighth, _16th, _32nd, _64th, _128th, _256th, _512th, _1024th 
-     }
-     */
-
-    public enum BXStep
-    {
-        A, B, C, D, E, F, G
-    }
-
-    public enum BXOctave
-    {
-        First, Second, Third, Fourth, Fifth, Sixth, Seventh
-    }
-
-    public enum BXType2
-    {
-        Maxima, Long, Breve, Whole, Half, Quarter, Eighth, _16th, _32nd, _64th, _128th, _256th, _512th, _1024th
-    }
-
 
     public class BXBrailleNote : BXBrailleElement
     {
@@ -40,14 +19,10 @@ namespace LiveDots
 
         public string Type { get; set; }
 
-        public int Staff { get; set; }
-
         public bool IsRest { get; set; }
 
         public bool IsDotted { get; set; }
         public int Alter { get; set; }
-
-        public string Accidental { get; set; }
 
         public bool beam;
 
@@ -63,17 +38,7 @@ namespace LiveDots
         {
             Type = null;
         }
-
-        public BXBrailleNote(Step s, Octave o, string t, int st)
-        {
-            Step = s;
-            Octave = o;
-            //Tuplet = tup;
-            Type = t;
-            Staff = st;
-        }
-
-       
+     
         public void Parse(BrailleText brailleText, List<char> content)
         {
             List<string> L = new List<string>();
@@ -364,7 +329,6 @@ namespace LiveDots
             ParseText(brailleText);
 
         }
-
 
         public int getToctaveNum()
         {
