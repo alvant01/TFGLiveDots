@@ -108,7 +108,7 @@ namespace LiveDots
             while (xmlName[i] != '.')
             { i++; }
             xmlName = xmlName.Substring(0,i);
-            xmlName = xmlName + "aa.musicxml";
+            xmlName = xmlName + ".musicxml";
             System.IO.File.WriteAllText(xmlName, NewXml);
             // Decir que se ha guardado
         }
